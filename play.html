@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Home</title>
+    <title>Play Game</title>
 
     <script src="config/main.js" type="module"></script>
     <style>
@@ -24,6 +24,8 @@
 
     <script>
       var serverUrl1 = "https://gms.parcoil.com";
+      var localImageBaseUrl = "./images";  // Local image directory for new games
+
       const queryString = window.location.search;
       const urlParams = new URLSearchParams(queryString);
       const gameUrl = urlParams.get("gameurl");
@@ -32,8 +34,25 @@
         alert("Game URL not provided!");
         window.location.href = "/"; // Redirect to homepage if game URL is missing
       } else {
-        const embedUrl = `${serverUrl1}/${gameUrl}`;
-        document.getElementById("gameFrame").src = embedUrl;
+        let embedUrl;
+
+        // For new games, load from the local server
+        // For older games, load from the external server (serverUrl1)
+        const game = gamesData.find(game => game.url === gameUrl);
+        if (game) {
+          if (game.new) {
+            // For new games, fetch from the local server or a common image folder
+            embedUrl = `${localImageBaseUrl}/${game.url}`;
+          } else {
+            // For existing games, use the old server URL
+            embedUrl = `${serverUrl1}/${gameUrl}`;
+          }
+
+          document.getElementById("gameFrame").src = embedUrl;
+        } else {
+          alert("Game not found!");
+          window.location.href = "/"; // Redirect to homepage if game is not found
+        }
       }
     </script>
   </body>
