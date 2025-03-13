@@ -11,7 +11,7 @@ var subtext = "Port Washington's Number One Games Website"; // set the subtext
 import "/./config/custom.js";
 
 var serverUrl1 = "https://gms.parcoil.com";
-var localServerUrl = "./games";  // New server or local path for new games
+var localImageBaseUrl = "./images";  // Local image directory (common images folder)
 var currentPageTitle = document.title;
 document.title = `${currentPageTitle} | ${sitename}`;
 let gamesData = []; 
@@ -26,15 +26,13 @@ function displayFilteredGames(filteredGames) {
 
     const gameImage = document.createElement("img");
 
-    // Check if the game is new and load accordingly
+    // For new games, load images from a common location (local or external)
     if (game.new) {
-      // For new games, load images from a custom location, like a local folder
-      gameImage.src = `./images/${game.image}`;  // New way to load images
-      game.url = `${localServerUrl}/${game.url}`;  // New server path for new games
+      // For new games, images can be hosted in the same general 'images' folder
+      gameImage.src = `${localImageBaseUrl}/${game.image}`; // Loading from common images folder or external server
     } else {
-      // For existing games, keep the old server URL structure
-      gameImage.src = `${serverUrl1}/${game.url}/${game.image}`;  // Old way to load images
-      game.url = `${serverUrl1}/${game.url}`;  // Old server path
+      // For existing games, use the server URL to load the images
+      gameImage.src = `${serverUrl1}/${game.url}/${game.image}`;
     }
 
     gameImage.alt = game.name;
