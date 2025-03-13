@@ -33,8 +33,14 @@ function displayFilteredGames(filteredGames) {
     }
 
     gameImage.alt = game.name;
+
+    // Handle click event based on source
     gameImage.onclick = () => {
-      window.location.href = `play.html?gameurl=${game.url}/`;
+      if (game.source === "local") {
+        window.location.href = `./games/${game.url}/index.html`; // Local game
+      } else {
+        window.location.href = `play.html?gameurl=${game.url}/`; // External game
+      }
     };
 
     const gameName = document.createElement("p");
