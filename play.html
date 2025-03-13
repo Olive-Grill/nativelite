@@ -31,12 +31,17 @@
         border-radius: 50%;
         cursor: pointer;
         z-index: 10;
-        display: none; /* Initially hidden */
+        transition: transform 0.3s ease; /* Transition for smooth sliding */
+      }
+
+      /* Button hidden offscreen */
+      #homeButton.offscreen {
+        transform: translateX(-100px); /* Slide the button offscreen */
       }
 
       /* Visible Button */
       #homeButton.show {
-        display: block;
+        transform: translateX(0); /* Reset transform to bring it back onscreen */
       }
     </style>
   </head>
@@ -72,6 +77,11 @@
 
         // Show the home button once the game is loaded
         document.getElementById("homeButton").classList.add("show");
+
+        // Set a timeout to make the button slide offscreen after 5 seconds (for example)
+        setTimeout(() => {
+          document.getElementById("homeButton").classList.add("offscreen");
+        }, 5000); // Change the time delay as needed (5000ms = 5 seconds)
       }
     </script>
   </body>
