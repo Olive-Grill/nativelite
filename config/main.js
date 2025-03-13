@@ -11,6 +11,7 @@ var subtext = "Port Washington's Number One Games Website"; // set the subtext
 import "/./config/custom.js";
 
 var serverUrl1 = "https://gms.parcoil.com";
+var localServerUrl = "./games";  // New server or local path for new games
 var currentPageTitle = document.title;
 document.title = `${currentPageTitle} | ${sitename}`;
 let gamesData = []; 
@@ -25,13 +26,15 @@ function displayFilteredGames(filteredGames) {
 
     const gameImage = document.createElement("img");
 
-    // Check if the game is new and if so, load a local image path or different server path
+    // Check if the game is new and load accordingly
     if (game.new) {
       // For new games, load images from a custom location, like a local folder
       gameImage.src = `./images/${game.image}`;  // New way to load images
+      game.url = `${localServerUrl}/${game.url}`;  // New server path for new games
     } else {
       // For existing games, keep the old server URL structure
       gameImage.src = `${serverUrl1}/${game.url}/${game.image}`;  // Old way to load images
+      game.url = `${serverUrl1}/${game.url}`;  // Old server path
     }
 
     gameImage.alt = game.name;
@@ -48,7 +51,6 @@ function displayFilteredGames(filteredGames) {
   });
 }
 
-
 function handleSearchInput() {
   const searchInputValue = document
     .getElementById("searchInput")
@@ -59,7 +61,6 @@ function handleSearchInput() {
   displayFilteredGames(filteredGames);
 }
 
-
 fetch("./config/games.json") 
   .then((response) => response.json())
   .then((data) => {
@@ -67,7 +68,6 @@ fetch("./config/games.json")
     displayFilteredGames(data); 
   })
   .catch((error) => console.error("Error fetching games:", error));
-
 
 document
   .getElementById("searchInput")
