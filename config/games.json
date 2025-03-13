@@ -42,6 +42,12 @@
     "new": false
   },
   {
+    "name": "AI 2048",
+    "image": "logo-4.png",
+    "url": "AI 2048",
+    "new": true
+  },
+  {
     "name": "DogeMiner",
     "image": "favicon.ico",
     "url": "DogeMiner",
