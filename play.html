@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Play Game</title>
+    <title>Game Play</title>
 
     <script src="config/main.js" type="module"></script>
     <style>
@@ -20,12 +20,12 @@
     </style>
   </head>
   <body>
+    <!-- Iframe where the game will be loaded -->
     <iframe id="gameFrame"></iframe>
 
     <script>
-      var serverUrl1 = "https://gms.parcoil.com";
-      var localImageBaseUrl = "./images";  // Local image directory for new games
-
+      // Server URL where games are hosted
+      var serverUrl1 = "https://gms.parcoil.com"; // This remains the same for any local games
       const queryString = window.location.search;
       const urlParams = new URLSearchParams(queryString);
       const gameUrl = urlParams.get("gameurl");
@@ -34,24 +34,16 @@
         alert("Game URL not provided!");
         window.location.href = "/"; // Redirect to homepage if game URL is missing
       } else {
-        let embedUrl;
+        // Check if the game URL points to the external source
+        const isExternalGame = gameUrl.startsWith("http");
 
-        // For new games, load from the local server
-        // For older games, load from the external server (serverUrl1)
-        const game = gamesData.find(game => game.url === gameUrl);
-        if (game) {
-          if (game.new) {
-            // For new games, fetch from the local server or a common image folder
-            embedUrl = `${localImageBaseUrl}/${game.url}`;
-          } else {
-            // For existing games, use the old server URL
-            embedUrl = `${serverUrl1}/${gameUrl}`;
-          }
-
-          document.getElementById("gameFrame").src = embedUrl;
+        // For external games
+        if (isExternalGame) {
+          document.getElementById("gameFrame").src = gameUrl; // Use the external URL directly
         } else {
-          alert("Game not found!");
-          window.location.href = "/"; // Redirect to homepage if game is not found
+          // For internal games hosted on the server
+          const embedUrl = `${serverUrl1}/${gameUrl}`; // Modify this as per your server's structure
+          document.getElementById("gameFrame").src = embedUrl; // Set iframe source to internal game URL
         }
       }
     </script>
