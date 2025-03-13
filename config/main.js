@@ -25,23 +25,23 @@ function displayFilteredGames(filteredGames) {
 
     const gameImage = document.createElement("img");
 
-    // Check if localImage exists; otherwise, use external
-    if (game.localImage) {
-      gameImage.src = `./${game.localImage}`; // Load from local folder
+    // Check if the game is local or external
+    if (game.source === "local" && game.image) {
+      gameImage.src = `./${game.image}`; // Load local image from folder
     } else {
-      gameImage.src = `${serverUrl1}/${game.url}/${game.image}`; // Load from external server
+      gameImage.src = `${serverUrl1}/${game.url}/${game.image}`; // Load external image
     }
 
     gameImage.alt = game.name;
 
-    // Handle click event based on source
+    // Handle click event to either display iframe or navigate
     gameImage.onclick = () => {
-      if (game.source === "local") {
-        window.location.href = `./games/${game.url}/index.html`; // Local game
-      } else if (game.source === "external" && game.externalUrl) {
-        window.location.href = game.externalUrl; // Direct external URL
-      } else {
-        window.location.href = `play.html?gameurl=${game.url}/`; // Generic external game
+      if (game.source === "local" && game.externalUrl) {
+        // Open the local game (AI 2048) in a new page with an iframe
+        window.location.href = `play.html?gameurl=${encodeURIComponent(game.externalUrl)}`;
+      } else if (game.source === "external" && game.url) {
+        // Open the external URL directly in the same window
+        window.location.href = game.url;
       }
     };
 
@@ -54,16 +54,18 @@ function displayFilteredGames(filteredGames) {
   });
 }
 
-// Function to handle search input
+// Handle search input
 function handleSearchInput() {
-  const searchInputValue = document.getElementById("searchInput").value.toLowerCase();
+  const searchInputValue = document
+    .getElementById("searchInput")
+    .value.toLowerCase();
   const filteredGames = gamesData.filter((game) =>
     game.name.toLowerCase().includes(searchInputValue)
   );
   displayFilteredGames(filteredGames);
 }
 
-// Fetch games from games.json
+// Fetch game data and display it
 fetch("./config/games.json")
   .then((response) => response.json())
   .then((data) => {
@@ -72,9 +74,10 @@ fetch("./config/games.json")
   })
   .catch((error) => console.error("Error fetching games:", error));
 
-// Add event listener to search input
-document.getElementById("searchInput").addEventListener("input", handleSearchInput);
+// Event listener for search input
+document
+  .getElementById("searchInput")
+  .addEventListener("input", handleSearchInput);
 
-// Set website title and subtitle
 document.getElementById("title").innerHTML = `${sitename}`;
 document.getElementById("subtitle").innerHTML = `${subtext}`;
