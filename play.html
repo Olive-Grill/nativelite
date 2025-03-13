@@ -37,6 +37,7 @@
         border-radius: 5px;
         z-index: 1000; /* Ensure it stays on top of the iframe */
         opacity: 0.8; /* Slightly transparent */
+        transition: all 0.3s ease; /* Smooth transition for moving the button */
       }
 
       /* Button hover effect */
@@ -44,11 +45,39 @@
         background-color: #45a049;
         opacity: 1; /* Fully opaque when hovered */
       }
+
+      /* Styling for the toggle button */
+      #toggleButton {
+        position: fixed;
+        top: 10px;
+        left: 100px; /* To position it near the home button initially */
+        padding: 10px 20px;
+        background-color: #ff6347;
+        color: white;
+        border: none;
+        font-size: 16px;
+        cursor: pointer;
+        border-radius: 5px;
+        z-index: 1000; /* Ensure it stays on top of the iframe */
+      }
+
+      /* Hide the home button when it's in the side position */
+      #homeButton.hidden {
+        left: -200px; /* Moves it to the left side off-screen */
+      }
+
+      /* When home button is hidden, move the toggle button closer to the left */
+      #toggleButton.active {
+        left: 10px; /* Moves the toggle button closer to the home button */
+      }
     </style>
   </head>
   <body>
     <!-- Home button with text "Go Back" -->
-    <button id="homeButton" onclick="goHome()">Go Back</button>
+    <button id="homeButton" onclick="goHome()">Return to menu 🏠</button>
+
+    <!-- Toggle button -->
+    <button id="toggleButton" onclick="toggleHomeButton()">Hide/Show Home</button>
 
     <!-- Game iframe -->
     <iframe id="gameFrame"></iframe>
@@ -70,6 +99,18 @@
       // Function to go to the homepage
       function goHome() {
         window.location.href = "/"; // You can change "/" to another URL if needed
+      }
+
+      // Function to toggle the home button visibility
+      function toggleHomeButton() {
+        const homeButton = document.getElementById("homeButton");
+        const toggleButton = document.getElementById("toggleButton");
+
+        // Toggle the "hidden" class on the home button
+        homeButton.classList.toggle("hidden");
+
+        // Toggle the active class on the toggle button to move it closer
+        toggleButton.classList.toggle("active");
       }
     </script>
   </body>
