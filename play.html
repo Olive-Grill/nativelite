@@ -1,117 +1,28 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Game Page</title>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Play Game</title>
+</head>
+<body>
+  <h1>Play Game</h1>
+  <div id="gameContainer">
+    <!-- The iframe will be dynamically injected here based on the game URL -->
+  </div>
 
-    <script src="config/main.js" type="module"></script>
-    <style>
-      body {
-        margin: 0;
-        padding: 0;
-      }
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const gameUrl = params.get('gameurl');
 
-      /* Fullscreen iframe */
-      iframe {
-        position: absolute; /* Absolute position to cover the whole screen */
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        border: none;
-        z-index: 1; /* Ensure iframe is below the button */
-      }
+    // Create and insert the iframe for the game
+    const iframe = document.createElement('iframe');
+    iframe.src = gameUrl; // Set the iframe's source to the game URL
+    iframe.width = "100%";
+    iframe.height = "800px"; // Set the height as needed
+    iframe.frameBorder = "0"; // Remove border
 
-      /* Styling for the Home button */
-      #homeButton {
-        position: fixed; /* Fixed position on the screen */
-        top: 10px; /* Position from the top */
-        left: 10px; /* Position from the left */
-        padding: 10px 20px;
-        background-color: #4CAF50;
-        color: white;
-        border: none;
-        font-size: 16px;
-        cursor: pointer;
-        border-radius: 5px;
-        z-index: 1000; /* Ensure it stays on top of the iframe */
-        opacity: 0.8; /* Slightly transparent */
-        transition: all 0.3s ease; /* Smooth transition for moving the button */
-      }
-
-      /* Button hover effect */
-      #homeButton:hover {
-        background-color: #45a049;
-        opacity: 1; /* Fully opaque when hovered */
-      }
-
-      /* Styling for the toggle button */
-      #toggleButton {
-        position: fixed;
-        top: 10px;
-        left: 100px; /* To position it near the home button initially */
-        padding: 10px 20px;
-        background-color: #ff6347;
-        color: white;
-        border: none;
-        font-size: 16px;
-        cursor: pointer;
-        border-radius: 5px;
-        z-index: 1000; /* Ensure it stays on top of the iframe */
-      }
-
-      /* Hide the home button when it's in the side position */
-      #homeButton.hidden {
-        left: -200px; /* Moves it to the left side off-screen */
-      }
-
-      /* When home button is hidden, move the toggle button closer to the left */
-      #toggleButton.active {
-        left: 10px; /* Moves the toggle button closer to the home button */
-      }
-    </style>
-  </head>
-  <body>
-    <!-- Home button with text "Go Back" -->
-    <button id="homeButton" onclick="goHome()">Return to menu 🏠</button>
-
-    <!-- Toggle button -->
-    <button id="toggleButton" onclick="toggleHomeButton()">Hide/Show Home</button>
-
-    <!-- Game iframe -->
-    <iframe id="gameFrame"></iframe>
-
-    <script>
-      var serverUrl1 = "https://gms.parcoil.com";
-      const queryString = window.location.search;
-      const urlParams = new URLSearchParams(queryString);
-      const gameUrl = urlParams.get("gameurl");
-
-      if (!gameUrl) {
-        alert("Game URL not provided!");
-        window.location.href = "/"; // Redirect to homepage if game URL is missing
-      } else {
-        const embedUrl = `${serverUrl1}/${gameUrl}`;
-        document.getElementById("gameFrame").src = embedUrl;
-      }
-
-      // Function to go to the homepage
-      function goHome() {
-        window.location.href = "/"; // You can change "/" to another URL if needed
-      }
-
-      // Function to toggle the home button visibility
-      function toggleHomeButton() {
-        const homeButton = document.getElementById("homeButton");
-        const toggleButton = document.getElementById("toggleButton");
-
-        // Toggle the "hidden" class on the home button
-        homeButton.classList.toggle("hidden");
-
-        // Toggle the active class on the toggle button to move it closer
-        toggleButton.classList.toggle("active");
-      }
-    </script>
-  </body>
+    document.getElementById('gameContainer').appendChild(iframe);
+  </script>
+</body>
 </html>
