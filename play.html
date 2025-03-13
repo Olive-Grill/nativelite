@@ -17,9 +17,33 @@
         height: 100vh;
         border: none;
       }
+
+      /* Home Button Styles */
+      #homeButton {
+        position: fixed;
+        top: 20px;
+        left: 20px;
+        background-color: #4b87f7;
+        color: white;
+        font-size: 30px;
+        border: none;
+        padding: 10px 15px;
+        border-radius: 50%;
+        cursor: pointer;
+        z-index: 10;
+        display: none; /* Initially hidden */
+      }
+
+      /* Visible Button */
+      #homeButton.show {
+        display: block;
+      }
     </style>
   </head>
   <body>
+    <!-- Home Button -->
+    <button id="homeButton" onclick="window.location.href = '/'">🏠</button>
+
     <!-- Iframe where the game will be loaded -->
     <iframe id="gameFrame"></iframe>
 
@@ -45,6 +69,9 @@
           const embedUrl = `${serverUrl1}/${gameUrl}`; // Modify this as per your server's structure
           document.getElementById("gameFrame").src = embedUrl; // Set iframe source to internal game URL
         }
+
+        // Show the home button once the game is loaded
+        document.getElementById("homeButton").classList.add("show");
       }
     </script>
   </body>
