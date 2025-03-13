@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Home</title>
+    <title>Game Page</title>
 
     <script src="config/main.js" type="module"></script>
     <style>
@@ -17,23 +17,53 @@
         height: 100vh;
         border: none;
       }
+
+      #homeButton {
+        position: fixed;
+        top: 10px;
+        left: 10px;
+        padding: 10px 20px;
+        background-color: #4CAF50;
+        color: white;
+        border: none;
+        font-size: 16px;
+        cursor: pointer;
+        border-radius: 5px;
+        z-index: 1000; /* Ensures it stays on top of the iframe */
+      }
+
+      #homeButton:hover {
+        background-color: #45a049;
+      }
     </style>
   </head>
   <body>
+    <!-- Home button -->
+    <button id="homeButton" onclick="goHome()">Home</button>
+
+    <!-- Game iframe -->
     <iframe id="gameFrame"></iframe>
 
     <script>
+      // The server URL and the game URL parameter from the query string
       var serverUrl1 = "https://gms.parcoil.com";
       const queryString = window.location.search;
       const urlParams = new URLSearchParams(queryString);
       const gameUrl = urlParams.get("gameurl");
 
+      // If no game URL is provided, show an alert and redirect to the homepage
       if (!gameUrl) {
         alert("Game URL not provided!");
         window.location.href = "/"; // Redirect to homepage if game URL is missing
       } else {
+        // Embed the game in the iframe using the provided URL
         const embedUrl = `${serverUrl1}/${gameUrl}`;
         document.getElementById("gameFrame").src = embedUrl;
+      }
+
+      // Function to go to the homepage
+      function goHome() {
+        window.location.href = "/"; // You can change "/" to another URL if needed
       }
     </script>
   </body>
