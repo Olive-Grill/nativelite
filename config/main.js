@@ -38,8 +38,10 @@ function displayFilteredGames(filteredGames) {
     gameImage.onclick = () => {
       if (game.source === "local") {
         window.location.href = `./games/${game.url}/index.html`; // Local game
+      } else if (game.source === "external" && game.externalUrl) {
+        window.location.href = game.externalUrl; // Direct external URL
       } else {
-        window.location.href = `play.html?gameurl=${game.url}/`; // External game
+        window.location.href = `play.html?gameurl=${game.url}/`; // Generic external game
       }
     };
 
