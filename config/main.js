@@ -25,28 +25,28 @@ function displayFilteredGames(filteredGames) {
     const gameDiv = document.createElement("div");
     gameDiv.classList.add("game");
 
-    // Create image container
-    const imageContainer = document.createElement("div");
-    imageContainer.classList.add("image-container");
+    const gameImage = document.createElement("img");
+    
+    // Check where the image should load from
+    if (game.source === "external") {
+      gameImage.src = `${serverUrl1}/${game.url}/${game.image}`;
+    } else {
+      gameImage.src = `config/${game.image}`;
+    }
 
-    // External Image
-    const gameImage1 = document.createElement("img");
-    gameImage1.src = `${serverUrl1}/${game.url}/${game.image}`;
-    gameImage1.alt = `${game.name} (External)`;
-    gameImage1.classList.add("game-image");
+    gameImage.alt = game.name;
+    gameImage.onclick = () => {
+      window.location.href = `play.html?gameurl=${game.url}`;
+    };
 
-    // Local Image
-    const gameImage2 = document.createElement("img");
-    gameImage2.src = `config/${game.image}`;
-    gameImage2.alt = `${game.name} (Local)`;
-    gameImage2.classList.add("game-image");
+    const gameName = document.createElement("p");
+    gameName.textContent = game.name;
 
-    // Clicking any image should load the game
-    [gameImage1, gameImage2].forEach((img) => {
-      img.onclick = () => {
-        window.location.href = `play.html?gameurl=${game.url}`;
-      };
-    });
+    gameDiv.appendChild(gameImage);
+    gameDiv.appendChild(gameName);
+    gamesContainer.appendChild(gameDiv);
+  });
+}
 
     // Append both images
     imageContainer.appendChild(gameImage1);
