@@ -12,17 +12,18 @@
       <h1 id="title"></h1>
       <p id="subtitle"></p>
     </div>
-    <div class="center">
-      <input type="text" id="searchInput" placeholder="Search games" />
-    </div>
-    <div id="gamesContainer"></div>
 
-    <!-- Feedback Button -->
+    <!-- Feedback Button (moved up here) -->
     <div class="center">
       <a href="https://forms.gle/t9KCv2UWJPUb3isW7" target="_blank">
         <button class="feedback-button">📝 Give Feedback</button>
       </a>
     </div>
+
+    <div class="center">
+      <input type="text" id="searchInput" placeholder="Search games" />
+    </div>
+    <div id="gamesContainer"></div>
 
     <div class="footer">
       <a style="font-weight: 700">a site by</a><a style="font-weight: 700" class="link" href="https://dsc.gg/parcoil">parcoil network</a>
@@ -39,6 +40,7 @@
         cursor: pointer;
         text-decoration: none; /* Remove underline */
         transition: background-color 0.3s;
+        margin-bottom: 20px; /* Space between the button and search bar */
       }
 
       .feedback-button:hover {
