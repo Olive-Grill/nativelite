@@ -5,8 +5,6 @@ var subtext = "Port Washington's Number One Games Website"; // set the subtext
 
 // more settings in main.css
 
-
-
 // END CONFIG
 // DO NOT MODIFY IF YOU DO NOT KNOW WHAT YOUR DOING!
 
@@ -26,7 +24,16 @@ function displayFilteredGames(filteredGames) {
     gameDiv.classList.add("game");
 
     const gameImage = document.createElement("img");
-    gameImage.src = `${serverUrl1}/${game.url}/${game.image}`;
+
+    // Check if the game is new and if so, load a local image path or different server path
+    if (game.new) {
+      // For new games, load images from a custom location, like a local folder
+      gameImage.src = `./images/${game.image}`;  // New way to load images
+    } else {
+      // For existing games, keep the old server URL structure
+      gameImage.src = `${serverUrl1}/${game.url}/${game.image}`;  // Old way to load images
+    }
+
     gameImage.alt = game.name;
     gameImage.onclick = () => {
       window.location.href = `play.html?gameurl=${game.url}/`;
@@ -68,4 +75,4 @@ document
 
 document.getElementById("title").innerHTML = `${sitename}`;
 
-document.getElementById("subtitle").innerHTML = `${subtext}`
+document.getElementById("subtitle").innerHTML = `${subtext}`;
