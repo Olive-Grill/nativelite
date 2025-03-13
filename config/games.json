@@ -48,12 +48,13 @@
     "source": "external",
     "new": false
   },
-  {
+    {
     "name": "AI 2048",
     "image": "Images/Ai2048.png",
     "url": "AI 2048",
     "source": "local",
-    "new": true
+    "new": true,
+    "externalUrl": "https://ai2048.netlify.app"  // External URL to open in iframe
   },
   {
     "name": "DogeMiner",
