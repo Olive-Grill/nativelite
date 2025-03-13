@@ -31,23 +31,18 @@
         border-radius: 50%;
         cursor: pointer;
         z-index: 10;
-        transition: transform 0.3s ease; /* Transition for smooth sliding */
-      }
-
-      /* Button hidden offscreen */
-      #homeButton.offscreen {
-        transform: translateX(-100px); /* Slide the button offscreen */
+        display: none; /* Initially hidden */
       }
 
       /* Visible Button */
       #homeButton.show {
-        transform: translateX(0); /* Reset transform to bring it back onscreen */
+        display: block;
       }
     </style>
   </head>
   <body>
     <!-- Home Button -->
-    <button id="homeButton" onclick="toggleHomeButton()">🏠</button>
+    <button id="homeButton" onclick="window.location.href = '/'">🏠</button>
 
     <!-- Iframe where the game will be loaded -->
     <iframe id="gameFrame"></iframe>
@@ -77,17 +72,6 @@
 
         // Show the home button once the game is loaded
         document.getElementById("homeButton").classList.add("show");
-
-        // Optionally slide the button offscreen after some time (for example, 5 seconds)
-        setTimeout(() => {
-          document.getElementById("homeButton").classList.add("offscreen");
-        }, 5000); // Change the time delay as needed (5000ms = 5 seconds)
-      }
-
-      // Function to toggle the visibility of the home button
-      function toggleHomeButton() {
-        const homeButton = document.getElementById("homeButton");
-        homeButton.classList.toggle("offscreen"); // Toggle the 'offscreen' class
       }
     </script>
   </body>
