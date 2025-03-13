@@ -50,7 +50,7 @@
   },
   {
     "name": "AI 2048",
-    "image": "2048.png",
+    "image": "Images/Ai2048.png",
     "url": "AI 2048",
     "source": "local",
     "new": true
