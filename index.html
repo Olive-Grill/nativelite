@@ -324,7 +324,7 @@
         }
     </script>
 
-    <!-- Terms of Service Popup -->
+   <!-- Terms of Service Popup -->
     <div id="tosPopup" class="tos-popup">
         <div class="tos-popup-content">
             <h2>Terms of Service</h2>
@@ -335,10 +335,11 @@
             </p>
             <div class="tos-buttons">
                 <button id="acceptTOS">Accept</button>
-                <button id="viewTOS">View Terms</button>
+                <button id="viewTOS" onclick="window.location.href = 'terms.html';">View Terms</button> <!-- Updated this line -->
             </div>
         </div>
     </div>
+
         <script>
         // Check if the user has already accepted the ToS
         window.onload = function() {
