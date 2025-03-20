@@ -21,16 +21,10 @@
       <button class="button chatroom-button" onclick="window.open('https://us29.chatzy.com/46298746305400', '_blank')">
         💬 Open Chatroom
       </button>
+      <a href="https://sites.google.com/portnet.org/263875438796534879658734687956/home" target="_blank">
+        <button class="button legacy-button">🕰️ Legacy Version</button>
+      </a>
     </div>
-
-    <!-- Dark Mode Button Positioned Below Chatroom -->
-    <div class="center">
-      <button class="button" onclick="toggleTheme()">🌙 Toggle Dark Mode</button>
-    </div>
-
-    <a href="https://sites.google.com/portnet.org/263875438796534879658734687956/home" target="_blank">
-      <button class="button legacy-button">🕰️ Legacy Version</button>
-    </a>
 
     <!-- Mission Statement Drop-Down -->
     <div class="center">
@@ -154,25 +148,9 @@
         transform: scale(1.05);
         border-color: #3871d0;
       }
-
-      /* Dark Mode Styles */
-      body.dark-mode {
-        background-color: #121212; /* Dark background */
-        color: white; /* Light text */
-      }
-
-      .button.dark-mode {
-        background-color: #444;
-        color: white;
-      }
-
-      h1.dark-mode, p.dark-mode {
-        color: white;
-      }
     </style>
 
     <script>
-      // Function to toggle mission statement visibility with smooth animation
       function toggleMission() {
         var mission = document.getElementById("missionStatement");
         if (mission.style.display === "block") {
@@ -183,16 +161,7 @@
           mission.style.maxHeight = "500px";  // Adjust to ensure the entire content is revealed
         }
       }
-
-      // Function to toggle dark mode
-      function toggleTheme() {
-        document.body.classList.toggle('dark-mode');
-        // Optionally toggle the class for buttons as well
-        let buttons = document.querySelectorAll('.button');
-        buttons.forEach(button => {
-          button.classList.toggle('dark-mode');
-        });
-      }
     </script>
+
   </body>
 </html>
