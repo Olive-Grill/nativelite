@@ -13,8 +13,13 @@
       <p id="subtitle"></p>
     </div>
 
-    <!-- Button Container (Flexbox for side-by-side layout) -->
-    <div class="button-container">
+    <!-- Button to reveal other buttons -->
+    <div class="center">
+      <button class="button reveal-buttons" onclick="togglePages()">📄 Our Pages</button>
+    </div>
+
+    <!-- Hidden Button Container (Initially Hidden) -->
+    <div id="buttonContainer" class="button-container" style="display: none;">
       <a href="https://forms.gle/t9KCv2UWJPUb3isW7" target="_blank">
         <button class="button feedback-button">📝 Give Feedback</button>
       </a>
@@ -185,6 +190,15 @@
       function toggleDarkMode() {
         var body = document.body;
         body.classList.toggle('dark-mode');
+      }
+
+      function togglePages() {
+        var buttonContainer = document.getElementById("buttonContainer");
+        if (buttonContainer.style.display === "none") {
+          buttonContainer.style.display = "flex";  // Show the buttons
+        } else {
+          buttonContainer.style.display = "none";  // Hide the buttons
+        }
       }
     </script>
   </body>
