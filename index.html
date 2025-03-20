@@ -128,7 +128,7 @@
         box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
         overflow: hidden;
         max-height: 0;
-        transition: max-height 1s ease-out;
+        transition: max-height 1s ease-out, padding 0.3s ease;
       }
 
       .mission-content p {
@@ -161,9 +161,11 @@
         if (mission.style.display === "block") {
           mission.style.display = "none";
           mission.style.maxHeight = "0";
+          mission.style.padding = "0 15px";  // Ensure padding shrinks when hidden
         } else {
           mission.style.display = "block";
-          mission.style.maxHeight = "1000px";  // Ensure full text is revealed
+          mission.style.maxHeight = "1000px";  // Ensure full content is revealed
+          mission.style.padding = "15px";  // Restore padding when shown
         }
       }
     </script>
