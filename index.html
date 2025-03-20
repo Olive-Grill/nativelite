@@ -1,49 +1,63 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Home</title>
+    <link rel="stylesheet" href="config/main.css" />
+    <script src="config/main.js" type="module"></script>
+</head>
+<body>
+    <div class="center">
+        <h1 id="title"></h1>
+        <p id="subtitle"></p>
+    </div>
+
+    <!-- Tools Button -->
+    <div class="center">
+        <button class="button tools-button" onclick="toggleTools()">🛠️ Tools</button>
+    </div>
+
+    <!-- Hidden Buttons Container -->
+    <div id="toolsContainer" class="button-container hidden">
+        <a href="https://forms.gle/t9KCv2UWJPUb3isW7" target="_blank">
+            <button class="button feedback-button">📝 Give Feedback</button>
+        </a>
+        <button class="button chatroom-button" onclick="window.open('https://us29.chatzy.com/46298746305400', '_blank')">
+            💬 Open Chatroom
+        </button>
+        <a href="https://sites.google.com/portnet.org/263875438796534879658734687956/home" target="_blank">
+            <button class="button legacy-button">🕰️ Legacy Version</button>
+        </a>
+        <button class="button dark-mode-button" onclick="toggleDarkMode()">🌙 Toggle Dark Mode</button>
+        <button class="button mission-toggle" onclick="toggleMission()">📜 Our Mission</button>
+    </div>
+
+    <!-- Mission Statement Drop-Down -->
+    <div id="missionStatement" class="mission-content">
+        <p>
+            We strive to create a space where users can easily find and enjoy games while fostering a welcoming community.<br /><br />
+            Student privacy is an important issue in education. Privacy is a fundamental human right that establishes limits to limit access to personal information.<br /><br />
+            It is essential to understand the importance of protecting student data to prevent it from falling into the wrong hands.<br /><br />
+            There are federal and state laws that regulate the privacy of students' personally identifiable information (PII), and there are legal and ethical limitations on the collection and use of this data.<br />
+            It is wrong to deprive students of their privacy by monitoring and changing everything they do. This is considered illegal and violates students' privacy rights.<br /><br />
+            Privacy is a fundamental value that must be respected in a democratic society. Both the State and private organizations must limit their power to commit illegal or arbitrary intrusions into people's private lives.
+        </p>
+    </div>
+
+    <!-- Search Bar -->
+    <div class="center">
+        <input type="text" id="searchInput" placeholder="Search games" />
+    </div>
+    <div id="gamesContainer"></div>
+
+    <div class="footer">
+        <a style="font-weight: 700">a site by</a>
+        <a style="font-weight: 700" class="link" href="https://dsc.gg/parcoil">parcoil network</a>
+    </div>
+
     <style>
-        /* General Styles */
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
-            text-align: center;
-            margin: 0;
-            padding: 20px;
-        }
-
-        /* Tools Dropdown */
-        .tools-container {
-            margin-bottom: 20px;
-        }
-
-        .tools-button {
-            background-color: #222;
-            color: white;
-            font-size: 18px;
-            padding: 15px 30px;
-            border-radius: 5px;
-            cursor: pointer;
-            border: 3px solid black;
-            display: inline-block;
-        }
-
-        .tools-content {
-            display: none;
-            margin-top: 10px;
-        }
-
-        /* Buttons */
-        .button-container {
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 15px;
-            margin-top: 10px;
-        }
-
+        /* General Button Styles */
         .button {
             background-color: #4b87f7;
             color: white;
@@ -55,36 +69,57 @@
             transition: transform 0.3s ease-out, background-color 0.3s ease, border 0.3s ease;
             box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
             border: 3px solid black;
-            height: 60px;
+            min-height: 60px;  /* Ensures all buttons are at least this tall */
             display: flex;
             align-items: center;
             justify-content: center;
         }
 
-        /* Specific Button Effects */
-        .feedback-button {
-            transform: rotate(-5deg);
-        }
-
-        .mission-toggle {
-            transform: rotate(5deg);
-        }
-
         /* Hover Effects */
-        .button:hover {
+        .feedback-button:hover {
             background-color: #3871d0;
+            border: 3px solid yellow;
+            transform: scale(1.1) rotate(-5deg); /* Only this rotates -5 degrees */
+        }
+
+        .chatroom-button:hover {
+            background-color: #3871d0;
+            border: 3px solid green;
             transform: scale(1.1);
         }
 
-        .feedback-button:hover {
-            transform: scale(1.1) rotate(-5deg);
+        .legacy-button:hover {
+            background-color: #3871d0;
+            border: 3px solid red;
+            transform: scale(1.1); /* No rotation */
+        }
+
+        .dark-mode-button:hover {
+            background-color: #3871d0;
+            border: 3px solid orange;
+            transform: scale(1.1);
         }
 
         .mission-toggle:hover {
-            transform: scale(1.1) rotate(5deg);
+            background-color: #444;
+            transform: scale(1.1) rotate(5deg); /* Only this rotates 5 degrees */
         }
 
-        /* Mission Statement */
+        /* Button Container */
+        .button-container {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        /* Hide Tools Buttons Initially */
+        .hidden {
+            display: none;
+        }
+
+        /* Mission Statement Content */
         .mission-content {
             display: none;
             background-color: #000;
@@ -102,43 +137,35 @@
         .mission-content p {
             margin: 0;
         }
+
+        /* Search Bar Styles */
+        #searchInput {
+            width: 60%;
+            max-width: 500px;
+            padding: 15px;
+            font-size: 18px;
+            border: 2px solid #4b87f7;
+            border-radius: 5px;
+            outline: none;
+            transition: transform 0.3s ease-out, border-color 0.3s ease;
+            margin-top: 20px;
+        }
+
+        /* Search Bar Hover Effect */
+        #searchInput:hover, #searchInput:focus {
+            transform: scale(1.05);
+            border-color: #3871d0;
+        }
+
+        /* Centered Layout */
+        .center {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 20px;
+        }
     </style>
-</head>
-<body>
 
-    <!-- Tools Dropdown -->
-    <div class="tools-container">
-        <button class="tools-button" onclick="toggleTools()">🛠️ Tools</button>
-        <div id="toolsContent" class="tools-content">
-            <div class="button-container">
-                <a href="https://forms.gle/t9KCv2UWJPUb3isW7" target="_blank">
-                    <button class="button feedback-button">📝 Give Feedback</button>
-                </a>
-                <button class="button chatroom-button" onclick="window.open('https://us29.chatzy.com/46298746305400', '_blank')">
-                    💬 Open Chatroom
-                </button>
-                <a href="https://sites.google.com/portnet.org/263875438796534879658734687956/home" target="_blank">
-                    <button class="button legacy-button">🕰️ Legacy Version</button>
-                </a>
-                <button class="button dark-mode-button" onclick="toggleDarkMode()">🌙 Toggle Dark Mode</button>
-                <button class="button mission-toggle" onclick="toggleMission()">📜 Our Mission</button>
-            </div>
-        </div>
-    </div>
-
-    <!-- Mission Statement -->
-    <div id="missionStatement" class="mission-content">
-        <p>
-            We strive to create a space where users can easily find and enjoy games while fostering a welcoming community.<br><br>
-            Student privacy is an important issue in education. Privacy is a fundamental human right that establishes limits to limit access to personal information.<br><br>
-            It is essential to understand the importance of protecting student data to prevent it from falling into the wrong hands.<br><br>
-            There are federal and state laws that regulate the privacy of students' personally identifiable information (PII), and there are legal and ethical limitations on the collection and use of this data.<br>
-            It is wrong to deprive students of their privacy by monitoring and changing everything they do. This is considered illegal and violates students' privacy rights.<br><br>
-            Privacy is a fundamental value that must be respected in a democratic society. Both the State and private organizations must limit their power to commit illegal or arbitrary intrusions into people's private lives.
-        </p>
-    </div>
-
-    <!-- JavaScript -->
     <script>
         function toggleMission() {
             var mission = document.getElementById("missionStatement");
@@ -151,11 +178,15 @@
             }
         }
 
+        function toggleDarkMode() {
+            var body = document.body;
+            body.classList.toggle('dark-mode');
+        }
+
         function toggleTools() {
-            var tools = document.getElementById("toolsContent");
-            tools.style.display = tools.style.display === "block" ? "none" : "block";
+            var toolsContainer = document.getElementById("toolsContainer");
+            toolsContainer.classList.toggle("hidden");
         }
     </script>
-
 </body>
 </html>
