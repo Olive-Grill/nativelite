@@ -339,5 +339,45 @@
             </div>
         </div>
     </div>
+        <script>
+        // Check if the user has already accepted the ToS
+        window.onload = function() {
+            if (!localStorage.getItem('tosAccepted')) {
+                document.getElementById('tosPopup').style.display = 'flex';
+            }
+        };
+    
+        // Function to accept the Terms of Service
+        document.getElementById('acceptTOS').onclick = function() {
+            // Store the acceptance in localStorage
+            localStorage.setItem('tosAccepted', 'true');
+            
+            // Hide the Terms of Service popup
+            document.getElementById('tosPopup').style.display = 'none';
+        };
+    
+        // Function to view the Terms of Service (optional)
+        document.getElementById('viewTOS').onclick = function() {
+            // Redirect to a page where full terms are available (replace with actual link)
+            window.open('https://www.example.com/terms-of-service', '_blank');
+        };
+    
+        // Toggle the visibility of the tools section
+        function toggleTools() {
+            const toolsContainer = document.getElementById('toolsContainer');
+            toolsContainer.classList.toggle('hidden');
+        }
+    
+        // Toggle Dark Mode
+        function toggleDarkMode() {
+            document.body.classList.toggle('dark-mode');
+        }
+    
+        // Toggle the mission statement section visibility
+        function toggleMission() {
+            const missionContent = document.getElementById('missionStatement');
+            missionContent.style.display = missionContent.style.display === 'none' ? 'block' : 'none';
+        }
+    </script>
 </body>
 </html>
