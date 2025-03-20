@@ -226,10 +226,14 @@
 
         function toggleMission() {
             var mission = document.getElementById("missionStatement");
-            if (mission.style.maxHeight) {
+
+            // Toggle the display of the mission statement content
+            if (mission.style.display === "block") {
+                mission.style.display = "none";
                 mission.style.maxHeight = null;
                 mission.style.padding = "0 15px";
             } else {
+                mission.style.display = "block";
                 mission.style.maxHeight = mission.scrollHeight + "px";
                 mission.style.padding = "15px";
             }
