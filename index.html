@@ -25,30 +25,56 @@
             justify-content: center;
         }
 
-        /* Remove underline from linked buttons */
-        a {
+        /* Remove link underline */
+        .button a {
             text-decoration: none;
+            color: white;
         }
 
-        /* Button Animations */
+        /* Hover Effects */
+        .button:hover {
+            transform: scale(1.1);
+        }
+
+        /* Button Container */
+        .button-container {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        /* Hide Tools Buttons Initially */
+        .hidden {
+            display: none;
+        }
+
+        /* Second row formatting */
+        .second-row {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        /* Wiggle animation for Tools button */
         @keyframes wiggle {
-            0% { transform: rotate(0deg); }
-            25% { transform: rotate(3deg); }
-            50% { transform: rotate(-3deg); }
-            75% { transform: rotate(2deg); }
-            100% { transform: rotate(0deg); }
+            0%, 100% { transform: rotate(0deg); }
+            25% { transform: rotate(-3deg); }
+            50% { transform: rotate(3deg); }
+            75% { transform: rotate(-2deg); }
         }
 
         .tools-button {
-            animation: wiggle 1.5s ease-in-out infinite;
-            animation-play-state: paused;
+            animation: wiggle 0.8s ease-in-out infinite;
+            animation-delay: 3s;
         }
 
         /* Pulsating Search Bar */
         @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.03); }
-            100% { transform: scale(1); }
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
         }
 
         #searchInput {
@@ -59,29 +85,15 @@
             border: 2px solid #4b87f7;
             border-radius: 5px;
             outline: none;
-            animation: pulse 2.5s infinite ease-in-out;
+            transition: transform 0.3s ease-out, border-color 0.3s ease;
+            margin-top: 20px;
+            animation: pulse 2s infinite;
         }
 
-        /* Centered Layout */
-        .center {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin-bottom: 20px;
-        }
-
-        /* Initially Hidden Elements */
-        .hidden {
-            display: none;
-        }
-
-        /* Button Container */
-        .button-container {
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-            margin-bottom: 20px;
-            flex-wrap: wrap;
+        /* Search Bar Hover Effect */
+        #searchInput:hover, #searchInput:focus {
+            transform: scale(1.02);
+            border-color: #3871d0;
         }
     </style>
 </head>
@@ -93,7 +105,7 @@
 
     <!-- Tools Button -->
     <div class="center">
-        <button class="button tools-button" id="toolsButton" onclick="toggleTools()">🛠️ Tools</button>
+        <button class="button tools-button" onclick="toggleTools()">🛠️ Tools</button>
     </div>
 
     <!-- Hidden Buttons Container -->
@@ -109,13 +121,25 @@
         </a>
         <button class="button dark-mode-button" onclick="toggleDarkMode()">🌙 Toggle Dark Mode</button>
         <button class="button mission-toggle" onclick="toggleMission()">📜 Our Mission</button>
+    </div>
 
-        <!-- Second Row of Buttons -->
-        <div class="button-container">
-            <a href="https://pastebin.com/embed_js/7M8NucYs" target="_blank">
-                <button class="button alt-links-button">🔗 Alternate Links</button>
-            </a>
-        </div>
+    <!-- Second Row -->
+    <div id="toolsContainer2" class="second-row hidden">
+        <a href="https://pastebin.com/embed_js/7M8NucYs" target="_blank">
+            <button class="button alternate-links-button">🔗 Alternate Links</button>
+        </a>
+    </div>
+
+    <!-- Mission Statement Drop-Down -->
+    <div id="missionStatement" class="mission-content">
+        <p>
+            We strive to create a space where users can easily find and enjoy games while fostering a welcoming community.<br /><br />
+            Student privacy is an important issue in education. Privacy is a fundamental human right that establishes limits to limit access to personal information.<br /><br />
+            It is essential to understand the importance of protecting student data to prevent it from falling into the wrong hands.<br /><br />
+            There are federal and state laws that regulate the privacy of students' personally identifiable information (PII), and there are legal and ethical limitations on the collection and use of this data.<br />
+            It is wrong to deprive students of their privacy by monitoring and changing everything they do. This is considered illegal and violates students' privacy rights.<br /><br />
+            Privacy is a fundamental value that must be respected in a democratic society. Both the State and private organizations must limit their power to commit illegal or arbitrary intrusions into people's private lives.
+        </p>
     </div>
 
     <!-- Search Bar -->
@@ -130,15 +154,6 @@
     </div>
 
     <script>
-        function toggleTools() {
-            var toolsContainer = document.getElementById("toolsContainer");
-            toolsContainer.classList.toggle("hidden");
-        }
-
-        function toggleDarkMode() {
-            document.body.classList.toggle('dark-mode');
-        }
-
         function toggleMission() {
             var mission = document.getElementById("missionStatement");
             if (mission.style.maxHeight) {
@@ -150,14 +165,17 @@
             }
         }
 
-        // Start the wiggle animation every 3 seconds
-        setInterval(() => {
-            let toolsButton = document.getElementById("toolsButton");
-            toolsButton.style.animationPlayState = "running";
-            setTimeout(() => {
-                toolsButton.style.animationPlayState = "paused";
-            }, 1500); // Stop the wiggle after 1.5s
-        }, 3000);
+        function toggleDarkMode() {
+            document.body.classList.toggle('dark-mode');
+        }
+
+        function toggleTools() {
+            var toolsContainer = document.getElementById("toolsContainer");
+            var toolsContainer2 = document.getElementById("toolsContainer2");
+
+            toolsContainer.classList.toggle("hidden");
+            toolsContainer2.classList.toggle("hidden");
+        }
     </script>
 </body>
 </html>
