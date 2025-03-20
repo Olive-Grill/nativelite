@@ -57,6 +57,69 @@
     </div>
 
     <style>
+        /* ToS Popup Styles */
+        .tos-popup {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(10px); /* Blurring effect */
+            z-index: 9999; /* Ensure it's above other content */
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .tos-popup-content {
+            background-color: white;
+            color: black;
+            padding: 20px;
+            border-radius: 10px;
+            width: 80%;
+            max-width: 600px;
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
+            overflow: auto;
+            max-height: 80%;
+        }
+        
+        .tos-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+        
+        .tos-popup h2 {
+            margin-bottom: 15px;
+        }
+        
+        .tos-popup p {
+            line-height: 1.6;
+        }
+        
+        #acceptTOS {
+            background-color: #4b87f7;
+            color: white;
+            font-size: 18px;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        
+        #viewTOS {
+            background-color: #ddd;
+            color: #444;
+            font-size: 18px;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        
+        #acceptTOS:hover, #viewTOS:hover {
+            transform: scale(1.05);
+        }
+
         /* General Button Styles */
         .button {
             background-color: #4b87f7;
@@ -225,70 +288,56 @@
     </style>
 
     <script>
-        // Function to trigger the wiggle every 3 seconds
-        function triggerWiggle() {
-            var toolsButton = document.getElementById('toolsButton');
-            toolsButton.style.animation = `wiggle 0.6s ease-in-out`; // Slower wiggle
-
-            // Reset animation after it completes
-            setTimeout(() => {
-                toolsButton.style.animation = ''; // Reset animation
-            }, 600); // 600ms matches the animation duration
-
-            // Schedule the next wiggle after 3 seconds
-            setTimeout(triggerWiggle, 3000); // Wiggle every 3 seconds
-        }
-
-        // Start the wiggle when the page loads
+        // Check if the user has already accepted the ToS
         window.onload = function() {
-            triggerWiggle();
-
-            // Check if dark mode is enabled from localStorage
-            if (localStorage.getItem('darkMode') === 'enabled') {
-                document.body.classList.add('dark-mode');
+            if (!localStorage.getItem('tosAccepted')) {
+                document.getElementById('tosPopup').style.display = 'flex';
             }
         };
 
-        function toggleMission() {
-            var mission = document.getElementById("missionStatement");
+        // Function to accept the Terms of Service
+        document.getElementById('acceptTOS').onclick = function() {
+            localStorage.setItem('tosAccepted', 'true');
+            document.getElementById('tosPopup').style.display = 'none';
+        };
 
-            // Toggle the display of the mission statement content
-            if (mission.style.display === "block") {
-                mission.style.display = "none";
-                mission.style.maxHeight = null;
-                mission.style.padding = "0 15px";
-            } else {
-                mission.style.display = "block";
-                mission.style.maxHeight = mission.scrollHeight + "px";
-                mission.style.padding = "15px";
-            }
-        }
+        // Function to view the Terms of Service
+        document.getElementById('viewTOS').onclick = function() {
+            window.open('https://www.example.com/terms-of-service', '_blank');
+        };
 
-        function toggleDarkMode() {
-            var body = document.body;
-            body.classList.toggle('dark-mode');
-
-            // Save the dark mode preference in localStorage
-            if (body.classList.contains('dark-mode')) {
-                localStorage.setItem('darkMode', 'enabled');
-            } else {
-                localStorage.removeItem('darkMode');
-            }
-        }
-
+        // Toggle the visibility of the tools section
         function toggleTools() {
-            var toolsContainer = document.getElementById("toolsContainer");
-            var toolsButton = document.getElementById("toolsButton");
+            const toolsContainer = document.getElementById('toolsContainer');
+            toolsContainer.classList.toggle('hidden');
+        }
 
-            toolsContainer.classList.toggle("hidden");
+        // Toggle Dark Mode
+        function toggleDarkMode() {
+            document.body.classList.toggle('dark-mode');
+        }
 
-            // Change button text between "Tools" and "Close"
-            if (toolsContainer.classList.contains("hidden")) {
-                toolsButton.innerText = "🛠️ Tools";
-            } else {
-                toolsButton.innerText = "❌ Close";
-            }
+        // Toggle the mission statement section visibility
+        function toggleMission() {
+            const missionContent = document.getElementById('missionStatement');
+            missionContent.style.display = missionContent.style.display === 'none' ? 'block' : 'none';
         }
     </script>
+
+    <!-- Terms of Service Popup -->
+    <div id="tosPopup" class="tos-popup">
+        <div class="tos-popup-content">
+            <h2>Terms of Service</h2>
+            <p>
+                By accessing or using this website, you agree to the following terms:
+                <br><br>
+                <strong>Intended Use</strong> – This website is not designed for use in educational institutions...
+            </p>
+            <div class="tos-buttons">
+                <button id="acceptTOS">Accept</button>
+                <button id="viewTOS">View Terms</button>
+            </div>
+        </div>
+    </div>
 </body>
 </html>
