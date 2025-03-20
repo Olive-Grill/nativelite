@@ -24,18 +24,17 @@
       <a href="https://sites.google.com/portnet.org/263875438796534879658734687956/home" target="_blank">
         <button class="button legacy-button">🕰️ Legacy Version</button>
       </a>
+      <!-- Our Mission Button -->
+      <button class="button mission-toggle" onclick="toggleMission()">📜 Our Mission</button>
     </div>
 
     <!-- Mission Statement Drop-Down -->
-    <div class="center">
-      <button class="mission-toggle" onclick="toggleMission()">📜 Our Mission</button>
-    </div>
     <div id="missionStatement" class="mission-content">
       <p>
         We strive to create a space where users can easily find and enjoy games while fostering a welcoming community.<br /><br />
         Student privacy is an important issue in education. Privacy is a fundamental human right that establishes limits to limit access to personal information.<br /><br />
         It is essential to understand the importance of protecting student data to prevent it from falling into the wrong hands.<br /><br />
-        There are federal and state laws that regulate the privacy of students' personally identifiable information (PII), and there are legal and ethical limitations on the collection and use of this data.<br />
+        There are federal and state laws that regulate the privacy of students' personally identifiable information (PII), and there are legal and ethical limitations on the collection and use of this data.<br /><br />
         It is wrong to deprive students of their privacy by monitoring and changing everything they do. This is considered illegal and violates students' privacy rights.<br /><br />
         Privacy is a fundamental value that must be respected in a democratic society. Both the State and private organizations must limit their power to commit illegal or arbitrary intrusions into people's private lives.
       </p>
@@ -86,29 +85,18 @@
         transform: scale(1.1) rotate(5deg);
       }
 
+      .mission-toggle:hover {
+        background-color: #3871d0;
+        border: 3px solid white;
+        transform: scale(1.1);
+      }
+
       /* Flexbox to Align Buttons Side-by-Side */
       .button-container {
         display: flex;
         justify-content: center;
         gap: 15px;
         margin-bottom: 20px;
-      }
-
-      /* Mission Statement Button */
-      .mission-toggle {
-        background-color: #222;
-        color: white;
-        font-size: 18px;
-        padding: 10px 25px;
-        border-radius: 5px;
-        cursor: pointer;
-        transition: background-color 0.3s ease;
-        border: 2px solid white;
-        margin-bottom: 10px;
-      }
-
-      .mission-toggle:hover {
-        background-color: #444;
       }
 
       /* Mission Statement Content */
