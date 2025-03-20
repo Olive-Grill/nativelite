@@ -52,11 +52,23 @@
         border: 3px solid white; /* Default border */
       }
 
-      /* Button Hover Effect - Growing + Rotation */
-      .button:hover {
+      /* Hover Effects */
+      .feedback-button:hover {
         background-color: #3871d0;
-        border: 3px solid black; /* Border changes on hover */
-        transform: scale(1.1) rotate(5deg); /* Grows + Slight Rotation */
+        border: 3px solid yellow;
+        transform: scale(1.1) rotate(-5deg); /* Rotate left */
+      }
+
+      .chatroom-button:hover {
+        background-color: #3871d0;
+        border: 3px solid green;
+        transform: scale(1.1); /* Only grows, no rotation */
+      }
+
+      .legacy-button:hover {
+        background-color: #3871d0;
+        border: 3px solid red;
+        transform: scale(1.1) rotate(5deg); /* Rotate right */
       }
 
       /* Flexbox to Align Buttons Side-by-Side */
@@ -65,19 +77,6 @@
         justify-content: center;
         gap: 15px; /* Space between buttons */
         margin-bottom: 20px;
-      }
-
-      /* Custom Borders for Each Button */
-      .feedback-button {
-        border-color: yellow;
-      }
-
-      .chatroom-button {
-        border-color: green;
-      }
-
-      .legacy-button {
-        border-color: red;
       }
     </style>
 
