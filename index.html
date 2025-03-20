@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Goggle Games</title>
+    <title>Terms of Service Popup</title>
     <style>
         /* ToS Popup Styles */
         .tos-popup {
@@ -19,7 +19,7 @@
             justify-content: center;
             align-items: center;
         }
-        
+
         .tos-popup-content {
             background-color: white;
             color: black;
@@ -28,24 +28,27 @@
             width: 80%;
             max-width: 600px;
             box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
-            overflow: auto;
             max-height: 80%;
+            overflow: hidden;
         }
-        
-        .tos-buttons {
-            display: flex;
-            justify-content: space-between;
-            margin-top: 20px;
-        }
-        
+
         .tos-popup h2 {
             margin-bottom: 15px;
         }
-        
+
         .tos-popup p {
             line-height: 1.6;
         }
-        
+
+                .tos-textbox {
+            max-height: 400px; /* Set a max height for scrolling */
+            overflow-y: auto; /* Allow vertical scrolling */
+            padding: 10px;
+            font-size: 16px;
+            line-height: 1.5;
+        }
+
+
         #acceptTOS {
             background-color: #4b87f7;
             color: white;
@@ -54,18 +57,9 @@
             border-radius: 5px;
             cursor: pointer;
         }
-        
+
         #acceptTOS:hover {
             transform: scale(1.05);
-        }
-
-        /* Scrollable Textbox for Terms */
-        .tos-textbox {
-            max-height: 400px; /* Set a max height for scrolling */
-            overflow-y: auto; /* Allow vertical scrolling */
-            padding: 10px;
-            font-size: 16px;
-            line-height: 1.5;
         }
 
         /* General Button Styles */
@@ -87,11 +81,6 @@
         }
 
         /* Hover Effects */
-        #acceptTOS:hover {
-            background-color: #3871d0;
-        }
-
-        /* Feedback Button */
         .feedback-button:hover {
             background-color: #3871d0;
             border: 3px solid yellow;
@@ -242,59 +231,61 @@
 </head>
 <body>
 
-    <!-- ToS Popup -->
-    <div class="tos-popup" id="tosPopup">
-        <div class="tos-popup-content">
-            <h2>Terms of Service</h2>
-            <div class="tos-textbox">
-                <p><strong>By accessing or using this website, you agree to the following terms:</strong></p>
-
-                <p><strong>Intended Use</strong> – This website is not designed for use in educational institutions. Users are responsible for ensuring compliance with their school’s policies. The website owner is not liable for any consequences resulting from misuse.</p>
-
-                <p><strong>Prohibited Activities</strong> – Users may not use this website or any linked services to access illicit, explicit, or NSFW content. Violations may result in restrictions on access.</p>
-
-                <p><strong>Third-Party Content</strong> – This website acts as an access point to third-party websites. We do not own or claim credit for external games or services. Any issues with third-party content should be addressed with the respective creators.</p>
-
-                <p><strong>Disclaimer of Liability</strong> – The website owner is not responsible for how users interact with this site or any resulting consequences. Users assume all risks associated with their usage.</p>
-
-                <p><strong>Policy Updates</strong> – These terms may be updated at any time. Continued use of the site indicates acceptance of the latest version.</p>
-                
-                <p>Scroll through this content to read all of the terms.</p>
-            </div>
-            <div class="tos-buttons">
-                <button id="acceptTOS" onclick="acceptTOS()">Accept</button>
+    <!-- ToS Popup HTML -->
+            <div class="tos-popup">
+            <div class="tos-popup-content">
+                <h2>Terms of Service</h2>
+                <div class="tos-textbox">
+                    <p><strong>By accessing or using this website, you agree to the following terms:</strong></p>
+        
+                    <p><strong>Intended Use</strong> – This website is not designed for use in educational institutions. Users are responsible for ensuring compliance with their school’s policies. The website owner is not liable for any consequences resulting from misuse.</p>
+        
+                    <p><strong>Prohibited Activities</strong> – Users may not use this website or any linked services to access illicit, explicit, or NSFW content. Violations may result in restrictions on access.</p>
+        
+                    <p><strong>Third-Party Content</strong> – This website acts as an access point to third-party websites. We do not own or claim credit for external games or services. Any issues with third-party content should be addressed with the respective creators.</p>
+        
+                    <p><strong>Disclaimer of Liability</strong> – The website owner is not responsible for how users interact with this site or any resulting consequences. Users assume all risks associated with their usage.</p>
+        
+                    <p><strong>Policy Updates</strong> – These terms may be updated at any time. Continued use of the site indicates acceptance of the latest version.</p>
+                    
+                    <p>Scroll through this content to read all of the terms.</p>
+                </div>
+                <div class="tos-buttons">
+                    <button id="acceptTOS">Accept</button>
+                </div>
             </div>
         </div>
+
+
+    <!-- Other Content (buttons, search bar, etc.) -->
+
+    <!-- Example Button Container -->
+    <div class="button-container">
+        <button class="button feedback-button">Feedback</button>
+        <button class="button chatroom-button">Chatroom</button>
+        <button class="button legacy-button">Legacy</button>
+        <button class="button dark-mode-button">Dark Mode</button>
     </div>
 
-    <!-- Main Content -->
+    <!-- Search Bar -->
     <div class="center">
-        <div class="button-container">
-            <button class="button feedback-button">Feedback</button>
-            <button class="button chatroom-button">Chatroom</button>
-            <button class="button legacy-button">Legacy Mode</button>
-            <button class="button dark-mode-button">Dark Mode</button>
-            <button class="button mission-toggle">Mission Statement</button>
-        </div>
-
-        <!-- Search Bar -->
-        <input type="text" id="searchInput" placeholder="Search games...">
+        <input type="text" id="searchInput" placeholder="Search...">
     </div>
 
     <script>
-        // Function to display the popup
-        function showTOS() {
+        // Show the Terms of Service popup
+        function showTOSPopup() {
             document.getElementById("tosPopup").style.display = "flex";
         }
 
-        // Function to handle Accept button
-        function acceptTOS() {
+        // Handle accepting the Terms of Service
+        document.getElementById("acceptTOS").addEventListener("click", function() {
+            // Hide the ToS popup
             document.getElementById("tosPopup").style.display = "none";
-        }
+        });
 
-        // Show Terms of Service when the page loads
-        window.onload = showTOS;
+        // Trigger popup for demonstration (you can trigger it as needed)
+        window.onload = showTOSPopup;
     </script>
-
 </body>
 </html>
