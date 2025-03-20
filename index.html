@@ -149,22 +149,21 @@
             outline: none;
             transition: transform 0.3s ease-out, border-color 0.3s ease;
             margin-top: 20px;
-            animation: pulse 1.5s infinite ease-in-out; /* Pulsating animation */
+            animation: pulse 2s infinite ease-in-out; /* Slower and more subtle pulsing */
         }
-
-        /* Keyframes for Pulsating Effect */
+        
+        /* Keyframes for a more subtle pulsating effect */
         @keyframes pulse {
             0% {
                 transform: scale(1);
             }
             50% {
-                transform: scale(1.1); /* Get a bit bigger */
+                transform: scale(1.03); /* Smaller scale factor */
             }
             100% {
-                transform: scale(1); /* Return to normal size */
+                transform: scale(1);
             }
         }
-
         /* Tools Button */
         .tools-button {
             animation: bounce 0.8s infinite ease-in-out;
