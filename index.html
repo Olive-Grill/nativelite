@@ -15,7 +15,7 @@
 
     <!-- Tools Button -->
     <div class="center">
-        <button id="toolsButton" class="button tools-button" onclick="toggleTools()">🛠️ Tools</button>
+        <button class="button tools-button" onclick="toggleTools()">🛠️ Tools</button>
     </div>
 
     <!-- Hidden Buttons Container -->
@@ -100,9 +100,30 @@
             transform: scale(1.1);
         }
 
+        /* Mission Button */
+        .mission-toggle {
+            background-color: #4b87f7;
+            color: white;
+            font-size: 18px;
+            padding: 15px 30px;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: transform 0.3s ease-out, background-color 0.3s ease, border 0.3s ease;
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
+            border: 3px solid black;
+            min-height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Keep Mission Button Color on Hover */
         .mission-toggle:hover {
-            background-color: #444;
-            transform: scale(1.1) rotate(5deg); /* Only this rotates 5 degrees */
+            background-color: #4b87f7; /* Keeps the background the same */
+            color: white; /* Keeps the text color the same */
+            border: 3px solid yellow; /* Optional: change the border color */
+            transform: scale(1.1) rotate(5deg);
         }
 
         /* Button Container */
@@ -149,44 +170,6 @@
             outline: none;
             transition: transform 0.3s ease-out, border-color 0.3s ease;
             margin-top: 20px;
-            animation: pulse 1.5s infinite ease-in-out; /* Pulsating animation */
-        }
-
-        /* Keyframes for Pulsating Effect */
-        @keyframes pulse {
-            0% {
-                transform: scale(1);
-            }
-            50% {
-                transform: scale(1.1); /* Get a bit bigger */
-            }
-            100% {
-                transform: scale(1); /* Return to normal size */
-            }
-        }
-
-        /* Tools Button */
-        .tools-button {
-            animation: bounce 0.8s infinite ease-in-out;
-        }
-
-        /* Wiggle effect (slower with 3-second intervals) */
-        @keyframes wiggle {
-            0% {
-                transform: rotate(0deg);
-            }
-            25% {
-                transform: rotate(3deg); /* Rotate slightly */
-            }
-            50% {
-                transform: rotate(-3deg); /* Rotate slightly in the opposite direction */
-            }
-            75% {
-                transform: rotate(2deg); /* Another slight rotation */
-            }
-            100% {
-                transform: rotate(0deg);
-            }
         }
 
         /* Search Bar Hover Effect */
@@ -204,78 +187,53 @@
         }
 
         /* Dark Mode Styles */
-        body.dark-mode {
-            background-color: #121212;
-            color: white;
-        }
-
-        .dark-mode .button {
+        .dark-mode {
             background-color: #333;
-            border-color: #555;
             color: white;
-        }
-
-        .dark-mode .mission-content {
-            background-color: #222;
-        }
-
-        .dark-mode #searchInput {
-            border-color: #555;
         }
     </style>
 
     <script>
-        // Function to trigger the wiggle every 3 seconds
-        function triggerWiggle() {
-            var toolsButton = document.getElementById('toolsButton');
-            toolsButton.style.animation = `wiggle 0.6s ease-in-out`; // Slower wiggle
-
-            // Reset animation after it completes
-            setTimeout(() => {
-                toolsButton.style.animation = ''; // Reset animation
-            }, 600); // 600ms matches the animation duration
-
-            // Schedule the next wiggle after 3 seconds
-            setTimeout(triggerWiggle, 3000); // Wiggle every 3 seconds
-        }
-
-        // Start the wiggle when the page loads
         window.onload = function() {
+            // Check if dark mode preference is saved in localStorage
+            if (localStorage.getItem('darkMode') === 'enabled') {
+                document.body.classList.add('dark-mode');
+            }
+
+            // Start the wiggle when the page loads
             triggerWiggle();
         };
 
-        function toggleMission() {
-            var mission = document.getElementById("missionStatement");
-
-            // Toggle the display of the mission statement content
-            if (mission.style.display === "block") {
-                mission.style.display = "none";
-                mission.style.maxHeight = null;
-                mission.style.padding = "0 15px";
+        function toggleDarkMode() {
+            var body = document.body;
+            var currentMode = body.classList.contains('dark-mode');
+            
+            if (currentMode) {
+                body.classList.remove('dark-mode');
+                localStorage.setItem('darkMode', 'disabled');
             } else {
-                mission.style.display = "block";
-                mission.style.maxHeight = mission.scrollHeight + "px";
-                mission.style.padding = "15px";
+                body.classList.add('dark-mode');
+                localStorage.setItem('darkMode', 'enabled');
             }
         }
 
-        function toggleDarkMode() {
-            var body = document.body;
-            body.classList.toggle('dark-mode');
+        function toggleMission() {
+            var missionContent = document.getElementById('missionStatement');
+            missionContent.style.display = missionContent.style.display === 'none' ? 'block' : 'none';
         }
 
         function toggleTools() {
-            var toolsContainer = document.getElementById("toolsContainer");
-            var toolsButton = document.getElementById("toolsButton");
+            var toolsContainer = document.getElementById('toolsContainer');
+            toolsContainer.classList.toggle('hidden');
+        }
 
-            toolsContainer.classList.toggle("hidden");
-
-            // Change button text between "Tools" and "Close"
-            if (toolsContainer.classList.contains("hidden")) {
-                toolsButton.innerText = "🛠️ Tools";
-            } else {
-                toolsButton.innerText = "❌ Close";
-            }
+        // Add transition effects to the mission statement
+        function triggerWiggle() {
+            var missionButton = document.querySelector('.mission-toggle');
+            missionButton.classList.add('wiggle');
+            setTimeout(function() {
+                missionButton.classList.remove('wiggle');
+            }, 1000); // remove wiggle class after animation
         }
     </script>
 </body>
