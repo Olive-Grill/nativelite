@@ -1,67 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Home</title>
-    <link rel="stylesheet" href="config/main.css" />
-    <script src="config/main.js" type="module"></script>
-</head>
-<body>
-    <div class="center">
-        <h1 id="title"></h1>
-        <p id="subtitle"></p>
-    </div>
-
-    <!-- Tools Button -->
-    <div class="center">
-        <button id="toolsButton" class="button tools-button" onclick="toggleTools()">🛠️ Tools</button>
-    </div>
-
-    <!-- Hidden Buttons Container -->
-    <div id="toolsContainer" class="button-container hidden">
-        <a href="https://forms.gle/t9KCv2UWJPUb3isW7" target="_blank">
-            <button class="button feedback-button">📝 Give Feedback</button>
-        </a>
-        <button class="button chatroom-button" onclick="window.open('https://us29.chatzy.com/46298746305400', '_blank')">
-            💬 Open Chatroom
-        </button>
-        <a href="https://sites.google.com/portnet.org/263875438796534879658734687956/home" target="_blank">
-            <button class="button legacy-button">🕰️ Legacy Version</button>
-        </a>
-        <button class="button dark-mode-button" onclick="toggleDarkMode()">🌙 Toggle Dark Mode</button>
-        <button class="button mission-toggle" onclick="toggleMission()">📜 Our Mission</button>
-    </div>
-
-    <!-- Mission Statement Drop-Down -->
-    <div id="missionStatement" class="mission-content">
-        <p>
-            We strive to create a space where users can easily find and enjoy games while fostering a welcoming community.<br /><br />
-            Student privacy is an important issue in education. Privacy is a fundamental human right that establishes limits to limit access to personal information.<br /><br />
-            It is essential to understand the importance of protecting student data to prevent it from falling into the wrong hands.<br /><br />
-            There are federal and state laws that regulate the privacy of students' personally identifiable information (PII), and there are legal and ethical limitations on the collection and use of this data.<br />
-            It is wrong to deprive students of their privacy by monitoring and changing everything they do. This is considered illegal and violates students' privacy rights.<br /><br />
-            Privacy is a fundamental value that must be respected in a democratic society. Both the State and private organizations must limit their power to commit illegal or arbitrary intrusions into people's private lives.
-        </p>
-    </div>
-
-    <!-- Search Bar -->
-    <div class="center">
-        <input type="text" id="searchInput" placeholder="Search games" />
-    </div>
-    <div id="gamesContainer"></div>
-
-    <div class="footer">
-        <a style="font-weight: 700">a site by</a>
-        <a style="font-weight: 700" class="link" href="https://dsc.gg/parcoil">parcoil network</a>
-    </div>
-
-       <!DOCTYPE html>
-<html lang="en">
-<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Terms of Service Popup</title>
+    <title>Goggle Games</title>
     <style>
         /* ToS Popup Styles */
         .tos-popup {
@@ -77,7 +19,7 @@
             justify-content: center;
             align-items: center;
         }
-
+        
         .tos-popup-content {
             background-color: white;
             color: black;
@@ -86,30 +28,24 @@
             width: 80%;
             max-width: 600px;
             box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
+            overflow: auto;
             max-height: 80%;
-            overflow: hidden;
         }
-
+        
+        .tos-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+        
         .tos-popup h2 {
             margin-bottom: 15px;
         }
-
+        
         .tos-popup p {
             line-height: 1.6;
         }
-
-        .tos-textbox {
-            width: 100%;
-            height: 300px;
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            overflow-y: scroll;
-            font-family: Arial, sans-serif;
-            font-size: 14px;
-            margin-bottom: 20px;
-        }
-
+        
         #acceptTOS {
             background-color: #4b87f7;
             color: white;
@@ -118,9 +54,18 @@
             border-radius: 5px;
             cursor: pointer;
         }
-
+        
         #acceptTOS:hover {
             transform: scale(1.05);
+        }
+
+        /* Scrollable Textbox for Terms */
+        .tos-textbox {
+            max-height: 400px; /* Set a max height for scrolling */
+            overflow-y: auto; /* Allow vertical scrolling */
+            padding: 10px;
+            font-size: 16px;
+            line-height: 1.5;
         }
 
         /* General Button Styles */
@@ -142,6 +87,11 @@
         }
 
         /* Hover Effects */
+        #acceptTOS:hover {
+            background-color: #3871d0;
+        }
+
+        /* Feedback Button */
         .feedback-button:hover {
             background-color: #3871d0;
             border: 3px solid yellow;
@@ -292,115 +242,59 @@
 </head>
 <body>
 
-    <!-- ToS Popup HTML -->
+    <!-- ToS Popup -->
     <div class="tos-popup" id="tosPopup">
         <div class="tos-popup-content">
             <h2>Terms of Service</h2>
-            <textarea class="tos-textbox" readonly>
-                <strong>By accessing or using this website, you agree to the following terms:</strong>
+            <div class="tos-textbox">
+                <p><strong>By accessing or using this website, you agree to the following terms:</strong></p>
 
-    <strong>Intended Use</strong> – This website is not designed for use in educational institutions. Users are responsible for ensuring compliance with their school’s policies. The website owner is not liable for any consequences resulting from misuse.
+                <p><strong>Intended Use</strong> – This website is not designed for use in educational institutions. Users are responsible for ensuring compliance with their school’s policies. The website owner is not liable for any consequences resulting from misuse.</p>
 
-    <strong>Prohibited Activities</strong> – Users may not use this website or any linked services to access illicit, explicit, or NSFW content. Violations may result in restrictions on access.
+                <p><strong>Prohibited Activities</strong> – Users may not use this website or any linked services to access illicit, explicit, or NSFW content. Violations may result in restrictions on access.</p>
 
-    <strong>Third-Party Content</strong> – This website acts as an access point to third-party websites. We do not own or claim credit for external games or services. Any issues with third-party content should be addressed with the respective creators.
+                <p><strong>Third-Party Content</strong> – This website acts as an access point to third-party websites. We do not own or claim credit for external games or services. Any issues with third-party content should be addressed with the respective creators.</p>
 
-    <strong>Disclaimer of Liability</strong> – The website owner is not responsible for how users interact with this site or any resulting consequences. Users assume all risks associated with their usage.
+                <p><strong>Disclaimer of Liability</strong> – The website owner is not responsible for how users interact with this site or any resulting consequences. Users assume all risks associated with their usage.</p>
 
-    <strong>Policy Updates</strong> – These terms may be updated at any time. Continued use of the site indicates acceptance of the latest version.
-
-                Scroll through this content to read all of the terms.
-            </textarea>
+                <p><strong>Policy Updates</strong> – These terms may be updated at any time. Continued use of the site indicates acceptance of the latest version.</p>
+                
+                <p>Scroll through this content to read all of the terms.</p>
+            </div>
             <div class="tos-buttons">
-                <button id="acceptTOS">Accept</button>
+                <button id="acceptTOS" onclick="acceptTOS()">Accept</button>
             </div>
         </div>
     </div>
 
-    <!-- Other Content (buttons, search bar, etc.) -->
-
-    <!-- Example Button Container -->
-    <div class="button-container">
-        <button class="button feedback-button">Feedback</button>
-        <button class="button chatroom-button">Chatroom</button>
-        <button class="button legacy-button">Legacy</button>
-        <button class="button dark-mode-button">Dark Mode</button>
-    </div>
-
-    <!-- Search Bar -->
+    <!-- Main Content -->
     <div class="center">
-        <input type="text" id="searchInput" placeholder="Search...">
+        <div class="button-container">
+            <button class="button feedback-button">Feedback</button>
+            <button class="button chatroom-button">Chatroom</button>
+            <button class="button legacy-button">Legacy Mode</button>
+            <button class="button dark-mode-button">Dark Mode</button>
+            <button class="button mission-toggle">Mission Statement</button>
+        </div>
+
+        <!-- Search Bar -->
+        <input type="text" id="searchInput" placeholder="Search games...">
     </div>
 
     <script>
-        // Show the Terms of Service popup
-        function showTOSPopup() {
+        // Function to display the popup
+        function showTOS() {
             document.getElementById("tosPopup").style.display = "flex";
         }
 
-        // Handle accepting the Terms of Service
-        document.getElementById("acceptTOS").addEventListener("click", function() {
-            // Hide the ToS popup
+        // Function to handle Accept button
+        function acceptTOS() {
             document.getElementById("tosPopup").style.display = "none";
-        });
-
-        // Trigger popup for demonstration (you can trigger it as needed)
-        window.onload = showTOSPopup;
-    </script>
-</body>
-</html>
-
-    <script>
-        // Check if the user has already accepted the ToS
-        window.onload = function() {
-            if (!localStorage.getItem('tosAccepted')) {
-                document.getElementById('tosPopup').style.display = 'flex';
-            }
-        };
-
-        // Function to accept the Terms of Service
-        document.getElementById('acceptTOS').onclick = function() {
-            localStorage.setItem('tosAccepted', 'true');
-            document.getElementById('tosPopup').style.display = 'none';
-        };
-
-        // Function to view the Terms of Service
-        document.getElementById('viewTOS').onclick = function() {
-            window.open('https://www.example.com/terms-of-service', '_blank');
-        };
-
-        // Toggle the visibility of the tools section
-        function toggleTools() {
-            const toolsContainer = document.getElementById('toolsContainer');
-            toolsContainer.classList.toggle('hidden');
         }
 
-        // Toggle Dark Mode
-        function toggleDarkMode() {
-            document.body.classList.toggle('dark-mode');
-        }
-
-        // Toggle the mission statement section visibility
-        function toggleMission() {
-            const missionContent = document.getElementById('missionStatement');
-            missionContent.style.display = missionContent.style.display === 'none' ? 'block' : 'none';
-        }
+        // Show Terms of Service when the page loads
+        window.onload = showTOS;
     </script>
 
-    <!-- Terms of Service Popup -->
-    <div id="tosPopup" class="tos-popup">
-        <div class="tos-popup-content">
-            <h2>Terms of Service</h2>
-            <p>
-                By accessing or using this website, you agree to the following terms:
-                <br><br>
-                <strong>Intended Use</strong> – This website is not designed for use in educational institutions...
-            </p>
-            <div class="tos-buttons">
-                <button id="acceptTOS">Accept</button>
-                <button id="viewTOS">View Terms</button>
-            </div>
-        </div>
-    </div>
 </body>
 </html>
