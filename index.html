@@ -16,13 +16,13 @@
     <!-- Button Container (Flexbox for side-by-side layout) -->
     <div class="button-container">
       <a href="https://forms.gle/t9KCv2UWJPUb3isW7" target="_blank">
-        <button class="button">📝 Give Feedback</button>
+        <button class="button feedback-button">📝 Give Feedback</button>
       </a>
-      <button class="button" onclick="window.open('https://us29.chatzy.com/46298746305400', '_blank')">
+      <button class="button chatroom-button" onclick="window.open('https://us29.chatzy.com/46298746305400', '_blank')">
         💬 Open Chatroom
       </button>
       <a href="https://sites.google.com/portnet.org/263875438796534879658734687956/home" target="_blank">
-        <button class="button">🕰️ Legacy Version</button>
+        <button class="button legacy-button">🕰️ Legacy Version</button>
       </a>
     </div>
 
@@ -47,14 +47,16 @@
         border-radius: 5px;
         cursor: pointer;
         text-decoration: none;
-        transition: background-color 0.3s;
+        transition: background-color 0.3s ease, border 0.3s ease, transform 0.3s ease-out;
         box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
-        border: none;
+        border: 3px solid white; /* Default border */
       }
 
-      /* Button Hover Effect */
+      /* Button Hover Effect - Growing Animation */
       .button:hover {
         background-color: #3871d0;
+        border: 3px solid black; /* Border changes on hover */
+        transform: scale(1.1); /* Slightly grows */
       }
 
       /* Flexbox to Align Buttons Side-by-Side */
@@ -63,6 +65,19 @@
         justify-content: center;
         gap: 15px; /* Space between buttons */
         margin-bottom: 20px;
+      }
+
+      /* Custom Borders for Each Button */
+      .feedback-button {
+        border-color: yellow;
+      }
+
+      .chatroom-button {
+        border-color: green;
+      }
+
+      .legacy-button {
+        border-color: red;
       }
     </style>
 
