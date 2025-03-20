@@ -26,7 +26,7 @@
       </a>
     </div>
 
-    <!-- Dark Mode Button (now matches size of other buttons) -->
+    <!-- Dark Mode Button -->
     <div class="center">
       <button class="button dark-mode-button" onclick="toggleDarkMode()">🌙 Toggle Dark Mode</button>
     </div>
@@ -97,19 +97,6 @@
         transform: scale(1.1);
       }
 
-      /* Mission Statement Button */
-      .mission-toggle {
-        background-color: #222;
-        color: white;
-        font-size: 18px;
-        padding: 15px 30px;  /* Match the size of the other buttons */
-        border-radius: 5px;
-        cursor: pointer;
-        transition: background-color 0.3s ease;
-        border: 3px solid black; /* Same as other buttons */
-        margin-bottom: 10px;
-      }
-
       .mission-toggle:hover {
         background-color: #444;
         transform: scale(1.1);
@@ -121,6 +108,27 @@
         justify-content: center;
         gap: 15px;
         margin-bottom: 20px;
+      }
+
+      /* Consistent Button Spacing (Alignment) */
+      .center {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-bottom: 20px;
+      }
+
+      /* Mission Statement Button */
+      .mission-toggle {
+        background-color: #222;
+        color: white;
+        font-size: 18px;
+        padding: 15px 30px;  /* Match the size of the other buttons */
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+        border: 3px solid black;
+        margin-bottom: 10px;
       }
 
       /* Mission Statement Content */
@@ -167,8 +175,10 @@
         var mission = document.getElementById("missionStatement");
         if (mission.style.maxHeight) {
           mission.style.maxHeight = null;
+          mission.style.padding = "0 15px";
         } else {
           mission.style.maxHeight = mission.scrollHeight + "px";  // Dynamically adjusts height based on content
+          mission.style.padding = "15px";
         }
       }
 
