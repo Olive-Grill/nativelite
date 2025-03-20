@@ -1,121 +1,91 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Terms of Service</title>
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
+            line-height: 1.6;
             margin: 0;
             padding: 0;
+            background-color: #f4f4f4;
             color: #333;
         }
 
         .container {
-            max-width: 900px;
-            margin: 20px auto;
             padding: 20px;
+            max-width: 800px;
+            margin: 0 auto;
             background-color: white;
-            border-radius: 8px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+            margin-top: 20px;
         }
 
         h1 {
             text-align: center;
-            color: #4b87f7;
-            margin-bottom: 20px;
+            color: #333;
         }
 
         h2 {
-            color: #333;
-            margin-top: 20px;
+            margin-top: 30px;
         }
 
         p {
-            line-height: 1.6;
-            font-size: 16px;
             margin-bottom: 20px;
         }
 
-        ul {
-            list-style-type: disc;
-            margin-left: 20px;
-        }
-
-        .btn-close, .btn-back {
-            display: block;
-            margin: 30px auto;
-            padding: 12px 24px;
-            background-color: #4b87f7;
+        .accept-button {
+            background-color: #4CAF50;
             color: white;
+            padding: 10px 20px;
             border: none;
-            border-radius: 5px;
             cursor: pointer;
-            text-align: center;
+            display: block;
+            width: 100%;
+            font-size: 16px;
+            margin-top: 30px;
         }
 
-        .btn-close:hover, .btn-back:hover {
-            background-color: #3871d0;
+        .accept-button:hover {
+            background-color: #45a049;
         }
     </style>
 </head>
 <body>
-
     <div class="container">
         <h1>Terms of Service</h1>
         
-        <p>
-            Welcome to our website! Please read the following Terms of Service ("Terms") carefully before using this website.
-            By accessing or using this website, you agree to these Terms. If you do not agree, please do not use this website.
-        </p>
+        <h2>1. Introduction</h2>
+        <p>By accessing and using this website, you agree to comply with and be bound by the following terms and conditions. If you do not agree with these terms, you should not use the website.</p>
+        
+        <h2>2. Intended Use</h2>
+        <p>This website is intended for general use. All content is provided for informational purposes only. The website is not intended for use by individuals under the age of 13 without parental consent.</p>
 
-        <h2>1. Intended Use</h2>
-        <p>
-            This website is intended for personal, non-commercial use. It is not designed for educational institutions. Users must ensure their use complies with the policies of their respective institutions. The website owner is not liable for any consequences resulting from misuse or inappropriate use.
-        </p>
+        <h2>3. Privacy</h2>
+        <p>We are committed to safeguarding your privacy. We collect personal information only when necessary and use it strictly for providing services. By using this website, you consent to the collection and use of your information as outlined in our privacy policy.</p>
 
-        <h2>2. Prohibited Activities</h2>
-        <p>
-            Users may not use this website to:
-        </p>
-        <ul>
-            <li>Access or distribute illicit, explicit, or NSFW content.</li>
-            <li>Violate any laws, including intellectual property and privacy rights.</li>
-            <li>Engage in activities that disrupt the normal functioning of the website or its services.</li>
-        </ul>
+        <h2>4. Limitations of Liability</h2>
+        <p>We are not responsible for any direct, indirect, or consequential damages that may arise from using the website or relying on the information provided. We make no guarantees regarding the accuracy or completeness of the information on this site.</p>
 
-        <h2>3. Third-Party Content</h2>
-        <p>
-            This website may provide links to third-party websites or external content. We are not responsible for the content, availability, or accuracy of these external sites. Any issues related to third-party content should be directed to the respective creators or service providers.
-        </p>
-
-        <h2>4. Disclaimer of Liability</h2>
-        <p>
-            The website owner is not responsible for any damages, losses, or risks incurred by users while interacting with the site. By using this site, you agree that any use is at your own risk.
-        </p>
-
-        <h2>5. Updates to the Terms</h2>
-        <p>
-            The Terms of Service may be updated from time to time. The latest version will always be available on this page. Continued use of the website after updates signifies your acceptance of the modified Terms.
-        </p>
+        <h2>5. Changes to Terms</h2>
+        <p>We reserve the right to modify or update these terms at any time. All changes will be posted on this page, and by continuing to use the website, you agree to be bound by the updated terms.</p>
 
         <h2>6. Governing Law</h2>
-        <p>
-            These Terms are governed by and construed in accordance with the laws of [Your Country]. Any disputes shall be resolved in the appropriate courts of [Your Country].
-        </p>
+        <p>These terms are governed by the laws of [Insert Country/Region]. Any disputes arising from the use of this website will be resolved under the jurisdiction of [Insert Country/Region].</p>
 
-        <p>
-            By using this website, you acknowledge that you have read and understood these Terms of Service and agree to be bound by them.
-        </p>
+        <h2>7. Contact Us</h2>
+        <p>If you have any questions or concerns about these terms, please contact us at [Insert Email Address].</p>
 
-        <!-- Back to Main Website Button -->
-        <button class="btn-back" onclick="window.location.href='https://www.yourwebsite.com';">Back to Main Website</button>
-        
-        <!-- Close Button -->
-        <button class="btn-close" onclick="window.close();">Close</button>
+        <button class="accept-button" id="acceptTOS">I Accept</button>
     </div>
 
+    <script>
+        document.getElementById('acceptTOS').addEventListener('click', function() {
+            localStorage.setItem('tosAccepted', 'true');
+            window.close();  // Close the terms page when accepted
+        });
+    </script>
 </body>
 </html>
