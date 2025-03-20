@@ -133,7 +133,7 @@
 
       /* Mission Statement Content */
       .mission-content {
-        display: none;
+        display: block;  /* Ensure the content is considered in the layout */
         background-color: #000;
         color: white;
         padding: 15px;
@@ -142,8 +142,8 @@
         border-radius: 5px;
         box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
         overflow: hidden;
-        max-height: 0;
-        transition: max-height 0.5s ease-out, padding 0.3s ease-out;
+        max-height: 0;  /* Start with max-height of 0 for a hidden effect */
+        transition: max-height 0.5s ease-out, padding 0.3s ease-out;  /* Smooth transition */
       }
 
       .mission-content p {
@@ -174,11 +174,11 @@
       function toggleMission() {
         var mission = document.getElementById("missionStatement");
         if (mission.style.maxHeight) {
-          mission.style.maxHeight = null;
-          mission.style.padding = "0 15px";
+          mission.style.maxHeight = null;  // Collapse mission statement
+          mission.style.padding = "0 15px";  // Reset padding when collapsed
         } else {
-          mission.style.maxHeight = mission.scrollHeight + "px";  // Dynamically adjusts height based on content
-          mission.style.padding = "15px";
+          mission.style.maxHeight = mission.scrollHeight + "px";  // Expand mission statement to fit content
+          mission.style.padding = "15px";  // Add padding when expanded
         }
       }
 
