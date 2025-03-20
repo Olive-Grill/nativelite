@@ -13,13 +13,13 @@
       <p id="subtitle"></p>
     </div>
 
-    <!-- Button to reveal other buttons -->
+    <!-- Button to reveal Tools (All buttons) -->
     <div class="center">
-      <button class="button reveal-buttons" onclick="togglePages()">📄 Our Pages</button>
+      <button class="button reveal-buttons" onclick="toggleTools()">📦 Tools</button>
     </div>
 
-    <!-- Hidden Button Container (Initially Hidden) -->
-    <div id="buttonContainer" class="button-container" style="display: none;">
+    <!-- Hidden Tools Container (Initially Hidden) -->
+    <div id="toolsContainer" class="button-container" style="display: none;">
       <a href="https://forms.gle/t9KCv2UWJPUb3isW7" target="_blank">
         <button class="button feedback-button">📝 Give Feedback</button>
       </a>
@@ -29,17 +29,11 @@
       <a href="https://sites.google.com/portnet.org/263875438796534879658734687956/home" target="_blank">
         <button class="button legacy-button">🕰️ Legacy Version</button>
       </a>
-    </div>
-
-    <!-- Dark Mode Button -->
-    <div class="center">
       <button class="button dark-mode-button" onclick="toggleDarkMode()">🌙 Toggle Dark Mode</button>
-    </div>
-
-    <!-- Mission Statement Drop-Down -->
-    <div class="center">
       <button class="button mission-toggle" onclick="toggleMission()">📜 Our Mission</button>
     </div>
+
+    <!-- Mission Statement Content -->
     <div id="missionStatement" class="mission-content">
       <p>
         We strive to create a space where users can easily find and enjoy games while fostering a welcoming community.<br /><br />
@@ -113,6 +107,7 @@
         justify-content: center;
         gap: 15px;
         margin-bottom: 20px;
+        flex-wrap: wrap;
       }
 
       /* Consistent Button Spacing (Alignment) */
@@ -192,12 +187,12 @@
         body.classList.toggle('dark-mode');
       }
 
-      function togglePages() {
-        var buttonContainer = document.getElementById("buttonContainer");
-        if (buttonContainer.style.display === "none") {
-          buttonContainer.style.display = "flex";  // Show the buttons
+      function toggleTools() {
+        var toolsContainer = document.getElementById("toolsContainer");
+        if (toolsContainer.style.display === "none") {
+          toolsContainer.style.display = "flex";  // Show the tools
         } else {
-          buttonContainer.style.display = "none";  // Hide the buttons
+          toolsContainer.style.display = "none";  // Hide the tools
         }
       }
     </script>
