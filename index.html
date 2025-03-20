@@ -165,20 +165,39 @@
             }
         }
 
-        /* Pulsating "Tools" Button Up-and-Down */
+        /* Faster and Smaller Pulsating "Tools" Button Movement */
         .tools-button {
-            animation: bounce 1.5s infinite ease-in-out; /* Pulsating up-and-down animation */
+            animation: bounce 0.8s infinite ease-in-out, wiggle 1.2s infinite ease-in-out;
         }
 
         @keyframes bounce {
             0% {
-                transform: translateY(0);
+                transform: translateY(0) rotate(0);
             }
             50% {
-                transform: translateY(-10px); /* Move up */
+                transform: translateY(-5px) rotate(3deg); /* Move up slightly and rotate */
             }
             100% {
-                transform: translateY(0); /* Return to original position */
+                transform: translateY(0) rotate(-3deg); /* Move back to original position and rotate */
+            }
+        }
+
+        /* Random wiggle (rotation) effect */
+        @keyframes wiggle {
+            0% {
+                transform: rotate(0deg);
+            }
+            25% {
+                transform: rotate(3deg); /* Slight rotation */
+            }
+            50% {
+                transform: rotate(-3deg); /* Slight rotation in the opposite direction */
+            }
+            75% {
+                transform: rotate(2deg); /* Slight rotation */
+            }
+            100% {
+                transform: rotate(0deg);
             }
         }
 
