@@ -64,7 +64,7 @@
         text-decoration: none;
         transition: transform 0.3s ease-out, background-color 0.3s ease, border 0.3s ease;
         box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
-        border: 3px solid black; /* Default border color changed to black */
+        border: 3px solid black;
       }
 
       /* Hover Effects */
@@ -114,8 +114,8 @@
       /* Mission Statement Content */
       .mission-content {
         display: none;
-        background-color: #000;  /* Changed to black */
-        color: white;  /* Make text visible on black background */
+        background-color: #000;
+        color: white;
         padding: 15px;
         margin: 10px auto;
         max-width: 600px;
@@ -123,7 +123,7 @@
         box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
         overflow: hidden;
         max-height: 0;
-        transition: max-height 0.5s ease-out;
+        transition: max-height 1s ease-out;
       }
 
       .mission-content p {
@@ -132,10 +132,10 @@
 
       /* Search Bar Styles */
       #searchInput {
-        width: 60%; /* Increased width for proper visibility */
-        max-width: 500px; /* Limit the maximum width */
-        padding: 15px; /* Sufficient padding */
-        font-size: 18px; /* Adjusted font size */
+        width: 60%;
+        max-width: 500px;
+        padding: 15px;
+        font-size: 18px;
         border: 2px solid #4b87f7;
         border-radius: 5px;
         outline: none;
@@ -158,7 +158,7 @@
           mission.style.maxHeight = "0";
         } else {
           mission.style.display = "block";
-          mission.style.maxHeight = "500px";  // Adjust to ensure the entire content is revealed
+          mission.style.maxHeight = "1000px";  // Adjusted for full text reveal
         }
       }
     </script>
