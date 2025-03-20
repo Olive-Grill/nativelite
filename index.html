@@ -246,7 +246,16 @@
 
         function toggleTools() {
             var toolsContainer = document.getElementById("toolsContainer");
+            var toolsButton = document.getElementById("toolsButton");
+
             toolsContainer.classList.toggle("hidden");
+
+            // Change button text between "Tools" and "Close"
+            if (toolsContainer.classList.contains("hidden")) {
+                toolsButton.innerText = "🛠️ Tools";
+            } else {
+                toolsButton.innerText = "❌ Close";
+            }
         }
     </script>
 </body>
