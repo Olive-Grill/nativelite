@@ -1,7 +1,7 @@
 // This changes the title of your site
 
 var sitename = "Goggle Games"; // Change this to change the name of your website.
-var subtext = "Port Washington's Number One Games Website -- Updated 3/18/25 (V1)"; // set the subtext
+var subtext = "Port Washington's Number One Games Website (V1.5)"; // set the subtext
 
 // more settings in main.css
 
