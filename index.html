@@ -100,30 +100,9 @@
             transform: scale(1.1);
         }
 
-        /* Mission Button */
-        .mission-toggle {
-            background-color: #4b87f7;
-            color: white;
-            font-size: 18px;
-            padding: 15px 30px;
-            border-radius: 5px;
-            cursor: pointer;
-            text-decoration: none;
-            transition: transform 0.3s ease-out, background-color 0.3s ease, border 0.3s ease;
-            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
-            border: 3px solid black;
-            min-height: 60px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        /* Keep Mission Button Color on Hover */
         .mission-toggle:hover {
-            background-color: #4b87f7; /* Keeps the background the same */
-            color: white; /* Keeps the text color the same */
-            border: 3px solid yellow; /* Optional: change the border color */
-            transform: scale(1.1) rotate(5deg);
+            background-color: #444;
+            transform: scale(1.1) rotate(5deg); /* Only this rotates 5 degrees */
         }
 
         /* Button Container */
@@ -206,34 +185,37 @@
 
         function toggleDarkMode() {
             var body = document.body;
-            var currentMode = body.classList.contains('dark-mode');
-            
-            if (currentMode) {
-                body.classList.remove('dark-mode');
-                localStorage.setItem('darkMode', 'disabled');
-            } else {
-                body.classList.add('dark-mode');
+            body.classList.toggle('dark-mode');
+
+            // Save the dark mode preference to localStorage
+            if (body.classList.contains('dark-mode')) {
                 localStorage.setItem('darkMode', 'enabled');
+            } else {
+                localStorage.removeItem('darkMode');
             }
         }
 
         function toggleMission() {
-            var missionContent = document.getElementById('missionStatement');
-            missionContent.style.display = missionContent.style.display === 'none' ? 'block' : 'none';
+            var mission = document.getElementById("missionStatement");
+            if (mission.style.maxHeight) {
+                mission.style.maxHeight = null;
+                mission.style.padding = "0 15px";
+            } else {
+                mission.style.maxHeight = mission.scrollHeight + "px";
+                mission.style.padding = "15px";
+            }
         }
 
         function toggleTools() {
-            var toolsContainer = document.getElementById('toolsContainer');
-            toolsContainer.classList.toggle('hidden');
-        }
+            var toolsContainer = document.getElementById("toolsContainer");
+            toolsContainer.classList.toggle("hidden");
 
-        // Add transition effects to the mission statement
-        function triggerWiggle() {
-            var missionButton = document.querySelector('.mission-toggle');
-            missionButton.classList.add('wiggle');
-            setTimeout(function() {
-                missionButton.classList.remove('wiggle');
-            }, 1000); // remove wiggle class after animation
+            var toolsButton = document.querySelector(".tools-button");
+            if (toolsContainer.classList.contains("hidden")) {
+                toolsButton.textContent = "🛠️ Tools";
+            } else {
+                toolsButton.textContent = "❌ Close";
+            }
         }
     </script>
 </body>
