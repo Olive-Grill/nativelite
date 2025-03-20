@@ -25,15 +25,39 @@
             justify-content: center;
         }
 
-        /* Remove link underline */
-        .button a {
-            text-decoration: none;
-            color: white;
+        /* Hover Effect for All Buttons in the Tools Container */
+        .button-container .button:hover {
+            transform: scale(1.1); /* Make the buttons grow */
         }
 
-        /* Hover Effects */
-        .button:hover {
+        /* Specific Hover Effects for Individual Buttons (optional, can be kept for uniqueness) */
+        .feedback-button:hover {
+            background-color: #3871d0;
+            border: 3px solid yellow;
+            transform: scale(1.1) rotate(-5deg);
+        }
+
+        .chatroom-button:hover {
+            background-color: #3871d0;
+            border: 3px solid green;
             transform: scale(1.1);
+        }
+
+        .legacy-button:hover {
+            background-color: #3871d0;
+            border: 3px solid red;
+            transform: scale(1.1);
+        }
+
+        .dark-mode-button:hover {
+            background-color: #3871d0;
+            border: 3px solid orange;
+            transform: scale(1.1);
+        }
+
+        .mission-toggle:hover {
+            background-color: #444;
+            transform: scale(1.1) rotate(5deg);
         }
 
         /* Button Container */
@@ -50,33 +74,26 @@
             display: none;
         }
 
-        /* Second row formatting */
-        .second-row {
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-            flex-wrap: wrap;
+        /* Mission Statement Content */
+        .mission-content {
+            display: none;
+            background-color: #000;
+            color: white;
+            padding: 15px;
+            margin: 10px auto;
+            max-width: 600px;
+            border-radius: 5px;
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+            max-height: 0;
+            transition: max-height 0.5s ease-out, padding 0.3s ease-out;
         }
 
-        /* Wiggle animation for Tools button */
-        @keyframes wiggle {
-            0%, 100% { transform: rotate(0deg); }
-            25% { transform: rotate(-3deg); }
-            50% { transform: rotate(3deg); }
-            75% { transform: rotate(-2deg); }
+        .mission-content p {
+            margin: 0;
         }
 
-        .tools-button {
-            animation: wiggle 0.8s ease-in-out infinite;
-            animation-delay: 3s;
-        }
-
-        /* Pulsating Search Bar */
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-        }
-
+        /* Search Bar Styles */
         #searchInput {
             width: 60%;
             max-width: 500px;
@@ -87,13 +104,20 @@
             outline: none;
             transition: transform 0.3s ease-out, border-color 0.3s ease;
             margin-top: 20px;
-            animation: pulse 2s infinite;
         }
 
         /* Search Bar Hover Effect */
         #searchInput:hover, #searchInput:focus {
-            transform: scale(1.02);
+            transform: scale(1.05);
             border-color: #3871d0;
+        }
+
+        /* Centered Layout */
+        .center {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 20px;
         }
     </style>
 </head>
@@ -121,13 +145,13 @@
         </a>
         <button class="button dark-mode-button" onclick="toggleDarkMode()">🌙 Toggle Dark Mode</button>
         <button class="button mission-toggle" onclick="toggleMission()">📜 Our Mission</button>
-    </div>
 
-    <!-- Second Row -->
-    <div id="toolsContainer2" class="second-row hidden">
-        <a href="https://pastebin.com/embed_js/7M8NucYs" target="_blank">
-            <button class="button alternate-links-button">🔗 Alternate Links</button>
-        </a>
+        <!-- Second Row of Buttons (Hidden by Default) -->
+        <div class="button-container">
+            <a href="https://pastebin.com/embed_js/7M8NucYs" target="_blank">
+                <button class="button alt-links-button">🔗 Alternate Links</button>
+            </a>
+        </div>
     </div>
 
     <!-- Mission Statement Drop-Down -->
@@ -166,15 +190,13 @@
         }
 
         function toggleDarkMode() {
-            document.body.classList.toggle('dark-mode');
+            var body = document.body;
+            body.classList.toggle('dark-mode');
         }
 
         function toggleTools() {
             var toolsContainer = document.getElementById("toolsContainer");
-            var toolsContainer2 = document.getElementById("toolsContainer2");
-
             toolsContainer.classList.toggle("hidden");
-            toolsContainer2.classList.toggle("hidden");
         }
     </script>
 </body>
