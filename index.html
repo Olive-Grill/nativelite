@@ -26,7 +26,7 @@
       </a>
     </div>
 
-    <!-- Dark Mode Button -->
+    <!-- Dark Mode Button (now matches size of other buttons) -->
     <div class="center">
       <button class="button dark-mode-button" onclick="toggleDarkMode()">🌙 Toggle Dark Mode</button>
     </div>
@@ -91,29 +91,18 @@
         transform: scale(1.1) rotate(5deg);
       }
 
+      .dark-mode-button:hover {
+        background-color: #3871d0;
+        border: 3px solid orange; /* Similar hover effect as chatroom button */
+        transform: scale(1.1);
+      }
+
       /* Flexbox to Align Buttons Side-by-Side */
       .button-container {
         display: flex;
         justify-content: center;
         gap: 15px;
         margin-bottom: 20px;
-      }
-
-      /* Dark Mode Button */
-      .dark-mode-button {
-        background-color: #222;
-        color: white;
-        font-size: 18px;
-        padding: 10px 25px;
-        border-radius: 5px;
-        cursor: pointer;
-        transition: background-color 0.3s ease;
-        border: 2px solid white;
-        margin-top: 10px;
-      }
-
-      .dark-mode-button:hover {
-        background-color: #444;
       }
 
       /* Mission Statement Button */
@@ -136,8 +125,8 @@
       /* Mission Statement Content */
       .mission-content {
         display: none;
-        background-color: #000;  /* Changed to black */
-        color: white;  /* Make text visible on black background */
+        background-color: #000;
+        color: white;
         padding: 15px;
         margin: 10px auto;
         max-width: 600px;
@@ -154,10 +143,10 @@
 
       /* Search Bar Styles */
       #searchInput {
-        width: 60%; /* Increased width for proper visibility */
-        max-width: 500px; /* Limit the maximum width */
-        padding: 15px; /* Sufficient padding */
-        font-size: 18px; /* Adjusted font size */
+        width: 60%;
+        max-width: 500px;
+        padding: 15px;
+        font-size: 18px;
         border: 2px solid #4b87f7;
         border-radius: 5px;
         outline: none;
@@ -180,7 +169,7 @@
           mission.style.maxHeight = "0";
         } else {
           mission.style.display = "block";
-          mission.style.maxHeight = "500px";  // Adjust to ensure the entire content is revealed
+          mission.style.maxHeight = "500px";
         }
       }
 
@@ -189,6 +178,5 @@
         body.classList.toggle('dark-mode');
       }
     </script>
-
   </body>
 </html>
