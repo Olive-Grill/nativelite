@@ -93,7 +93,25 @@
 
       .dark-mode-button:hover {
         background-color: #3871d0;
-        border: 3px solid orange; /* Similar hover effect as chatroom button */
+        border: 3px solid orange;
+        transform: scale(1.1);
+      }
+
+      /* Mission Statement Button */
+      .mission-toggle {
+        background-color: #222;
+        color: white;
+        font-size: 18px;
+        padding: 15px 30px;  /* Match the size of the other buttons */
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+        border: 3px solid black; /* Same as other buttons */
+        margin-bottom: 10px;
+      }
+
+      .mission-toggle:hover {
+        background-color: #444;
         transform: scale(1.1);
       }
 
@@ -103,23 +121,6 @@
         justify-content: center;
         gap: 15px;
         margin-bottom: 20px;
-      }
-
-      /* Mission Statement Button */
-      .mission-toggle {
-        background-color: #222;
-        color: white;
-        font-size: 18px;
-        padding: 10px 25px;
-        border-radius: 5px;
-        cursor: pointer;
-        transition: background-color 0.3s ease;
-        border: 2px solid white;
-        margin-bottom: 10px;
-      }
-
-      .mission-toggle:hover {
-        background-color: #444;
       }
 
       /* Mission Statement Content */
@@ -134,7 +135,7 @@
         box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
         overflow: hidden;
         max-height: 0;
-        transition: max-height 0.5s ease-out;
+        transition: max-height 0.5s ease-out, padding 0.3s ease-out;
       }
 
       .mission-content p {
@@ -169,7 +170,7 @@
           mission.style.maxHeight = "0";
         } else {
           mission.style.display = "block";
-          mission.style.maxHeight = "500px";
+          mission.style.maxHeight = "500px";  // Adjusted to show full content
         }
       }
 
