@@ -149,6 +149,20 @@
             outline: none;
             transition: transform 0.3s ease-out, border-color 0.3s ease;
             margin-top: 20px;
+            animation: pulse 1.5s infinite ease-in-out; /* Pulsating animation */
+        }
+
+        /* Keyframes for Pulsating Effect */
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.1); /* Get a bit bigger */
+            }
+            100% {
+                transform: scale(1); /* Return to normal size */
+            }
         }
 
         /* Search Bar Hover Effect */
