@@ -26,6 +26,11 @@
       </a>
     </div>
 
+    <!-- Dark Mode Button -->
+    <div class="center">
+      <button class="button dark-mode-button" onclick="toggleDarkMode()">🌙 Toggle Dark Mode</button>
+    </div>
+
     <!-- Mission Statement Drop-Down -->
     <div class="center">
       <button class="button mission-toggle" onclick="toggleMission()">📜 Our Mission</button>
@@ -64,7 +69,7 @@
         text-decoration: none;
         transition: transform 0.3s ease-out, background-color 0.3s ease, border 0.3s ease;
         box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
-        border: 3px solid black; /* Default border color changed to black */
+        border: 3px solid black;
       }
 
       /* Hover Effects */
@@ -92,6 +97,23 @@
         justify-content: center;
         gap: 15px;
         margin-bottom: 20px;
+      }
+
+      /* Dark Mode Button */
+      .dark-mode-button {
+        background-color: #222;
+        color: white;
+        font-size: 18px;
+        padding: 10px 25px;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+        border: 2px solid white;
+        margin-top: 10px;
+      }
+
+      .dark-mode-button:hover {
+        background-color: #444;
       }
 
       /* Mission Statement Button */
@@ -160,6 +182,11 @@
           mission.style.display = "block";
           mission.style.maxHeight = "500px";  // Adjust to ensure the entire content is revealed
         }
+      }
+
+      function toggleDarkMode() {
+        var body = document.body;
+        body.classList.toggle('dark-mode');
       }
     </script>
 
