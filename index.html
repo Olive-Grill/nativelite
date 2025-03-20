@@ -26,12 +26,10 @@
       </a>
     </div>
 
-    <!-- Our Mission Button -->
+    <!-- Mission Statement Drop-Down -->
     <div class="center">
       <button class="button mission-toggle" onclick="toggleMission()">📜 Our Mission</button>
     </div>
-
-    <!-- Mission Statement Drop-Down -->
     <div id="missionStatement" class="mission-content">
       <p>
         We strive to create a space where users can easily find and enjoy games while fostering a welcoming community.<br /><br />
@@ -42,6 +40,9 @@
         Privacy is a fundamental value that must be respected in a democratic society. Both the State and private organizations must limit their power to commit illegal or arbitrary intrusions into people's private lives.
       </p>
     </div>
+
+    <!-- Dark Mode Toggle Button -->
+    <button class="button" onclick="toggleTheme()">🌙 Toggle Dark Mode</button>
 
     <!-- Search Bar -->
     <div class="center">
@@ -66,7 +67,7 @@
         text-decoration: none;
         transition: transform 0.3s ease-out, background-color 0.3s ease, border 0.3s ease;
         box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
-        border: 3px solid black;
+        border: 3px solid black; /* Default border color changed to black */
       }
 
       /* Hover Effects */
@@ -88,12 +89,6 @@
         transform: scale(1.1) rotate(5deg);
       }
 
-      .mission-toggle:hover {
-        background-color: #3871d0;
-        border: 3px solid white;
-        transform: scale(1.1);
-      }
-
       /* Flexbox to Align Buttons Side-by-Side */
       .button-container {
         display: flex;
@@ -102,33 +97,36 @@
         margin-bottom: 20px;
       }
 
-      /* Mission Statement Button (same size as others, black background) */
+      /* Mission Statement Button */
       .mission-toggle {
-        background-color: black;
+        background-color: #222;
         color: white;
         font-size: 18px;
-        padding: 15px 30px;
+        padding: 10px 25px;
         border-radius: 5px;
         cursor: pointer;
-        text-decoration: none;
-        transition: transform 0.3s ease-out, background-color 0.3s ease, border 0.3s ease;
-        box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
-        border: 3px solid black;
+        transition: background-color 0.3s ease;
+        border: 2px solid white;
+        margin-bottom: 10px;
       }
 
-      /* Mission Statement Content (with drop-down animation) */
+      .mission-toggle:hover {
+        background-color: #444;
+      }
+
+      /* Mission Statement Content */
       .mission-content {
         display: none;
-        background-color: #000;
-        color: white;
-        padding: 0 15px;
+        background-color: #000;  /* Changed to black */
+        color: white;  /* Make text visible on black background */
+        padding: 15px;
         margin: 10px auto;
         max-width: 600px;
         border-radius: 5px;
         box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
         overflow: hidden;
-        height: 0;
-        transition: height 0.5s ease-out, padding 0.5s ease;
+        max-height: 0;
+        transition: max-height 0.5s ease-out;
       }
 
       .mission-content p {
@@ -137,10 +135,10 @@
 
       /* Search Bar Styles */
       #searchInput {
-        width: 60%;
-        max-width: 500px;
-        padding: 15px;
-        font-size: 18px;
+        width: 60%; /* Increased width for proper visibility */
+        max-width: 500px; /* Limit the maximum width */
+        padding: 15px; /* Sufficient padding */
+        font-size: 18px; /* Adjusted font size */
         border: 2px solid #4b87f7;
         border-radius: 5px;
         outline: none;
@@ -153,30 +151,45 @@
         transform: scale(1.05);
         border-color: #3871d0;
       }
+
+      /* Dark Mode Styles */
+      body.dark-mode {
+        background-color: #121212; /* Dark background */
+        color: white; /* Light text */
+      }
+
+      .button.dark-mode {
+        background-color: #444;
+        color: white;
+      }
+
+      h1.dark-mode, p.dark-mode {
+        color: white;
+      }
     </style>
 
     <script>
+      // Function to toggle mission statement visibility with smooth animation
       function toggleMission() {
         var mission = document.getElementById("missionStatement");
-
-        // If mission content is hidden, show it with smooth transition
-        if (mission.style.height === "0px" || mission.style.height === "") {
-          mission.style.display = "block"; // Make it visible
-          
-          // Temporarily force height to 'auto' for measuring
-          var contentHeight = mission.scrollHeight + "px";
-          
-          mission.style.height = contentHeight; // Set the height to the content's height
-          mission.style.padding = "15px"; // Ensure padding is added back
+        if (mission.style.display === "block") {
+          mission.style.display = "none";
+          mission.style.maxHeight = "0";
         } else {
-          mission.style.height = "0"; // Collapse the content
-          mission.style.padding = "0"; // Remove padding for smooth collapse
-          setTimeout(function () {
-            mission.style.display = "none"; // Hide the element after collapse
-          }, 500); // Match transition time
+          mission.style.display = "block";
+          mission.style.maxHeight = "500px";  // Adjust to ensure the entire content is revealed
         }
       }
-    </script>
 
+      // Function to toggle dark mode
+      function toggleTheme() {
+        document.body.classList.toggle('dark-mode');
+        // Optionally toggle the class for buttons as well
+        let buttons = document.querySelectorAll('.button');
+        buttons.forEach(button => {
+          button.classList.toggle('dark-mode');
+        });
+      }
+    </script>
   </body>
 </html>
