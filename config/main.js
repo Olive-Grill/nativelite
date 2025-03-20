@@ -15,7 +15,7 @@
 
     <!-- Tools Button -->
     <div class="center">
-        <button class="button tools-button" onclick="toggleTools()">🛠️ Tools</button>
+        <button id="toolsButton" class="button tools-button" onclick="toggleTools()">🛠️ Tools</button>
     </div>
 
     <!-- Hidden Buttons Container -->
@@ -149,6 +149,44 @@
             outline: none;
             transition: transform 0.3s ease-out, border-color 0.3s ease;
             margin-top: 20px;
+            animation: pulse 1.5s infinite ease-in-out; /* Pulsating animation */
+        }
+
+        /* Keyframes for Pulsating Effect */
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.1); /* Get a bit bigger */
+            }
+            100% {
+                transform: scale(1); /* Return to normal size */
+            }
+        }
+
+        /* Tools Button */
+        .tools-button {
+            animation: bounce 0.8s infinite ease-in-out;
+        }
+
+        /* Wiggle effect (slower with 3-second intervals) */
+        @keyframes wiggle {
+            0% {
+                transform: rotate(0deg);
+            }
+            25% {
+                transform: rotate(3deg); /* Rotate slightly */
+            }
+            50% {
+                transform: rotate(-3deg); /* Rotate slightly in the opposite direction */
+            }
+            75% {
+                transform: rotate(2deg); /* Another slight rotation */
+            }
+            100% {
+                transform: rotate(0deg);
+            }
         }
 
         /* Search Bar Hover Effect */
@@ -166,55 +204,77 @@
         }
 
         /* Dark Mode Styles */
-        .dark-mode {
-            background-color: #333;
+        body.dark-mode {
+            background-color: #121212;
             color: white;
+        }
+
+        .dark-mode .button {
+            background-color: #333;
+            border-color: #555;
+            color: white;
+        }
+
+        .dark-mode .mission-content {
+            background-color: #222;
+        }
+
+        .dark-mode #searchInput {
+            border-color: #555;
         }
     </style>
 
     <script>
-        window.onload = function() {
-            // Check if dark mode preference is saved in localStorage
-            if (localStorage.getItem('darkMode') === 'enabled') {
-                document.body.classList.add('dark-mode');
-            }
+        // Function to trigger the wiggle every 3 seconds
+        function triggerWiggle() {
+            var toolsButton = document.getElementById('toolsButton');
+            toolsButton.style.animation = `wiggle 0.6s ease-in-out`; // Slower wiggle
 
-            // Start the wiggle when the page loads
+            // Reset animation after it completes
+            setTimeout(() => {
+                toolsButton.style.animation = ''; // Reset animation
+            }, 600); // 600ms matches the animation duration
+
+            // Schedule the next wiggle after 3 seconds
+            setTimeout(triggerWiggle, 3000); // Wiggle every 3 seconds
+        }
+
+        // Start the wiggle when the page loads
+        window.onload = function() {
             triggerWiggle();
         };
 
-        function toggleDarkMode() {
-            var body = document.body;
-            body.classList.toggle('dark-mode');
-
-            // Save the dark mode preference to localStorage
-            if (body.classList.contains('dark-mode')) {
-                localStorage.setItem('darkMode', 'enabled');
-            } else {
-                localStorage.removeItem('darkMode');
-            }
-        }
-
         function toggleMission() {
             var mission = document.getElementById("missionStatement");
-            if (mission.style.maxHeight) {
+
+            // Toggle the display of the mission statement content
+            if (mission.style.display === "block") {
+                mission.style.display = "none";
                 mission.style.maxHeight = null;
                 mission.style.padding = "0 15px";
             } else {
+                mission.style.display = "block";
                 mission.style.maxHeight = mission.scrollHeight + "px";
                 mission.style.padding = "15px";
             }
         }
 
+        function toggleDarkMode() {
+            var body = document.body;
+            body.classList.toggle('dark-mode');
+        }
+
         function toggleTools() {
             var toolsContainer = document.getElementById("toolsContainer");
+            var toolsButton = document.getElementById("toolsButton");
+
             toolsContainer.classList.toggle("hidden");
 
-            var toolsButton = document.querySelector(".tools-button");
+            // Change button text between "Tools" and "Close"
             if (toolsContainer.classList.contains("hidden")) {
-                toolsButton.textContent = "🛠️ Tools";
+                toolsButton.innerText = "🛠️ Tools";
             } else {
-                toolsButton.textContent = "❌ Close";
+                toolsButton.innerText = "❌ Close";
             }
         }
     </script>
