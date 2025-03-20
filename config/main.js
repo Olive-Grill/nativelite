@@ -1,282 +1,76 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Home</title>
-    <link rel="stylesheet" href="config/main.css" />
-    <script src="config/main.js" type="module"></script>
-</head>
-<body>
-    <div class="center">
-        <h1 id="title"></h1>
-        <p id="subtitle"></p>
-    </div>
+// This changes the title of your site
 
-    <!-- Tools Button -->
-    <div class="center">
-        <button id="toolsButton" class="button tools-button" onclick="toggleTools()">🛠️ Tools</button>
-    </div>
+var sitename = "Goggle Games"; // Change this to change the name of your website.
+var subtext = "Port Washington's Number One Games Website (V1.5)"; // set the subtext
 
-    <!-- Hidden Buttons Container -->
-    <div id="toolsContainer" class="button-container hidden">
-        <a href="https://forms.gle/t9KCv2UWJPUb3isW7" target="_blank">
-            <button class="button feedback-button">📝 Give Feedback</button>
-        </a>
-        <button class="button chatroom-button" onclick="window.open('https://us29.chatzy.com/46298746305400', '_blank')">
-            💬 Open Chatroom
-        </button>
-        <a href="https://sites.google.com/portnet.org/263875438796534879658734687956/home" target="_blank">
-            <button class="button legacy-button">🕰️ Legacy Version</button>
-        </a>
-        <button class="button dark-mode-button" onclick="toggleDarkMode()">🌙 Toggle Dark Mode</button>
-        <button class="button mission-toggle" onclick="toggleMission()">📜 Our Mission</button>
-    </div>
+// more settings in main.css
 
-    <!-- Mission Statement Drop-Down -->
-    <div id="missionStatement" class="mission-content">
-        <p>
-            We strive to create a space where users can easily find and enjoy games while fostering a welcoming community.<br /><br />
-            Student privacy is an important issue in education. Privacy is a fundamental human right that establishes limits to limit access to personal information.<br /><br />
-            It is essential to understand the importance of protecting student data to prevent it from falling into the wrong hands.<br /><br />
-            There are federal and state laws that regulate the privacy of students' personally identifiable information (PII), and there are legal and ethical limitations on the collection and use of this data.<br />
-            It is wrong to deprive students of their privacy by monitoring and changing everything they do. This is considered illegal and violates students' privacy rights.<br /><br />
-            Privacy is a fundamental value that must be respected in a democratic society. Both the State and private organizations must limit their power to commit illegal or arbitrary intrusions into people's private lives.
-        </p>
-    </div>
+// END CONFIG
+// DO NOT MODIFY IF YOU DO NOT KNOW WHAT YOUR DOING!
 
-    <!-- Search Bar -->
-    <div class="center">
-        <input type="text" id="searchInput" placeholder="Search games" />
-    </div>
-    <div id="gamesContainer"></div>
+import "/./config/custom.js";
 
-    <div class="footer">
-        <a style="font-weight: 700">a site by</a>
-        <a style="font-weight: 700" class="link" href="https://dsc.gg/parcoil">parcoil network</a>
-    </div>
+var serverUrl1 = "https://gms.parcoil.com";
+var localImageBaseUrl = "./images";  // Local image directory (common images folder)
+var currentPageTitle = document.title;
+document.title = `${currentPageTitle} | ${sitename}`;
+let gamesData = []; 
 
-    <style>
-        /* General Button Styles */
-        .button {
-            background-color: #4b87f7;
-            color: white;
-            font-size: 18px;
-            padding: 15px 30px;
-            border-radius: 5px;
-            cursor: pointer;
-            text-decoration: none;
-            transition: transform 0.3s ease-out, background-color 0.3s ease, border 0.3s ease;
-            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
-            border: 3px solid black;
-            min-height: 60px;  /* Ensures all buttons are at least this tall */
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
+function displayFilteredGames(filteredGames) {
+  const gamesContainer = document.getElementById("gamesContainer");
+  gamesContainer.innerHTML = ""; 
 
-        /* Hover Effects */
-        .feedback-button:hover {
-            background-color: #3871d0;
-            border: 3px solid yellow;
-            transform: scale(1.1) rotate(-5deg); /* Only this rotates -5 degrees */
-        }
+  filteredGames.forEach((game) => {
+    const gameDiv = document.createElement("div");
+    gameDiv.classList.add("game");
 
-        .chatroom-button:hover {
-            background-color: #3871d0;
-            border: 3px solid green;
-            transform: scale(1.1);
-        }
+    const gameImage = document.createElement("img");
 
-        .legacy-button:hover {
-            background-color: #3871d0;
-            border: 3px solid red;
-            transform: scale(1.1); /* No rotation */
-        }
+    // For new games, load images from a common location (local or external)
+    if (game.new) {
+      // For new games, images can be hosted in the same general 'images' folder
+      gameImage.src = `${localImageBaseUrl}/${game.image}`; // Loading from common images folder or external server
+    } else {
+      // For existing games, use the server URL to load the images
+      gameImage.src = `${serverUrl1}/${game.url}/${game.image}`;
+    }
 
-        .dark-mode-button:hover {
-            background-color: #3871d0;
-            border: 3px solid orange;
-            transform: scale(1.1);
-        }
+    gameImage.alt = game.name;
+    gameImage.onclick = () => {
+      window.location.href = `play.html?gameurl=${game.url}/`;
+    };
 
-        .mission-toggle:hover {
-            background-color: #444;
-            transform: scale(1.1) rotate(5deg); /* Only this rotates 5 degrees */
-        }
+    const gameName = document.createElement("p");
+    gameName.textContent = game.name;
 
-        /* Button Container */
-        .button-container {
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-            margin-bottom: 20px;
-            flex-wrap: wrap;
-        }
+    gameDiv.appendChild(gameImage);
+    gameDiv.appendChild(gameName);
+    gamesContainer.appendChild(gameDiv);
+  });
+}
 
-        /* Hide Tools Buttons Initially */
-        .hidden {
-            display: none;
-        }
+function handleSearchInput() {
+  const searchInputValue = document
+    .getElementById("searchInput")
+    .value.toLowerCase();
+  const filteredGames = gamesData.filter((game) =>
+    game.name.toLowerCase().includes(searchInputValue)
+  );
+  displayFilteredGames(filteredGames);
+}
 
-        /* Mission Statement Content */
-        .mission-content {
-            display: none;
-            background-color: #000;
-            color: white;
-            padding: 15px;
-            margin: 10px auto;
-            max-width: 600px;
-            border-radius: 5px;
-            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
-            overflow: hidden;
-            max-height: 0;
-            transition: max-height 0.5s ease-out, padding 0.3s ease-out;
-        }
+fetch("./config/games.json") 
+  .then((response) => response.json())
+  .then((data) => {
+    gamesData = data;
+    displayFilteredGames(data); 
+  })
+  .catch((error) => console.error("Error fetching games:", error));
 
-        .mission-content p {
-            margin: 0;
-        }
+document
+  .getElementById("searchInput")
+  .addEventListener("input", handleSearchInput);
 
-        /* Search Bar Styles */
-        #searchInput {
-            width: 60%;
-            max-width: 500px;
-            padding: 15px;
-            font-size: 18px;
-            border: 2px solid #4b87f7;
-            border-radius: 5px;
-            outline: none;
-            transition: transform 0.3s ease-out, border-color 0.3s ease;
-            margin-top: 20px;
-            animation: pulse 1.5s infinite ease-in-out; /* Pulsating animation */
-        }
+document.getElementById("title").innerHTML = `${sitename}`;
 
-        /* Keyframes for Pulsating Effect */
-        @keyframes pulse {
-            0% {
-                transform: scale(1);
-            }
-            50% {
-                transform: scale(1.1); /* Get a bit bigger */
-            }
-            100% {
-                transform: scale(1); /* Return to normal size */
-            }
-        }
-
-        /* Tools Button */
-        .tools-button {
-            animation: bounce 0.8s infinite ease-in-out;
-        }
-
-        /* Wiggle effect (slower with 3-second intervals) */
-        @keyframes wiggle {
-            0% {
-                transform: rotate(0deg);
-            }
-            25% {
-                transform: rotate(3deg); /* Rotate slightly */
-            }
-            50% {
-                transform: rotate(-3deg); /* Rotate slightly in the opposite direction */
-            }
-            75% {
-                transform: rotate(2deg); /* Another slight rotation */
-            }
-            100% {
-                transform: rotate(0deg);
-            }
-        }
-
-        /* Search Bar Hover Effect */
-        #searchInput:hover, #searchInput:focus {
-            transform: scale(1.05);
-            border-color: #3871d0;
-        }
-
-        /* Centered Layout */
-        .center {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin-bottom: 20px;
-        }
-
-        /* Dark Mode Styles */
-        body.dark-mode {
-            background-color: #121212;
-            color: white;
-        }
-
-        .dark-mode .button {
-            background-color: #333;
-            border-color: #555;
-            color: white;
-        }
-
-        .dark-mode .mission-content {
-            background-color: #222;
-        }
-
-        .dark-mode #searchInput {
-            border-color: #555;
-        }
-    </style>
-
-    <script>
-        // Function to trigger the wiggle every 3 seconds
-        function triggerWiggle() {
-            var toolsButton = document.getElementById('toolsButton');
-            toolsButton.style.animation = `wiggle 0.6s ease-in-out`; // Slower wiggle
-
-            // Reset animation after it completes
-            setTimeout(() => {
-                toolsButton.style.animation = ''; // Reset animation
-            }, 600); // 600ms matches the animation duration
-
-            // Schedule the next wiggle after 3 seconds
-            setTimeout(triggerWiggle, 3000); // Wiggle every 3 seconds
-        }
-
-        // Start the wiggle when the page loads
-        window.onload = function() {
-            triggerWiggle();
-        };
-
-        function toggleMission() {
-            var mission = document.getElementById("missionStatement");
-
-            // Toggle the display of the mission statement content
-            if (mission.style.display === "block") {
-                mission.style.display = "none";
-                mission.style.maxHeight = null;
-                mission.style.padding = "0 15px";
-            } else {
-                mission.style.display = "block";
-                mission.style.maxHeight = mission.scrollHeight + "px";
-                mission.style.padding = "15px";
-            }
-        }
-
-        function toggleDarkMode() {
-            var body = document.body;
-            body.classList.toggle('dark-mode');
-        }
-
-        function toggleTools() {
-            var toolsContainer = document.getElementById("toolsContainer");
-            var toolsButton = document.getElementById("toolsButton");
-
-            toolsContainer.classList.toggle("hidden");
-
-            // Change button text between "Tools" and "Close"
-            if (toolsContainer.classList.contains("hidden")) {
-                toolsButton.innerText = "🛠️ Tools";
-            } else {
-                toolsButton.innerText = "❌ Close";
-            }
-        }
-    </script>
-</body>
-</html>
+document.getElementById("subtitle").innerHTML = `${subtext}`;
