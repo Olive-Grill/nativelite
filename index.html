@@ -165,12 +165,10 @@
     <script>
       function toggleMission() {
         var mission = document.getElementById("missionStatement");
-        if (mission.style.display === "block") {
-          mission.style.display = "none";
-          mission.style.maxHeight = "0";
+        if (mission.style.maxHeight) {
+          mission.style.maxHeight = null;
         } else {
-          mission.style.display = "block";
-          mission.style.maxHeight = "500px";  // Adjusted to show full content
+          mission.style.maxHeight = mission.scrollHeight + "px";  // Dynamically adjusts height based on content
         }
       }
 
