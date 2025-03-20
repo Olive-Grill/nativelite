@@ -4,10 +4,46 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home</title>
-    <link rel="stylesheet" href="config/main.css">
-    <script src="config/main.js" type="module"></script>
     <style>
-        /* General Button Styles */
+        /* General Styles */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            text-align: center;
+            margin: 0;
+            padding: 20px;
+        }
+
+        /* Tools Dropdown */
+        .tools-container {
+            margin-bottom: 20px;
+        }
+
+        .tools-button {
+            background-color: #222;
+            color: white;
+            font-size: 18px;
+            padding: 15px 30px;
+            border-radius: 5px;
+            cursor: pointer;
+            border: 3px solid black;
+            display: inline-block;
+        }
+
+        .tools-content {
+            display: none;
+            margin-top: 10px;
+        }
+
+        /* Buttons */
+        .button-container {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-top: 10px;
+        }
+
         .button {
             background-color: #4b87f7;
             color: white;
@@ -19,76 +55,33 @@
             transition: transform 0.3s ease-out, background-color 0.3s ease, border 0.3s ease;
             box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
             border: 3px solid black;
-            height: 60px; /* Ensure all buttons have the same height */
+            height: 60px;
             display: flex;
             align-items: center;
             justify-content: center;
         }
 
-        /* Remove Underline */
-        a {
-            text-decoration: none;
+        /* Specific Button Effects */
+        .feedback-button {
+            transform: rotate(-5deg);
+        }
+
+        .mission-toggle {
+            transform: rotate(5deg);
         }
 
         /* Hover Effects */
-        .feedback-button:hover {
+        .button:hover {
             background-color: #3871d0;
-            border: 3px solid yellow;
+            transform: scale(1.1);
+        }
+
+        .feedback-button:hover {
             transform: scale(1.1) rotate(-5deg);
         }
 
-        .chatroom-button:hover {
-            background-color: #3871d0;
-            border: 3px solid green;
-            transform: scale(1.1);
-        }
-
-        .legacy-button:hover {
-            background-color: #3871d0;
-            border: 3px solid red;
-            transform: scale(1.1);
-        }
-
-        .dark-mode-button:hover {
-            background-color: #3871d0;
-            border: 3px solid orange;
-            transform: scale(1.1);
-        }
-
         .mission-toggle:hover {
-            background-color: #444;
             transform: scale(1.1) rotate(5deg);
-        }
-
-        /* Tools Dropdown */
-        .tools-container {
-            text-align: center;
-            margin-bottom: 20px;
-        }
-
-        .tools-button {
-            background-color: #222;
-            color: white;
-            font-size: 18px;
-            padding: 15px 30px;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-            border: 3px solid black;
-        }
-
-        .tools-content {
-            display: none;
-            margin-top: 10px;
-        }
-
-        /* Flexbox Layout */
-        .button-container {
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 15px;
-            margin-top: 10px;
         }
 
         /* Mission Statement */
@@ -113,8 +106,9 @@
 </head>
 <body>
 
+    <!-- Tools Dropdown -->
     <div class="tools-container">
-        <button class="button tools-button" onclick="toggleTools()">🛠️ Tools</button>
+        <button class="tools-button" onclick="toggleTools()">🛠️ Tools</button>
         <div id="toolsContent" class="tools-content">
             <div class="button-container">
                 <a href="https://forms.gle/t9KCv2UWJPUb3isW7" target="_blank">
@@ -144,7 +138,7 @@
         </p>
     </div>
 
-    <!-- JavaScript for Interactivity -->
+    <!-- JavaScript -->
     <script>
         function toggleMission() {
             var mission = document.getElementById("missionStatement");
@@ -155,10 +149,6 @@
                 mission.style.maxHeight = mission.scrollHeight + "px";
                 mission.style.padding = "15px";
             }
-        }
-
-        function toggleDarkMode() {
-            document.body.classList.toggle('dark-mode');
         }
 
         function toggleTools() {
