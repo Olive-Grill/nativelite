@@ -6,63 +6,6 @@
     <title>Home</title>
     <link rel="stylesheet" href="config/main.css" />
     <script src="config/main.js" type="module"></script>
-</head>
-<body>
-    <div class="center">
-        <h1 id="title"></h1>
-        <p id="subtitle"></p>
-    </div>
-
-    <!-- Tools Button -->
-    <div class="center">
-        <button id="toolsButton" class="button tools-button" onclick="toggleTools()">🛠️ Tools</button>
-    </div>
-
-    <!-- Hidden Buttons Container -->
-    <div id="toolsContainer" class="button-container hidden">
-        <a href="https://forms.gle/t9KCv2UWJPUb3isW7" target="_blank">
-            <button class="button feedback-button">📝 Give Feedback</button>
-        </a>
-        <button class="button chatroom-button" onclick="window.open('https://us29.chatzy.com/46298746305400', '_blank')">
-            💬 Open Chatroom
-        </button>
-        <a href="https://sites.google.com/portnet.org/263875438796534879658734687956/home" target="_blank">
-            <button class="button legacy-button">🕰️ Legacy Version</button>
-        </a>
-        <button class="button dark-mode-button" onclick="toggleDarkMode()">🌙 Toggle Dark Mode</button>
-        <button class="button mission-toggle" onclick="toggleMission()">📜 Our Mission</button>
-    </div>
-        <!-- Second Row of Buttons -->
-    <div class="button-container">
-        <a href="https://pastebin.com/embed_js/7M8NucYs" target="_blank">
-            <button class="button alt-links-button">🔗 Alternate Links</button>
-        </a>
-    </div>
-
-
-    <!-- Mission Statement Drop-Down -->
-    <div id="missionStatement" class="mission-content">
-        <p>
-            We strive to create a space where users can easily find and enjoy games while fostering a welcoming community.<br /><br />
-            Student privacy is an important issue in education. Privacy is a fundamental human right that establishes limits to limit access to personal information.<br /><br />
-            It is essential to understand the importance of protecting student data to prevent it from falling into the wrong hands.<br /><br />
-            There are federal and state laws that regulate the privacy of students' personally identifiable information (PII), and there are legal and ethical limitations on the collection and use of this data.<br />
-            It is wrong to deprive students of their privacy by monitoring and changing everything they do. This is considered illegal and violates students' privacy rights.<br /><br />
-            Privacy is a fundamental value that must be respected in a democratic society. Both the State and private organizations must limit their power to commit illegal or arbitrary intrusions into people's private lives.
-        </p>
-    </div>
-
-    <!-- Search Bar -->
-    <div class="center">
-        <input type="text" id="searchInput" placeholder="Search games" />
-    </div>
-    <div id="gamesContainer"></div>
-
-    <div class="footer">
-        <a style="font-weight: 700">a site by</a>
-        <a style="font-weight: 700" class="link" href="https://dsc.gg/parcoil">parcoil network</a>
-    </div>
-
     <style>
         /* General Button Styles */
         .button {
@@ -76,17 +19,22 @@
             transition: transform 0.3s ease-out, background-color 0.3s ease, border 0.3s ease;
             box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
             border: 3px solid black;
-            min-height: 60px;  /* Ensures all buttons are at least this tall */
+            min-height: 60px;
             display: flex;
             align-items: center;
             justify-content: center;
+        }
+
+        /* Remove underline from linked buttons */
+        a {
+            text-decoration: none;
         }
 
         /* Hover Effects */
         .feedback-button:hover {
             background-color: #3871d0;
             border: 3px solid yellow;
-            transform: scale(1.1) rotate(-5deg); /* Only this rotates -5 degrees */
+            transform: scale(1.1) rotate(-5deg);
         }
 
         .chatroom-button:hover {
@@ -98,7 +46,7 @@
         .legacy-button:hover {
             background-color: #3871d0;
             border: 3px solid red;
-            transform: scale(1.1); /* No rotation */
+            transform: scale(1.1);
         }
 
         .dark-mode-button:hover {
@@ -109,7 +57,7 @@
 
         .mission-toggle:hover {
             background-color: #444;
-            transform: scale(1.1) rotate(5deg); /* Only this rotates 5 degrees */
+            transform: scale(1.1) rotate(5deg);
         }
 
         /* Button Container */
@@ -156,43 +104,6 @@
             outline: none;
             transition: transform 0.3s ease-out, border-color 0.3s ease;
             margin-top: 20px;
-            animation: pulse 2s infinite ease-in-out; /* Slower and more subtle pulsing */
-        }
-        
-        /* Keyframes for a more subtle pulsating effect */
-        @keyframes pulse {
-            0% {
-                transform: scale(1);
-            }
-            50% {
-                transform: scale(1.03); /* Smaller scale factor */
-            }
-            100% {
-                transform: scale(1);
-            }
-        }
-        /* Tools Button */
-        .tools-button {
-            animation: bounce 0.8s infinite ease-in-out;
-        }
-
-        /* Wiggle effect (slower with 3-second intervals) */
-        @keyframes wiggle {
-            0% {
-                transform: rotate(0deg);
-            }
-            25% {
-                transform: rotate(3deg); /* Rotate slightly */
-            }
-            50% {
-                transform: rotate(-3deg); /* Rotate slightly in the opposite direction */
-            }
-            75% {
-                transform: rotate(2deg); /* Another slight rotation */
-            }
-            100% {
-                transform: rotate(0deg);
-            }
         }
 
         /* Search Bar Hover Effect */
@@ -209,27 +120,64 @@
             margin-bottom: 20px;
         }
     </style>
+</head>
+<body>
+    <div class="center">
+        <h1 id="title"></h1>
+        <p id="subtitle"></p>
+    </div>
+
+    <!-- Tools Button -->
+    <div class="center">
+        <button class="button tools-button" onclick="toggleTools()">🛠️ Tools</button>
+    </div>
+
+    <!-- Hidden Buttons Container -->
+    <div id="toolsContainer" class="button-container hidden">
+        <a href="https://forms.gle/t9KCv2UWJPUb3isW7" target="_blank">
+            <button class="button feedback-button">📝 Give Feedback</button>
+        </a>
+        <button class="button chatroom-button" onclick="window.open('https://us29.chatzy.com/46298746305400', '_blank')">
+            💬 Open Chatroom
+        </button>
+        <a href="https://sites.google.com/portnet.org/263875438796534879658734687956/home" target="_blank">
+            <button class="button legacy-button">🕰️ Legacy Version</button>
+        </a>
+        <button class="button dark-mode-button" onclick="toggleDarkMode()">🌙 Toggle Dark Mode</button>
+        <button class="button mission-toggle" onclick="toggleMission()">📜 Our Mission</button>
+
+        <!-- Second Row of Buttons (Hidden by Default) -->
+        <div class="button-container">
+            <a href="https://pastebin.com/embed_js/7M8NucYs" target="_blank">
+                <button class="button alt-links-button">🔗 Alternate Links</button>
+            </a>
+        </div>
+    </div>
+
+    <!-- Mission Statement Drop-Down -->
+    <div id="missionStatement" class="mission-content">
+        <p>
+            We strive to create a space where users can easily find and enjoy games while fostering a welcoming community.<br /><br />
+            Student privacy is an important issue in education. Privacy is a fundamental human right that establishes limits to limit access to personal information.<br /><br />
+            It is essential to understand the importance of protecting student data to prevent it from falling into the wrong hands.<br /><br />
+            There are federal and state laws that regulate the privacy of students' personally identifiable information (PII), and there are legal and ethical limitations on the collection and use of this data.<br />
+            It is wrong to deprive students of their privacy by monitoring and changing everything they do. This is considered illegal and violates students' privacy rights.<br /><br />
+            Privacy is a fundamental value that must be respected in a democratic society. Both the State and private organizations must limit their power to commit illegal or arbitrary intrusions into people's private lives.
+        </p>
+    </div>
+
+    <!-- Search Bar -->
+    <div class="center">
+        <input type="text" id="searchInput" placeholder="Search games" />
+    </div>
+    <div id="gamesContainer"></div>
+
+    <div class="footer">
+        <a style="font-weight: 700">a site by</a>
+        <a style="font-weight: 700" class="link" href="https://dsc.gg/parcoil">parcoil network</a>
+    </div>
 
     <script>
-        // Function to trigger the wiggle every 3 seconds
-        function triggerWiggle() {
-            var toolsButton = document.getElementById('toolsButton');
-            toolsButton.style.animation = `wiggle 0.6s ease-in-out`; // Slower wiggle
-
-            // Reset animation after it completes
-            setTimeout(() => {
-                toolsButton.style.animation = ''; // Reset animation
-            }, 600); // 600ms matches the animation duration
-
-            // Schedule the next wiggle after 3 seconds
-            setTimeout(triggerWiggle, 3000); // Wiggle every 3 seconds
-        }
-
-        // Start the wiggle when the page loads
-        window.onload = function() {
-            triggerWiggle();
-        };
-
         function toggleMission() {
             var mission = document.getElementById("missionStatement");
             if (mission.style.maxHeight) {
