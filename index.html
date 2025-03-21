@@ -56,6 +56,18 @@
         <a style="font-weight: 700" class="link" href="https://dsc.gg/parcoil">parcoil network</a>
     </div>
 
+    <!-- Terms of Service Popup -->
+    <div id="tosPopup" class="tos-popup">
+        <div class="tos-popup-content">
+            <h2>Terms of Service</h2>
+            <iframe id="termsIframe" src="" frameborder="0" style="width: 100%; height: 500px; border: none;"></iframe>
+            <div class="tos-buttons">
+                <button id="acceptTOS">Accept</button>
+                <button id="viewTOS">View Terms</button>
+            </div>
+        </div>
+    </div>
+
     <style>
         /* ToS Popup Styles */
         .tos-popup {
@@ -115,14 +127,6 @@
         
         #acceptTOS:hover, #viewTOS:hover {
             transform: scale(1.05);
-        }
-        
-        /* Styles for iframe (for displaying terms.html) */
-        #termsIframe {
-            width: 100%;
-            height: 400px; /* Adjust height as needed */
-            border: none;
-            margin-top: 20px; /* Some space above the iframe */
         }
 
         /* General Button Styles */
@@ -233,113 +237,37 @@
             }
         }
 
-        /* Tools Button */
-        .tools-button {
-            animation: bounce 0.8s infinite ease-in-out;
-        }
-
-        /* Wiggle effect (slower with 3-second intervals) */
-        @keyframes wiggle {
-            0% {
-                transform: rotate(0deg);
-            }
-            25% {
-                transform: rotate(3deg); /* Rotate slightly */
-            }
-            50% {
-                transform: rotate(-3deg); /* Rotate slightly in the opposite direction */
-            }
-            75% {
-                transform: rotate(2deg); /* Another slight rotation */
-            }
-            100% {
-                transform: rotate(0deg);
-            }
-        }
-
-        /* Search Bar Hover Effect */
-        #searchInput:hover, #searchInput:focus {
-            transform: scale(1.05);
-            border-color: #3871d0;
-        }
-
-        /* Centered Layout */
-        .center {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin-bottom: 20px;
+        /* Footer Styles */
+        .footer {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background-color: #111;
+            color: white;
+            padding: 10px 0;
+            text-align: center;
         }
 
         /* Dark Mode Styles */
-        body.dark-mode {
+        .dark-mode {
             background-color: #121212;
             color: white;
         }
 
-        .dark-mode .button {
-            background-color: #333;
-            border-color: #555;
+        .dark-mode #title, .dark-mode #subtitle {
             color: white;
         }
-
-        .dark-mode .mission-content {
-            background-color: #222;
-        }
-
-        .dark-mode #searchInput {
-            border-color: #555;
-        }
     </style>
-    
-          <script>
-        // Check if the user has already accepted the ToS
-        window.onload = function() {
-            // If the user hasn't accepted ToS yet, show the popup
-            if (!localStorage.getItem('tosAccepted')) {
-                document.getElementById('tosPopup').style.display = 'flex';
-            }
-        };
-    
-        // Function to accept the Terms of Service
-        document.getElementById('acceptTOS').onclick = function() {
-            localStorage.setItem('tosAccepted', 'true');
-            document.getElementById('tosPopup').style.display = 'none';
-        };
-    
-        // Function to view the Terms of Service in iframe
-        document.getElementById('viewTOS').onclick = function() {
-            document.getElementById('termsIframe').src = 'terms.html'; 
-            document.getElementById('tosPopup').style.display = 'flex';
-        };
-    
-        // Toggle the visibility of the tools section
-        function toggleTools() {
-            const toolsContainer = document.getElementById('toolsContainer');
-            toolsContainer.classList.toggle('hidden');
-        }
-    
-        // Toggle Dark Mode
-        function toggleDarkMode() {
-            document.body.classList.toggle('dark-mode');
-        }
-    
-        // Toggle the mission statement section visibility
-        function toggleMission() {
-            const missionContent = document.getElementById('missionStatement');
-            missionContent.style.display = missionContent.style.display === 'none' ? 'block' : 'none';
-        }
-    </script>
 
-
-        <script>
+    <script>
         // Check if the user has already accepted the ToS
         window.onload = function() {
             if (!localStorage.getItem('tosAccepted')) {
                 document.getElementById('tosPopup').style.display = 'flex';
             }
         };
-    
+
         // Function to accept the Terms of Service
         document.getElementById('acceptTOS').onclick = function() {
             // Store the acceptance in localStorage
@@ -348,28 +276,28 @@
             // Hide the Terms of Service popup
             document.getElementById('tosPopup').style.display = 'none';
         };
-    
+
         // Function to view the Terms of Service (optional)
         document.getElementById('viewTOS').onclick = function() {
-            // Redirect to a page where full terms are available (replace with actual link)
-            window.open('https://www.example.com/terms-of-service', '_blank');
+            // Set iframe source to terms.html file
+            document.getElementById('termsIframe').src = 'terms.html'; // Replace with your Terms URL
         };
-    
+
         // Toggle the visibility of the tools section
         function toggleTools() {
             const toolsContainer = document.getElementById('toolsContainer');
             toolsContainer.classList.toggle('hidden');
         }
-    
+
         // Toggle Dark Mode
         function toggleDarkMode() {
             document.body.classList.toggle('dark-mode');
         }
-    
+
         // Toggle the mission statement section visibility
         function toggleMission() {
             const missionContent = document.getElementById('missionStatement');
-            missionContent.style.display = missionContent.style.display === 'none' ? 'block' : 'none';
+            missionContent.style.display = missionContent.style.display === 'block' ? 'none' : 'block';
         }
     </script>
 </body>
