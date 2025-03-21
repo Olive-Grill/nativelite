@@ -1,5 +1,11 @@
 [
   {
+    "name": "Plinko",
+    "image": "IMG_20250321_094004.jpg",
+    "url": "https://plinko-web-game.netlify.app/",
+    "new": true
+  },
+  {
     "name": "1v1lol",
     "image": "logo.png",
     "url": "1v1lol",
