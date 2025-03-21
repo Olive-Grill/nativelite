@@ -56,17 +56,6 @@
         <a style="font-weight: 700" class="link" href="https://dsc.gg/parcoil">parcoil network</a>
     </div>
 
-    <div id="tosPopup" class="tos-popup">
-        <div class="tos-popup-content">
-            <h2>Terms of Service</h2>
-            <iframe id="termsIframe" src="terms.html" frameborder="0" style="width: 100%; height: 500px; border: none;"></iframe>
-            <div class="tos-buttons">
-                <button id="acceptTOS">Accept</button>
-                <button id="viewTOS">View Terms</button>
-            </div>
-        </div>
-    </div>
-
     <style>
         /* ToS Popup Styles */
         .tos-popup {
@@ -77,7 +66,8 @@
             width: 100%;
             height: 100%;
             background-color: rgba(0, 0, 0, 0.5);
-            z-index: 9999;
+            backdrop-filter: blur(10px); /* Blurring effect */
+            z-index: 9999; /* Ensure it's above other content */
             justify-content: center;
             align-items: center;
         }
@@ -89,50 +79,42 @@
             border-radius: 10px;
             width: 80%;
             max-width: 600px;
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
+            overflow: auto;
+            max-height: 80%;
         }
-
+        
         .tos-buttons {
             display: flex;
             justify-content: space-between;
             margin-top: 20px;
         }
-
+        
+        .tos-popup h2 {
+            margin-bottom: 15px;
+        }
+        
+        .tos-popup p {
+            line-height: 1.6;
+        }
+        
         /* Button styles */
-        .button {
+        #acceptTOS, #viewTOS {
             background-color: #4b87f7;
             color: white;
             font-size: 18px;
-            padding: 15px 30px;
+            padding: 10px 20px;
             border-radius: 5px;
             cursor: pointer;
         }
-
-        .dark-mode-button:hover {
-            background-color: #3871d0;
+        
+        #viewTOS {
+            background-color: #ddd;
+            color: #444;
         }
-
-        /* Dark Mode Styles */
-        body.dark-mode {
-            background-color: #121212;
-            color: white;
-        }
-
-        .dark-mode .button {
-            background-color: #333;
-            border-color: #555;
-            color: white;
-        }
-
-        /* Centered Layout */
-        .center {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        /* Hide Tools Buttons Initially */
-        .hidden {
-            display: none;
+        
+        #acceptTOS:hover, #viewTOS:hover {
+            transform: scale(1.05);
         }
     </style>
 
@@ -150,12 +132,21 @@
             document.getElementById('tosPopup').style.display = 'none';
         };
 
-        // Function to view the Terms of Service
+        // Function to view the Terms of Service directly in the popup
         document.getElementById('viewTOS').onclick = function() {
-            window.open('https://www.example.com/terms-of-service', '_blank');
+            document.getElementById('tosPopupContent').innerHTML = `
+                <h2>Terms of Service</h2>
+                <p>By accessing and using this website, you agree to comply with and be bound by the following terms and conditions. If you do not agree with these terms, you should not use the website.</p>
+                <p>This website is intended for general use. All content is provided for informational purposes only. The website is not intended for use by individuals under the age of 13 without parental consent.</p>
+                <p>We are committed to safeguarding your privacy. We collect personal information only when necessary and use it strictly for providing services. By using this website, you consent to the collection and use of your information as outlined in our privacy policy.</p>
+                <p>We are not responsible for any direct, indirect, or consequential damages that may arise from using the website or relying on the information provided. We make no guarantees regarding the accuracy or completeness of the information on this site.</p>
+                <p>We reserve the right to modify or update these terms at any time. All changes will be posted on this page, and by continuing to use the website, you agree to be bound by the updated terms.</p>
+                <p>These terms are governed by the laws of [Insert Country/Region]. Any disputes arising from the use of this website will be resolved under the jurisdiction of [Insert Country/Region].</p>
+                <p>If you have any questions or concerns about these terms, please contact us at [Insert Email Address].</p>
+            `;
         };
 
-        // Toggle the visibility of the tools section
+        // Function to toggle tools section visibility
         function toggleTools() {
             const toolsContainer = document.getElementById('toolsContainer');
             toolsContainer.classList.toggle('hidden');
@@ -172,5 +163,17 @@
             missionContent.style.display = missionContent.style.display === 'none' ? 'block' : 'none';
         }
     </script>
+
+    <!-- Terms of Service Popup -->
+    <div id="tosPopup" class="tos-popup">
+        <div class="tos-popup-content" id="tosPopupContent">
+            <h2>Terms of Service</h2>
+            <p>By accessing and using this website, you agree to comply with and be bound by the following terms and conditions...</p>
+            <div class="tos-buttons">
+                <button id="acceptTOS">Accept</button>
+                <button id="viewTOS">View Full Terms</button>
+            </div>
+        </div>
+    </div>
 </body>
 </html>
