@@ -292,9 +292,10 @@
         }
     </style>
     
-       <script>
+          <script>
         // Check if the user has already accepted the ToS
         window.onload = function() {
+            // If the user hasn't accepted ToS yet, show the popup
             if (!localStorage.getItem('tosAccepted')) {
                 document.getElementById('tosPopup').style.display = 'flex';
             }
@@ -306,7 +307,7 @@
             document.getElementById('tosPopup').style.display = 'none';
         };
     
-        // Function to view the Terms of Service (in iframe)
+        // Function to view the Terms of Service in iframe
         document.getElementById('viewTOS').onclick = function() {
             document.getElementById('termsIframe').src = 'terms.html'; 
             document.getElementById('tosPopup').style.display = 'flex';
@@ -329,6 +330,7 @@
             missionContent.style.display = missionContent.style.display === 'none' ? 'block' : 'none';
         }
     </script>
+
 
         <script>
         // Check if the user has already accepted the ToS
