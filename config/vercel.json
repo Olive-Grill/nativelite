@@ -1,0 +1,9 @@
+{
+  "redirects": [
+    {
+      "source": "/(.*)",
+      "destination": "https://chic-mooncake-8011c7.netlify.app/$1",
+      "permanent": true
+    }
+  ]
+}
