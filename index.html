@@ -308,41 +308,48 @@
     </style>
 
     <script>
-        // Check if the user has already accepted the ToS
-        window.onload = function() {
-            if (!localStorage.getItem('tosAccepted')) {
-                document.getElementById('tosPopup').style.display = 'flex';
-            }
-        };
-    
-        // Function to accept the Terms of Service
-        document.getElementById('acceptTOS').onclick = function() {
-            localStorage.setItem('tosAccepted', 'true');
-            document.getElementById('tosPopup').style.display = 'none';
-        };
-    
-        // Function to view the Terms of Service (in iframe)
-        document.getElementById('viewTOS').onclick = function() {
-            document.getElementById('termsIframe').src = 'terms.html'; 
+    // Check if the user has already accepted the ToS
+    window.onload = function() {
+        if (!localStorage.getItem('tosAccepted')) {
             document.getElementById('tosPopup').style.display = 'flex';
-        };
-    
-        // Toggle the visibility of the tools section
-        function toggleTools() {
-            const toolsContainer = document.getElementById('toolsContainer');
-            toolsContainer.classList.toggle('hidden');
         }
-    
-        // Toggle Dark Mode
-        function toggleDarkMode() {
-            document.body.classList.toggle('dark-mode');
-        }
-    
-        // Toggle the mission statement section visibility
-        function toggleMission() {
-            const missionContent = document.getElementById('missionStatement');
-            missionContent.style.display = missionContent.style.display === 'none' ? 'block' : 'none';
-        }
-    </script>
+    };
+
+    // Function to accept the Terms of Service
+    document.getElementById('acceptTOS').onclick = function() {
+        localStorage.setItem('tosAccepted', 'true');
+        document.getElementById('tosPopup').style.display = 'none';
+    };
+
+    // Option 1: View Full Terms (in iframe inside the popup)
+    document.getElementById('viewTOS').onclick = function() {
+        document.getElementById('termsIframe').src = 'terms.html'; // Set the source for the iframe
+        document.getElementById('tosPopup').style.display = 'flex'; // Show the popup
+    };
+
+    // Option 2: View Full Terms (open in a new tab)
+    // Uncomment this block and comment out the above block if you want to use this method:
+    // document.getElementById('viewTOS').onclick = function() {
+    //     window.open('terms.html', '_blank'); // Open the terms in a new tab
+    //     document.getElementById('tosPopup').style.display = 'none'; // Close the popup
+    // };
+
+    // Toggle the visibility of the tools section
+    function toggleTools() {
+        const toolsContainer = document.getElementById('toolsContainer');
+        toolsContainer.classList.toggle('hidden');
+    }
+
+    // Toggle Dark Mode
+    function toggleDarkMode() {
+        document.body.classList.toggle('dark-mode');
+    }
+
+    // Toggle the mission statement section visibility
+    function toggleMission() {
+        const missionContent = document.getElementById('missionStatement');
+        missionContent.style.display = missionContent.style.display === 'none' ? 'block' : 'none';
+    }
+</script>
 </body>
 </html>
