@@ -56,6 +56,17 @@
         <a style="font-weight: 700" class="link" href="https://dsc.gg/parcoil">parcoil network</a>
     </div>
 
+    <div id="tosPopup" class="tos-popup">
+        <div class="tos-popup-content">
+            <h2>Terms of Service</h2>
+            <iframe id="termsIframe" src="terms.html" frameborder="0" style="width: 100%; height: 500px; border: none;"></iframe>
+            <div class="tos-buttons">
+                <button id="acceptTOS">Accept</button>
+                <button id="viewTOS">View Terms</button>
+            </div>
+        </div>
+    </div>
+
     <style>
         /* ToS Popup Styles */
         .tos-popup {
@@ -66,8 +77,7 @@
             width: 100%;
             height: 100%;
             background-color: rgba(0, 0, 0, 0.5);
-            backdrop-filter: blur(10px); /* Blurring effect */
-            z-index: 9999; /* Ensure it's above other content */
+            z-index: 9999;
             justify-content: center;
             align-items: center;
         }
@@ -79,53 +89,15 @@
             border-radius: 10px;
             width: 80%;
             max-width: 600px;
-            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
-            overflow: auto;
-            max-height: 80%;
         }
-        
+
         .tos-buttons {
             display: flex;
             justify-content: space-between;
             margin-top: 20px;
         }
-        
-        .tos-popup h2 {
-            margin-bottom: 15px;
-        }
-        
-        .tos-popup p {
-            line-height: 1.6;
-        }
-        
-        /* Button styles */
-        #acceptTOS, #viewTOS {
-            background-color: #4b87f7;
-            color: white;
-            font-size: 18px;
-            padding: 10px 20px;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-        
-        #viewTOS {
-            background-color: #ddd;
-            color: #444;
-        }
-        
-        #acceptTOS:hover, #viewTOS:hover {
-            transform: scale(1.05);
-        }
-        
-        /* Styles for iframe (for displaying terms.html) */
-        #termsIframe {
-            width: 100%;
-            height: 400px; /* Adjust height as needed */
-            border: none;
-            margin-top: 20px; /* Some space above the iframe */
-        }
 
-        /* General Button Styles */
+        /* Button styles */
         .button {
             background-color: #4b87f7;
             color: white;
@@ -133,195 +105,72 @@
             padding: 15px 30px;
             border-radius: 5px;
             cursor: pointer;
-            text-decoration: none;
-            transition: transform 0.3s ease-out, background-color 0.3s ease, border 0.3s ease;
-            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
-            border: 3px solid black;
-            min-height: 60px;  /* Ensures all buttons are at least this tall */
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        /* Hover Effects */
-        .feedback-button:hover {
-            background-color: #3871d0;
-            border: 3px solid yellow;
-            transform: scale(1.1) rotate(-5deg); /* Only this rotates -5 degrees */
-        }
-
-        .chatroom-button:hover {
-            background-color: #3871d0;
-            border: 3px solid green;
-            transform: scale(1.1);
-        }
-
-        .legacy-button:hover {
-            background-color: #3871d0;
-            border: 3px solid red;
-            transform: scale(1.1); /* No rotation */
         }
 
         .dark-mode-button:hover {
             background-color: #3871d0;
-            border: 3px solid orange;
-            transform: scale(1.1);
         }
 
-        .mission-toggle:hover {
-            background-color: #444;
-            transform: scale(1.1) rotate(5deg); /* Only this rotates 5 degrees */
+        /* Dark Mode Styles */
+        body.dark-mode {
+            background-color: #121212;
+            color: white;
         }
 
-        /* Button Container */
-        .button-container {
+        .dark-mode .button {
+            background-color: #333;
+            border-color: #555;
+            color: white;
+        }
+
+        /* Centered Layout */
+        .center {
             display: flex;
             justify-content: center;
-            gap: 15px;
-            margin-bottom: 20px;
-            flex-wrap: wrap;
+            align-items: center;
         }
 
         /* Hide Tools Buttons Initially */
         .hidden {
             display: none;
         }
-
-        /* Mission Statement Content */
-        .mission-content {
-            display: none;
-            background-color: #000;
-            color: white;
-            padding: 15px;
-            margin: 10px auto;
-            max-width: 600px;
-            border-radius: 5px;
-            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
-            overflow: hidden;
-            max-height: 0;
-            transition: max-height 0.5s ease-out, padding 0.3s ease-out;
-        }
-
-        .mission-content p {
-            margin: 0;
-        }
-
-        /* Search Bar Styles */
-        #searchInput {
-            width: 60%;
-            max-width: 500px;
-            padding: 15px;
-            font-size: 18px;
-            border: 2px solid #4b87f7;
-            border-radius: 5px;
-            outline: none;
-            transition: transform 0.3s ease-out, border-color 0.3s ease;
-            margin-top: 20px;
-            animation: pulse 1.5s infinite ease-in-out; /* Pulsating animation */
-        }
-
-        /* Keyframes for Pulsating Effect */
-        @keyframes pulse {
-            0% {
-                transform: scale(1);
-            }
-            50% {
-                transform: scale(1.1); /* Get a bit bigger */
-            }
-            100% {
-                transform: scale(1); /* Return to normal size */
-            }
-        }
-
-        /* Tools Button */
-        .tools-button {
-            animation: bounce 0.8s infinite ease-in-out;
-        }
-
-        /* Wiggle effect (slower with 3-second intervals) */
-        @keyframes wiggle {
-            0% {
-                transform: rotate(0deg);
-            }
-            25% {
-                transform: rotate(3deg); /* Rotate slightly */
-            }
-            50% {
-                transform: rotate(-3deg); /* Rotate slightly in the opposite direction */
-            }
-            75% {
-                transform: rotate(2deg); /* Another slight rotation */
-            }
-            100% {
-                transform: rotate(0deg);
-            }
-        }
-
-        /* Bouncing animation for tools button */
-        @keyframes bounce {
-            0% {
-                transform: translateY(0);
-            }
-            50% {
-                transform: translateY(-10px);
-            }
-            100% {
-                transform: translateY(0);
-            }
-        }
     </style>
 
     <script>
-        // Show ToS Popup when the page loads
+        // Check if the user has already accepted the ToS
         window.onload = function() {
-            const tosPopup = document.getElementById("tosPopup");
-            tosPopup.style.display = "flex";
+            if (!localStorage.getItem('tosAccepted')) {
+                document.getElementById('tosPopup').style.display = 'flex';
+            }
         };
 
-        // Accept the Terms of Service
-        document.getElementById("acceptTOS").addEventListener("click", function() {
-            localStorage.setItem("tosAccepted", "true");
-            document.getElementById("tosPopup").style.display = "none";
-        });
+        // Function to accept the Terms of Service
+        document.getElementById('acceptTOS').onclick = function() {
+            localStorage.setItem('tosAccepted', 'true');
+            document.getElementById('tosPopup').style.display = 'none';
+        };
 
-        // View the Terms of Service in the iframe
-        document.getElementById("viewTOS").addEventListener("click", function() {
-            document.getElementById("termsIframe").style.display = "block";
-        });
+        // Function to view the Terms of Service
+        document.getElementById('viewTOS').onclick = function() {
+            window.open('https://www.example.com/terms-of-service', '_blank');
+        };
 
-        // Toggle Tools visibility
+        // Toggle the visibility of the tools section
         function toggleTools() {
-            const toolsContainer = document.getElementById("toolsContainer");
-            toolsContainer.classList.toggle("hidden");
+            const toolsContainer = document.getElementById('toolsContainer');
+            toolsContainer.classList.toggle('hidden');
         }
 
-        // Toggle Dark Mode (simple implementation)
+        // Toggle Dark Mode
         function toggleDarkMode() {
-            document.body.classList.toggle("dark-mode");
+            document.body.classList.toggle('dark-mode');
         }
 
-        // Toggle Mission Statement (simple implementation)
+        // Toggle the mission statement section visibility
         function toggleMission() {
-            const missionStatement = document.getElementById("missionStatement");
-            missionStatement.style.display = missionStatement.style.display === "none" ? "block" : "none";
+            const missionContent = document.getElementById('missionStatement');
+            missionContent.style.display = missionContent.style.display === 'none' ? 'block' : 'none';
         }
     </script>
-
-    <!-- ToS Popup -->
-    <div id="tosPopup" class="tos-popup">
-        <div class="tos-popup-content">
-            <h2>Terms of Service</h2>
-            <p>
-                By using this website, you agree to the following Terms of Service...
-            </p>
-            <!-- Terms of Service Iframe -->
-            <iframe id="termsIframe" src="terms.html" style="display:none;"></iframe>
-
-            <div class="tos-buttons">
-                <button id="viewTOS">👁️ View ToS</button>
-                <button id="acceptTOS">✅ Accept</button>
-            </div>
-        </div>
-    </div>
 </body>
 </html>
