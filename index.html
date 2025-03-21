@@ -116,62 +116,210 @@
         #acceptTOS:hover, #viewTOS:hover {
             transform: scale(1.05);
         }
+        
+        /* Styles for iframe (for displaying terms.html) */
+        #termsIframe {
+            width: 100%;
+            height: 400px; /* Adjust height as needed */
+            border: none;
+            margin-top: 20px; /* Some space above the iframe */
+        }
+
+        /* General Button Styles */
+        .button {
+            background-color: #4b87f7;
+            color: white;
+            font-size: 18px;
+            padding: 15px 30px;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: transform 0.3s ease-out, background-color 0.3s ease, border 0.3s ease;
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
+            border: 3px solid black;
+            min-height: 60px;  /* Ensures all buttons are at least this tall */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Hover Effects */
+        .feedback-button:hover {
+            background-color: #3871d0;
+            border: 3px solid yellow;
+            transform: scale(1.1) rotate(-5deg); /* Only this rotates -5 degrees */
+        }
+
+        .chatroom-button:hover {
+            background-color: #3871d0;
+            border: 3px solid green;
+            transform: scale(1.1);
+        }
+
+        .legacy-button:hover {
+            background-color: #3871d0;
+            border: 3px solid red;
+            transform: scale(1.1); /* No rotation */
+        }
+
+        .dark-mode-button:hover {
+            background-color: #3871d0;
+            border: 3px solid orange;
+            transform: scale(1.1);
+        }
+
+        .mission-toggle:hover {
+            background-color: #444;
+            transform: scale(1.1) rotate(5deg); /* Only this rotates 5 degrees */
+        }
+
+        /* Button Container */
+        .button-container {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        /* Hide Tools Buttons Initially */
+        .hidden {
+            display: none;
+        }
+
+        /* Mission Statement Content */
+        .mission-content {
+            display: none;
+            background-color: #000;
+            color: white;
+            padding: 15px;
+            margin: 10px auto;
+            max-width: 600px;
+            border-radius: 5px;
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+            max-height: 0;
+            transition: max-height 0.5s ease-out, padding 0.3s ease-out;
+        }
+
+        .mission-content p {
+            margin: 0;
+        }
+
+        /* Search Bar Styles */
+        #searchInput {
+            width: 60%;
+            max-width: 500px;
+            padding: 15px;
+            font-size: 18px;
+            border: 2px solid #4b87f7;
+            border-radius: 5px;
+            outline: none;
+            transition: transform 0.3s ease-out, border-color 0.3s ease;
+            margin-top: 20px;
+            animation: pulse 1.5s infinite ease-in-out; /* Pulsating animation */
+        }
+
+        /* Keyframes for Pulsating Effect */
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.1); /* Get a bit bigger */
+            }
+            100% {
+                transform: scale(1); /* Return to normal size */
+            }
+        }
+
+        /* Tools Button */
+        .tools-button {
+            animation: bounce 0.8s infinite ease-in-out;
+        }
+
+        /* Wiggle effect (slower with 3-second intervals) */
+        @keyframes wiggle {
+            0% {
+                transform: rotate(0deg);
+            }
+            25% {
+                transform: rotate(3deg); /* Rotate slightly */
+            }
+            50% {
+                transform: rotate(-3deg); /* Rotate slightly in the opposite direction */
+            }
+            75% {
+                transform: rotate(2deg); /* Another slight rotation */
+            }
+            100% {
+                transform: rotate(0deg);
+            }
+        }
+
+        /* Bouncing animation for tools button */
+        @keyframes bounce {
+            0% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+            100% {
+                transform: translateY(0);
+            }
+        }
     </style>
 
     <script>
-        // Check if the user has already accepted the ToS
+        // Show ToS Popup when the page loads
         window.onload = function() {
-            if (!localStorage.getItem('tosAccepted')) {
-                document.getElementById('tosPopup').style.display = 'flex';
-            }
+            const tosPopup = document.getElementById("tosPopup");
+            tosPopup.style.display = "flex";
         };
 
-        // Function to accept the Terms of Service
-        document.getElementById('acceptTOS').onclick = function() {
-            localStorage.setItem('tosAccepted', 'true');
-            document.getElementById('tosPopup').style.display = 'none';
-        };
+        // Accept the Terms of Service
+        document.getElementById("acceptTOS").addEventListener("click", function() {
+            localStorage.setItem("tosAccepted", "true");
+            document.getElementById("tosPopup").style.display = "none";
+        });
 
-        // Function to view the Terms of Service directly in the popup
-        document.getElementById('viewTOS').onclick = function() {
-            document.getElementById('tosPopupContent').innerHTML = `
-                <h2>Terms of Service</h2>
-                <p>By accessing and using this website, you agree to comply with and be bound by the following terms and conditions. If you do not agree with these terms, you should not use the website.</p>
-                <p>This website is intended for general use. All content is provided for informational purposes only. The website is not intended for use by individuals under the age of 13 without parental consent.</p>
-                <p>We are committed to safeguarding your privacy. We collect personal information only when necessary and use it strictly for providing services. By using this website, you consent to the collection and use of your information as outlined in our privacy policy.</p>
-                <p>We are not responsible for any direct, indirect, or consequential damages that may arise from using the website or relying on the information provided. We make no guarantees regarding the accuracy or completeness of the information on this site.</p>
-                <p>We reserve the right to modify or update these terms at any time. All changes will be posted on this page, and by continuing to use the website, you agree to be bound by the updated terms.</p>
-                <p>These terms are governed by the laws of [Insert Country/Region]. Any disputes arising from the use of this website will be resolved under the jurisdiction of [Insert Country/Region].</p>
-                <p>If you have any questions or concerns about these terms, please contact us at [Insert Email Address].</p>
-            `;
-        };
+        // View the Terms of Service in the iframe
+        document.getElementById("viewTOS").addEventListener("click", function() {
+            document.getElementById("termsIframe").style.display = "block";
+        });
 
-        // Function to toggle tools section visibility
+        // Toggle Tools visibility
         function toggleTools() {
-            const toolsContainer = document.getElementById('toolsContainer');
-            toolsContainer.classList.toggle('hidden');
+            const toolsContainer = document.getElementById("toolsContainer");
+            toolsContainer.classList.toggle("hidden");
         }
 
-        // Toggle Dark Mode
+        // Toggle Dark Mode (simple implementation)
         function toggleDarkMode() {
-            document.body.classList.toggle('dark-mode');
+            document.body.classList.toggle("dark-mode");
         }
 
-        // Toggle the mission statement section visibility
+        // Toggle Mission Statement (simple implementation)
         function toggleMission() {
-            const missionContent = document.getElementById('missionStatement');
-            missionContent.style.display = missionContent.style.display === 'none' ? 'block' : 'none';
+            const missionStatement = document.getElementById("missionStatement");
+            missionStatement.style.display = missionStatement.style.display === "none" ? "block" : "none";
         }
     </script>
 
-    <!-- Terms of Service Popup -->
+    <!-- ToS Popup -->
     <div id="tosPopup" class="tos-popup">
-        <div class="tos-popup-content" id="tosPopupContent">
+        <div class="tos-popup-content">
             <h2>Terms of Service</h2>
-            <p>By accessing and using this website, you agree to comply with and be bound by the following terms and conditions...</p>
+            <p>
+                By using this website, you agree to the following Terms of Service...
+            </p>
+            <!-- Terms of Service Iframe -->
+            <iframe id="termsIframe" src="terms.html" style="display:none;"></iframe>
+
             <div class="tos-buttons">
-                <button id="acceptTOS">Accept</button>
-                <button id="viewTOS">View Full Terms</button>
+                <button id="viewTOS">👁️ View ToS</button>
+                <button id="acceptTOS">✅ Accept</button>
             </div>
         </div>
     </div>
