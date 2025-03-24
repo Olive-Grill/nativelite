@@ -19,20 +19,22 @@
     </div>
 
     <!-- Hidden Buttons Container -->
-    <div id="toolsContainer" class="button-container hidden">
-        <a href="https://forms.gle/t9KCv2UWJPUb3isW7" target="_blank">
-            <button class="button feedback-button">📝 Give Feedback</button>
-        </a>
-        <button class="button chatroom-button" onclick="window.open('https://us29.chatzy.com/46298746305400', '_blank')">
-            💬 Open Chatroom
-        </button>
-        <a href="https://sites.google.com/portnet.org/263875438796534879658734687956/home" target="_blank">
-            <button class="button legacy-button">🕰️ Legacy Version</button>
-        </a>
-        <button class="button dark-mode-button" onclick="toggleDarkMode()">🌙 Toggle Dark Mode</button>
-        <button class="button mission-toggle" onclick="toggleMission()">📜 Our Mission</button>
-    </div>
-
+<div id="toolsContainer" class="button-container hidden">
+    <a href="https://forms.gle/t9KCv2UWJPUb3isW7" target="_blank">
+        <button class="button feedback-button">📝 Give Feedback</button>
+    </a>
+    <button class="button chatroom-button" onclick="window.open('https://us29.chatzy.com/46298746305400', '_blank')">
+        💬 Open Chatroom
+    </button>
+    <a href="https://sites.google.com/portnet.org/263875438796534879658734687956/home" target="_blank">
+        <button class="button legacy-button">🕰️ Legacy Version</button>
+    </a>
+    <button class="button dark-mode-button" onclick="toggleDarkMode()">🌙 Toggle Dark Mode</button>
+    <button class="button mission-toggle" onclick="toggleMission()">📜 Our Mission</button>
+    <!-- New View ToS Button -->
+    <button class="button view-tos-button" onclick="viewToS()">📄 View Terms of Service</button>
+</div>
+    
     <!-- Mission Statement Drop-Down -->
     <div id="missionStatement" class="mission-content">
         <p>
@@ -352,6 +354,13 @@
     function toggleMission() {
         const missionContent = document.getElementById('missionStatement');
         missionContent.style.display = missionContent.style.display === 'none' ? 'block' : 'none';
+    }
+     // Function to view the Terms of Service (in iframe)
+function viewToS() {
+    // Set the iframe source to the Pastebin embed URL
+    document.getElementById('termsIframe').src = 'https://pastebin.com/embed_js/aw7RN1qF';
+    // Show the popup with the iframe
+    document.getElementById('tosPopup').style.display = 'flex';
     }
 </script>
 </body>
