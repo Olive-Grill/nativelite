@@ -37,7 +37,12 @@ function displayFilteredGames(filteredGames) {
 
     gameImage.alt = game.name;
     gameImage.onclick = () => {
-      window.location.href = `play.html?gameurl=${game.url}/`;
+      // Fixing the URL format before redirecting (removing trailing slash if present)
+      let gameUrl = game.url;
+      if (gameUrl.endsWith('/')) {
+        gameUrl = gameUrl.slice(0, -1);
+      }
+      window.location.href = `play.html?gameurl=${gameUrl}/`;
     };
 
     const gameName = document.createElement("p");
