@@ -58,12 +58,17 @@
         alert("Game URL not provided!");
         window.location.href = "/"; // Redirect to homepage if game URL is missing
       } else {
-        // Check if the game URL points to the external source
+        // Check if the game URL points to the external source or a file
         const isExternalGame = gameUrl.startsWith("http");
+        const isFileGame = gameUrl.endsWith(".html"); // Check if it's a file
 
         // For external games
         if (isExternalGame) {
           document.getElementById("gameFrame").src = gameUrl; // Use the external URL directly
+        } else if (isFileGame) {
+          // For internal games (HTML files)
+          const embedUrl = `${window.location.origin}/${gameUrl}`; // Use full path to the file
+          document.getElementById("gameFrame").src = embedUrl; // Set iframe source to the file URL
         } else {
           // For internal games hosted on the server
           const embedUrl = `${serverUrl1}/${gameUrl}`; // Modify this as per your server's structure
