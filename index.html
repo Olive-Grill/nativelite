@@ -58,7 +58,7 @@
         <a style="font-weight: 700" class="link" href="https://dsc.gg/parcoil">parcoil network</a>
     </div>
 
-   <!-- Terms of Service Popup -->
+  <!-- Terms of Service Popup -->
 <div id="tosPopup" class="tos-popup" style="display: flex;">
     <div class="tos-popup-content">
         <h2 id="tosTitle">Terms of Service</h2>
@@ -68,6 +68,7 @@
         <div class="tos-buttons">
             <button id="acceptTOS">Accept</button>
             <button id="viewTOS" onclick="viewToS()">View Full Terms</button>
+            <button id="closeTOS" style="display: none;" onclick="closeTOS()">Close</button>
         </div>
         <iframe id="termsIframe" style="display: none;"></iframe>
     </div>
@@ -77,6 +78,7 @@
 <div id="welcomeMessage" style="display: none;">
     <h2>Welcome back!</h2>
     <p>You have already accepted the latest Terms of Service.</p>
+    <button id="closeWelcome" onclick="closeWelcome()">Close</button>
 </div>
 
     <style>
