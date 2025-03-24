@@ -310,31 +310,28 @@
     </style>
 
 <script>
-    // Current ToS version
-    const currentTOSVersion = "1.1";  // Set the current version of the ToS
-
-    // Check if the user has already accepted the ToS and track the version
+    // Check if the user has already accepted the ToS
     window.onload = function() {
-        const acceptedVersion = localStorage.getItem('tosAcceptedVersion');  // Get the accepted version from localStorage
+        const tosAccepted = localStorage.getItem('tosAccepted');
+        const tosPopup = document.getElementById('tosPopup');
+        const welcomeMessage = document.getElementById('welcomeMessage');
 
-        // Display the Terms of Service popup always on login
-        document.getElementById('tosPopup').style.display = 'flex';
-
-        if (acceptedVersion && acceptedVersion === currentTOSVersion) {
-            // If the user has accepted the latest version, display a "Welcome back" message
-            document.getElementById('tosMessage').textContent = "Welcome back! You have accepted the latest Terms of Service.";
+        if (!tosAccepted) {
+            // If the user hasn't accepted the ToS, show the popup
+            tosPopup.style.display = 'flex';
         } else {
-            // If the version is outdated or not accepted, prompt for new acceptance
-            document.getElementById('tosMessage').textContent = acceptedVersion ? 
-                "A new version of the Terms of Service is available. Please review and accept the updated version." : 
-                "Please read and accept the Terms of Service to continue.";
+            // If the user has accepted the ToS, display a "Welcome back" message
+            welcomeMessage.style.display = 'block';
+            setTimeout(() => {
+                welcomeMessage.style.display = 'none';
+            }, 3000);  // Hide the message after 3 seconds
         }
     };
 
     // Function to accept the Terms of Service
     document.getElementById('acceptTOS').onclick = function() {
-        // Store the acceptance and version in localStorage
-        localStorage.setItem('tosAcceptedVersion', currentTOSVersion);
+        // Store the acceptance in localStorage
+        localStorage.setItem('tosAccepted', 'true');
         
         // Hide the Terms of Service popup
         document.getElementById('tosPopup').style.display = 'none';
@@ -346,14 +343,22 @@
 
         // Set the iframe source only if it's not already set
         if (!termsIframe.src) {
-            termsIframe.src = 'https://pastebin.com/embed_js/aw7RN1qF'; // Update with your actual ToS URL
+            termsIframe.src = 'https://pastebin.com/embed_js/aw7RN1qF';
         }
 
         // Make sure the iframe is visible
         termsIframe.style.display = 'block';
     };
 
-    // Function to toggle the visibility of the tools section
+    // Function to view the Terms of Service (in iframe) for the new button
+    function viewToS() {
+        // Set the iframe source to the Pastebin embed URL
+        document.getElementById('termsIframe').src = 'https://pastebin.com/embed_js/aw7RN1qF';
+        // Show the popup with the iframe
+        document.getElementById('tosPopup').style.display = 'flex';
+    }
+
+    // Toggle the visibility of the tools section
     function toggleTools() {
         const toolsContainer = document.getElementById('toolsContainer');
         toolsContainer.classList.toggle('hidden');
@@ -368,14 +373,6 @@
     function toggleMission() {
         const missionContent = document.getElementById('missionStatement');
         missionContent.style.display = missionContent.style.display === 'none' ? 'block' : 'none';
-    }
-
-    // Function to view the Terms of Service (in iframe)
-    function viewToS() {
-        // Set the iframe source to the Pastebin embed URL
-        document.getElementById('termsIframe').src = 'https://pastebin.com/embed_js/aw7RN1qF';  // Update with your actual ToS URL
-        // Show the popup with the iframe
-        document.getElementById('tosPopup').style.display = 'flex';
     }
 </script>
 </body>
