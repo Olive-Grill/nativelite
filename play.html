@@ -62,7 +62,7 @@
       } else {
         // Remove the trailing slash from the game URL if it exists
         if (gameUrl.endsWith('/')) {
-          gameUrl = gameUrl.slice(0, -1);
+          gameUrl = gameUrl.slice(0, -1); // Remove trailing slash
         }
 
         // Check if the game URL points to the external source or a local game
