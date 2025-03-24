@@ -12,6 +12,12 @@
     "new": false
   },
   {
+    "name": "Minecraft",
+    "image": "mc.png",
+    "url": "EaglercraftX_1.8_u29_Offline_Signed.html",
+    "new": true
+  }
+  {
     "name": "1v1space",
     "image": "splash.png",
     "url": "1v1space",
