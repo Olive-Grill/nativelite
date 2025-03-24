@@ -50,28 +50,28 @@
     <script>
       // Server URL where games are hosted
       var serverUrl1 = "https://gms.parcoil.com"; // This remains the same for any local games
-
-      // Get the game URL from the query string
       const queryString = window.location.search;
       const urlParams = new URLSearchParams(queryString);
-      let gameUrl = urlParams.get("gameurl");
+      const gameUrl = urlParams.get("gameurl");
 
       if (!gameUrl) {
         alert("Game URL not provided!");
         window.location.href = "/"; // Redirect to homepage if game URL is missing
       } else {
-        // Remove any trailing slashes in the URL, regardless of where they are
-        gameUrl = gameUrl.replace(/\/$/, ''); // This removes any trailing slashes at the end of the URL
-
-        // Check if the game URL points to the external source or a local game
+        // Check if the game URL points to the external source or a file
         const isExternalGame = gameUrl.startsWith("http");
+        const isFileGame = gameUrl.endsWith(".html"); // Check if it's a file
 
         // For external games
         if (isExternalGame) {
           document.getElementById("gameFrame").src = gameUrl; // Use the external URL directly
+        } else if (isFileGame) {
+          // For internal games (HTML files)
+          const embedUrl = `${window.location.origin}/${gameUrl}`; // Use full path to the file
+          document.getElementById("gameFrame").src = embedUrl; // Set iframe source to the file URL
         } else {
           // For internal games hosted on the server
-          const embedUrl = `${serverUrl1}/${gameUrl}`; // Ensure the URL structure is correct here
+          const embedUrl = `${serverUrl1}/${gameUrl}`; // Modify this as per your server's structure
           document.getElementById("gameFrame").src = embedUrl; // Set iframe source to internal game URL
         }
 
