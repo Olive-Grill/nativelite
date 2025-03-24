@@ -309,18 +309,32 @@
         }
     </style>
 
- <script>
-    // Check if the user has already accepted the ToS
+<script>
+    // Current ToS version
+    const currentTOSVersion = "1.1";  // Set the current version of the ToS
+
+    // Check if the user has already accepted the ToS and track the version
     window.onload = function() {
-        if (!localStorage.getItem('tosAccepted')) {
-            document.getElementById('tosPopup').style.display = 'flex';
+        const acceptedVersion = localStorage.getItem('tosAcceptedVersion');  // Get the accepted version from localStorage
+
+        // Display the Terms of Service popup always on login
+        document.getElementById('tosPopup').style.display = 'flex';
+
+        if (acceptedVersion && acceptedVersion === currentTOSVersion) {
+            // If the user has accepted the latest version, display a "Welcome back" message
+            document.getElementById('tosMessage').textContent = "Welcome back! You have accepted the latest Terms of Service.";
+        } else {
+            // If the version is outdated or not accepted, prompt for new acceptance
+            document.getElementById('tosMessage').textContent = acceptedVersion ? 
+                "A new version of the Terms of Service is available. Please review and accept the updated version." : 
+                "Please read and accept the Terms of Service to continue.";
         }
     };
 
     // Function to accept the Terms of Service
     document.getElementById('acceptTOS').onclick = function() {
-        // Store the acceptance in localStorage
-        localStorage.setItem('tosAccepted', 'true');
+        // Store the acceptance and version in localStorage
+        localStorage.setItem('tosAcceptedVersion', currentTOSVersion);
         
         // Hide the Terms of Service popup
         document.getElementById('tosPopup').style.display = 'none';
@@ -332,14 +346,14 @@
 
         // Set the iframe source only if it's not already set
         if (!termsIframe.src) {
-            termsIframe.src = 'https://pastebin.com/embed_js/aw7RN1qF';
+            termsIframe.src = 'https://pastebin.com/embed_js/aw7RN1qF'; // Update with your actual ToS URL
         }
 
         // Make sure the iframe is visible
         termsIframe.style.display = 'block';
     };
 
-    // Toggle the visibility of the tools section
+    // Function to toggle the visibility of the tools section
     function toggleTools() {
         const toolsContainer = document.getElementById('toolsContainer');
         toolsContainer.classList.toggle('hidden');
@@ -355,12 +369,13 @@
         const missionContent = document.getElementById('missionStatement');
         missionContent.style.display = missionContent.style.display === 'none' ? 'block' : 'none';
     }
-     // Function to view the Terms of Service (in iframe)
-function viewToS() {
-    // Set the iframe source to the Pastebin embed URL
-    document.getElementById('termsIframe').src = 'https://pastebin.com/embed_js/aw7RN1qF';
-    // Show the popup with the iframe
-    document.getElementById('tosPopup').style.display = 'flex';
+
+    // Function to view the Terms of Service (in iframe)
+    function viewToS() {
+        // Set the iframe source to the Pastebin embed URL
+        document.getElementById('termsIframe').src = 'https://pastebin.com/embed_js/aw7RN1qF';  // Update with your actual ToS URL
+        // Show the popup with the iframe
+        document.getElementById('tosPopup').style.display = 'flex';
     }
 </script>
 </body>
