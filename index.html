@@ -326,6 +326,8 @@ window.onload = function() {
         // Show the "Accept" button and "View Full Terms" button
         document.getElementById('acceptTOS').style.display = 'inline-block';
         document.getElementById('viewTOS').style.display = 'inline-block';
+        // Show close button
+        document.getElementById('closeTOS').style.display = 'inline-block';
     } else {
         // If the user has already accepted the ToS, show "Welcome Back!"
         document.getElementById('tosPopup').style.display = 'flex';
@@ -334,6 +336,8 @@ window.onload = function() {
         // Hide the "Accept" and "View Full Terms" buttons
         document.getElementById('acceptTOS').style.display = 'none';
         document.getElementById('viewTOS').style.display = 'none';
+        // Show close button
+        document.getElementById('closeTOS').style.display = 'inline-block';
     }
 };
 
@@ -357,6 +361,11 @@ document.getElementById('viewTOS').onclick = function() {
 
     // Make sure the iframe is visible
     termsIframe.style.display = 'block';
+};
+
+// Function to close the Terms of Service popup
+document.getElementById('closeTOS').onclick = function() {
+    document.getElementById('tosPopup').style.display = 'none';
 };
 
 // Function to toggle the visibility of the tools section
