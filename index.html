@@ -307,7 +307,7 @@
         }
     </style>
 
-  <script>
+ <script>
     // Check if the user has already accepted the ToS
     window.onload = function() {
         if (!localStorage.getItem('tosAccepted')) {
@@ -326,20 +326,16 @@
 
     // Function to view the Terms of Service (in iframe)
     document.getElementById('viewTOS').onclick = function() {
-        // Set the iframe source to the Pastebin embed URL
-        document.getElementById('termsIframe').src = 'https://pastebin.com/embed_js/aw7RN1qF';
-        // Show the popup with the iframe
-        document.getElementById('tosPopup').style.display = 'flex';
-    };
+        const termsIframe = document.getElementById('termsIframe');
 
-    // Function to view the Terms of Service (in a new tab)
-    // Uncomment this code if you want the terms to open in a new tab instead of the iframe
-    // document.getElementById('viewTOS').onclick = function() {
-    //     // Open the Pastebin URL in a new tab
-    //     window.open('https://pastebin.com/embed_js/aw7RN1qF', '_blank');
-    //     // Close the ToS popup
-    //     document.getElementById('tosPopup').style.display = 'none';
-    // };
+        // Set the iframe source only if it's not already set
+        if (!termsIframe.src) {
+            termsIframe.src = 'https://pastebin.com/embed_js/aw7RN1qF';
+        }
+
+        // Make sure the iframe is visible
+        termsIframe.style.display = 'block';
+    };
 
     // Toggle the visibility of the tools section
     function toggleTools() {
