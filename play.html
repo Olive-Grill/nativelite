@@ -1,76 +1,94 @@
-// This changes the title of your site
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Game Play</title>
 
-var sitename = "Goggle Games"; // Change this to change the name of your website.
-var subtext = "Port Washington's Number One Games Website"; // set the subtext
+    <script src="config/main.js" type="module"></script>
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+      }
 
-// more settings in main.css
+      iframe {
+        width: 100%;
+        height: 100vh;
+        border: none;
+      }
 
-// END CONFIG
-// DO NOT MODIFY IF YOU DO NOT KNOW WHAT YOUR DOING!
+      /* Home Button Styles */
+      #homeButton {
+        position: fixed;
+        top: 20px;
+        left: 20px;
+        background-color: #4b87f7;
+        color: white;
+        font-size: 30px;
+        border: none;
+        padding: 10px 15px;
+        border-radius: 50%;
+        cursor: pointer;
+        z-index: 10;
+        transition: transform 0.3s ease; /* Transition for smooth sliding */
+      }
 
-import "/./config/custom.js";
+      /* Button hidden offscreen */
+      #homeButton.offscreen {
+        transform: translateX(-100px); /* Slide the button offscreen */
+      }
 
-var serverUrl1 = "https://gms.parcoil.com";
-var localImageBaseUrl = "./images";  // Local image directory (common images folder)
-var currentPageTitle = document.title;
-document.title = `${currentPageTitle} | ${sitename}`;
-let gamesData = []; 
+      /* Visible Button */
+      #homeButton.show {
+        transform: translateX(0); /* Reset transform to bring it back onscreen */
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Home Button -->
+    <button id="homeButton" onclick="toggleHomeButton()">🏠</button>
 
-function displayFilteredGames(filteredGames) {
-  const gamesContainer = document.getElementById("gamesContainer");
-  gamesContainer.innerHTML = ""; 
+    <!-- Iframe where the game will be loaded -->
+    <iframe id="gameFrame"></iframe>
 
-  filteredGames.forEach((game) => {
-    const gameDiv = document.createElement("div");
-    gameDiv.classList.add("game");
+    <script>
+      // Server URL where games are hosted
+      var serverUrl1 = "https://gms.parcoil.com"; // This remains the same for any local games
+      const queryString = window.location.search;
+      const urlParams = new URLSearchParams(queryString);
+      const gameUrl = urlParams.get("gameurl");
 
-    const gameImage = document.createElement("img");
+      if (!gameUrl) {
+        alert("Game URL not provided!");
+        window.location.href = "/"; // Redirect to homepage if game URL is missing
+      } else {
+        // Check if the game URL points to the external source
+        const isExternalGame = gameUrl.startsWith("http");
 
-    // For new games, load images from a common location (local or external)
-    if (game.new) {
-      // For new games, images can be hosted in the same general 'images' folder
-      gameImage.src = `${localImageBaseUrl}/${game.image}`; // Loading from common images folder or external server
-    } else {
-      // For existing games, use the server URL to load the images
-      gameImage.src = `${serverUrl1}/${game.url}/${game.image}`;
-    }
+        // For external games
+        if (isExternalGame) {
+          document.getElementById("gameFrame").src = gameUrl; // Use the external URL directly
+        } else {
+          // For internal games hosted on the server
+          const embedUrl = `${serverUrl1}/${gameUrl}`; // Modify this as per your server's structure
+          document.getElementById("gameFrame").src = embedUrl; // Set iframe source to internal game URL
+        }
 
-    gameImage.alt = game.name;
-    gameImage.onclick = () => {
-      window.location.href = `play.html?gameurl=${game.url}/`;
-    };
+        // Show the home button once the game is loaded
+        document.getElementById("homeButton").classList.add("show");
 
-    const gameName = document.createElement("p");
-    gameName.textContent = game.name;
+        // Optionally slide the button offscreen after some time (for example, 5 seconds)
+        setTimeout(() => {
+          document.getElementById("homeButton").classList.add("offscreen");
+        }, 5000); // Change the time delay as needed (5000ms = 5 seconds)
+      }
 
-    gameDiv.appendChild(gameImage);
-    gameDiv.appendChild(gameName);
-    gamesContainer.appendChild(gameDiv);
-  });
-}
-
-function handleSearchInput() {
-  const searchInputValue = document
-    .getElementById("searchInput")
-    .value.toLowerCase();
-  const filteredGames = gamesData.filter((game) =>
-    game.name.toLowerCase().includes(searchInputValue)
-  );
-  displayFilteredGames(filteredGames);
-}
-
-fetch("./config/games.json") 
-  .then((response) => response.json())
-  .then((data) => {
-    gamesData = data;
-    displayFilteredGames(data); 
-  })
-  .catch((error) => console.error("Error fetching games:", error));
-
-document
-  .getElementById("searchInput")
-  .addEventListener("input", handleSearchInput);
-
-document.getElementById("title").innerHTML = `${sitename}`;
-
-document.getElementById("subtitle").innerHTML = `${subtext}`;
+      // Function to toggle the visibility of the home button
+      function toggleHomeButton() {
+        const homeButton = document.getElementById("homeButton");
+        homeButton.classList.toggle("offscreen"); // Toggle the 'offscreen' class
+      }
+    </script>
+  </body>
+</html>
