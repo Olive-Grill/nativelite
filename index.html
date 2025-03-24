@@ -12,10 +12,6 @@
         <h1 id="title"></h1>
         <p id="subtitle"></p>
     </div>
-    
-    <div id="welcomeMessage" style="display: none; text-align: center; font-size: 20px; color: green;">
-    Welcome back! You have already accepted the latest Terms of Service.
-</div>
 
     <!-- Tools Button -->
     <div class="center">
@@ -63,19 +59,26 @@
     </div>
 
     <!-- Terms of Service Popup -->
-    <div id="tosPopup" class="tos-popup">
-        <div class="tos-popup-content">
-            <h2>Terms of Service</h2>
-            <p>
-                By using this website, you agree to abide by the terms and conditions set forth in the Terms of Service. Please read them carefully.
-            </p>
-            <div class="tos-buttons">
-                <button id="acceptTOS">Accept</button>
-                <button id="viewTOS">View Full Terms</button>
-            </div>
-            <iframe id="termsIframe" style="display: none;"></iframe>
+<div id="tosPopup" class="tos-popup" style="display: none;">
+    <div class="tos-popup-content">
+        <h2>Terms of Service</h2>
+        <p>
+            By using this website, you agree to abide by the terms and conditions set forth in the Terms of Service. Please read them carefully.
+        </p>
+        <div class="tos-buttons">
+            <button id="acceptTOS">Accept</button>
+            <button id="viewTOS" onclick="viewToS()">View Full Terms</button>
         </div>
+        <iframe id="termsIframe" style="display: none;"></iframe>
     </div>
+</div>
+
+<!-- Welcome Back Message (hidden initially) -->
+<div id="welcomeMessage" style="display: none;">
+    <h2>Welcome back!</h2>
+    <p>You have already accepted the latest Terms of Service.</p>
+</div>
+    
     <style>
         /* ToS Popup Styles */
         .tos-popup {
@@ -313,21 +316,15 @@
     </style>
 
 <script>
-    // Check if the user has already accepted the ToS
     window.onload = function() {
-        const tosAccepted = localStorage.getItem('tosAccepted');
-        const tosPopup = document.getElementById('tosPopup');
-        const welcomeMessage = document.getElementById('welcomeMessage');
-
-        if (!tosAccepted) {
-            // If the user hasn't accepted the ToS, show the popup
-            tosPopup.style.display = 'flex';
+        // Check if the user has already accepted the ToS
+        if (localStorage.getItem('tosAccepted')) {
+            // If accepted, show the "Welcome back" message and hide the ToS popup
+            document.getElementById('welcomeMessage').style.display = 'block';
+            document.getElementById('tosPopup').style.display = 'none';
         } else {
-            // If the user has accepted the ToS, display a "Welcome back" message
-            welcomeMessage.style.display = 'block';
-            setTimeout(() => {
-                welcomeMessage.style.display = 'none';
-            }, 3000);  // Hide the message after 3 seconds
+            // If not accepted, show the ToS popup
+            document.getElementById('tosPopup').style.display = 'flex';
         }
     };
 
@@ -336,7 +333,8 @@
         // Store the acceptance in localStorage
         localStorage.setItem('tosAccepted', 'true');
         
-        // Hide the Terms of Service popup
+        // Show the "Welcome back" message and hide the ToS popup
+        document.getElementById('welcomeMessage').style.display = 'block';
         document.getElementById('tosPopup').style.display = 'none';
     };
 
@@ -353,7 +351,7 @@
         termsIframe.style.display = 'block';
     };
 
-    // Function to view the Terms of Service (in iframe) for the new button
+    // Function to view the Terms of Service (in iframe)
     function viewToS() {
         // Set the iframe source to the Pastebin embed URL
         document.getElementById('termsIframe').src = 'https://pastebin.com/embed_js/aw7RN1qF';
