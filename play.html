@@ -60,10 +60,8 @@
         alert("Game URL not provided!");
         window.location.href = "/"; // Redirect to homepage if game URL is missing
       } else {
-        // Remove the trailing slash from the game URL if it exists
-        if (gameUrl.endsWith('/')) {
-          gameUrl = gameUrl.slice(0, -1); // Remove trailing slash
-        }
+        // Remove any trailing slashes in the URL, regardless of where they are
+        gameUrl = gameUrl.replace(/\/$/, ''); // This removes any trailing slashes at the end of the URL
 
         // Check if the game URL points to the external source or a local game
         const isExternalGame = gameUrl.startsWith("http");
@@ -73,7 +71,7 @@
           document.getElementById("gameFrame").src = gameUrl; // Use the external URL directly
         } else {
           // For internal games hosted on the server
-          const embedUrl = `${serverUrl1}/${gameUrl}`; // Modify this as per your server's structure
+          const embedUrl = `${serverUrl1}${gameUrl}`; // Modify this as per your server's structure
           document.getElementById("gameFrame").src = embedUrl; // Set iframe source to internal game URL
         }
 
