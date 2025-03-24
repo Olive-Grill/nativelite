@@ -71,7 +71,7 @@
           document.getElementById("gameFrame").src = gameUrl; // Use the external URL directly
         } else {
           // For internal games hosted on the server
-          const embedUrl = `${serverUrl1}${gameUrl}`; // Modify this as per your server's structure
+          const embedUrl = `${serverUrl1}/${gameUrl}`; // Ensure the URL structure is correct here
           document.getElementById("gameFrame").src = embedUrl; // Set iframe source to internal game URL
         }
 
