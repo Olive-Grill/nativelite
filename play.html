@@ -86,9 +86,10 @@
 
       // Function to toggle the visibility of the home button
       function toggleHomeButton() {
-        const homeButton = document.getElementById("homeButton");
-        homeButton.classList.toggle("offscreen"); // Toggle the 'offscreen' class
+        // Redirect to the base URL (homepage) of the current site
+        window.location.href = window.location.origin;
       }
+
     </script>
   </body>
 </html>
