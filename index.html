@@ -58,11 +58,11 @@
         <a style="font-weight: 700" class="link" href="https://dsc.gg/parcoil">parcoil network</a>
     </div>
 
-    <!-- Terms of Service Popup -->
-<div id="tosPopup" class="tos-popup" style="display: none;">
+   <!-- Terms of Service Popup -->
+<div id="tosPopup" class="tos-popup" style="display: flex;">
     <div class="tos-popup-content">
-        <h2>Terms of Service</h2>
-        <p>
+        <h2 id="tosTitle">Terms of Service</h2>
+        <p id="tosMessage">
             By using this website, you agree to abide by the terms and conditions set forth in the Terms of Service. Please read them carefully.
         </p>
         <div class="tos-buttons">
@@ -78,7 +78,7 @@
     <h2>Welcome back!</h2>
     <p>You have already accepted the latest Terms of Service.</p>
 </div>
-    
+
     <style>
         /* ToS Popup Styles */
         .tos-popup {
@@ -316,65 +316,73 @@
     </style>
 
 <script>
-    window.onload = function() {
-        // Check if the user has already accepted the ToS
-        if (localStorage.getItem('tosAccepted')) {
-            // If accepted, show the "Welcome back" message and hide the ToS popup
-            document.getElementById('welcomeMessage').style.display = 'block';
-            document.getElementById('tosPopup').style.display = 'none';
-        } else {
-            // If not accepted, show the ToS popup
-            document.getElementById('tosPopup').style.display = 'flex';
-        }
-    };
-
-    // Function to accept the Terms of Service
-    document.getElementById('acceptTOS').onclick = function() {
-        // Store the acceptance in localStorage
-        localStorage.setItem('tosAccepted', 'true');
-        
-        // Show the "Welcome back" message and hide the ToS popup
-        document.getElementById('welcomeMessage').style.display = 'block';
-        document.getElementById('tosPopup').style.display = 'none';
-    };
-
-    // Function to view the Terms of Service (in iframe)
-    document.getElementById('viewTOS').onclick = function() {
-        const termsIframe = document.getElementById('termsIframe');
-
-        // Set the iframe source only if it's not already set
-        if (!termsIframe.src) {
-            termsIframe.src = 'https://pastebin.com/embed_js/aw7RN1qF';
-        }
-
-        // Make sure the iframe is visible
-        termsIframe.style.display = 'block';
-    };
-
-    // Function to view the Terms of Service (in iframe)
-    function viewToS() {
-        // Set the iframe source to the Pastebin embed URL
-        document.getElementById('termsIframe').src = 'https://pastebin.com/embed_js/aw7RN1qF';
-        // Show the popup with the iframe
+// Check if the user has already accepted the ToS
+window.onload = function() {
+    // If the user has not accepted the ToS, show the ToS popup
+    if (!localStorage.getItem('tosAccepted')) {
         document.getElementById('tosPopup').style.display = 'flex';
+        document.getElementById('tosTitle').textContent = 'Terms of Service';
+        document.getElementById('tosMessage').textContent = 'By using this website, you agree to abide by the terms and conditions set forth in the Terms of Service. Please read them carefully.';
+        // Show the "Accept" button and "View Full Terms" button
+        document.getElementById('acceptTOS').style.display = 'inline-block';
+        document.getElementById('viewTOS').style.display = 'inline-block';
+    } else {
+        // If the user has already accepted the ToS, show "Welcome Back!"
+        document.getElementById('tosPopup').style.display = 'flex';
+        document.getElementById('tosTitle').textContent = 'Welcome Back!';
+        document.getElementById('tosMessage').textContent = 'You have already accepted the latest Terms of Service.';
+        // Hide the "Accept" and "View Full Terms" buttons
+        document.getElementById('acceptTOS').style.display = 'none';
+        document.getElementById('viewTOS').style.display = 'none';
+    }
+};
+
+// Function to accept the Terms of Service
+document.getElementById('acceptTOS').onclick = function() {
+    // Store the acceptance in localStorage
+    localStorage.setItem('tosAccepted', 'true');
+    
+    // Hide the Terms of Service popup
+    document.getElementById('tosPopup').style.display = 'none';
+};
+
+// Function to view the Terms of Service (in iframe)
+document.getElementById('viewTOS').onclick = function() {
+    const termsIframe = document.getElementById('termsIframe');
+
+    // Set the iframe source only if it's not already set
+    if (!termsIframe.src) {
+        termsIframe.src = 'https://pastebin.com/embed_js/aw7RN1qF';
     }
 
-    // Toggle the visibility of the tools section
-    function toggleTools() {
-        const toolsContainer = document.getElementById('toolsContainer');
-        toolsContainer.classList.toggle('hidden');
-    }
+    // Make sure the iframe is visible
+    termsIframe.style.display = 'block';
+};
 
-    // Toggle Dark Mode
-    function toggleDarkMode() {
-        document.body.classList.toggle('dark-mode');
-    }
+// Function to toggle the visibility of the tools section
+function toggleTools() {
+    const toolsContainer = document.getElementById('toolsContainer');
+    toolsContainer.classList.toggle('hidden');
+}
 
-    // Toggle the mission statement section visibility
-    function toggleMission() {
-        const missionContent = document.getElementById('missionStatement');
-        missionContent.style.display = missionContent.style.display === 'none' ? 'block' : 'none';
-    }
+// Function to toggle Dark Mode
+function toggleDarkMode() {
+    document.body.classList.toggle('dark-mode');
+}
+
+// Function to toggle the mission statement section visibility
+function toggleMission() {
+    const missionContent = document.getElementById('missionStatement');
+    missionContent.style.display = missionContent.style.display === 'none' ? 'block' : 'none';
+}
+
+// Function to view the Terms of Service (in iframe)
+function viewToS() {
+    // Set the iframe source to the Pastebin embed URL
+    document.getElementById('termsIframe').src = 'https://pastebin.com/embed_js/aw7RN1qF';
+    // Show the popup with the iframe
+    document.getElementById('tosPopup').style.display = 'flex';
+}
 </script>
 </body>
 </html>
