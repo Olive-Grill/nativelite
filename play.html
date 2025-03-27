@@ -59,29 +59,38 @@
       const urlParams = new URLSearchParams(queryString);
       const gameUrl = urlParams.get("gameurl");
 
+      // Specific game URL that should open in a new tab
+      const specificGameUrl = "https://eagle-plum.vercel.app/";
+
       if (!gameUrl) {
         alert("Game URL not provided!");
         window.location.href = "/"; // Redirect to homepage if game URL is missing
       } else {
-        // Check if the game URL points to the external source
-        const isExternalGame = gameUrl.startsWith("http");
-
-        // For external games
-        if (isExternalGame) {
-          document.getElementById("gameFrame").src = gameUrl; // Use the external URL directly
+        // Check if the game URL matches the specific game URL
+        if (gameUrl === specificGameUrl) {
+          // Open the specific game in a new tab
+          window.open(gameUrl, "_blank");
         } else {
-          // For internal games hosted on the server
-          const embedUrl = `${serverUrl1}/${gameUrl}`; // Modify this as per your server's structure
-          document.getElementById("gameFrame").src = embedUrl; // Set iframe source to internal game URL
+          // Check if the game URL points to the external source
+          const isExternalGame = gameUrl.startsWith("http");
+
+          // For external games
+          if (isExternalGame) {
+            document.getElementById("gameFrame").src = gameUrl; // Use the external URL directly
+          } else {
+            // For internal games hosted on the server
+            const embedUrl = `${serverUrl1}/${gameUrl}`; // Modify this as per your server's structure
+            document.getElementById("gameFrame").src = embedUrl; // Set iframe source to internal game URL
+          }
+
+          // Show the home button once the game is loaded
+          document.getElementById("homeButton").classList.add("show");
+
+          // Optionally slide the button offscreen after some time (for example, 5 seconds)
+          setTimeout(() => {
+            document.getElementById("homeButton").classList.add("offscreen");
+          }, 5000); // Change the time delay as needed (5000ms = 5 seconds)
         }
-
-        // Show the home button once the game is loaded
-        document.getElementById("homeButton").classList.add("show");
-
-        // Optionally slide the button offscreen after some time (for example, 5 seconds)
-        setTimeout(() => {
-          document.getElementById("homeButton").classList.add("offscreen");
-        }, 5000); // Change the time delay as needed (5000ms = 5 seconds)
       }
 
       // Function to toggle the visibility of the home button
@@ -89,7 +98,6 @@
         // Redirect to the base URL (homepage) of the current site
         window.location.href = window.location.origin;
       }
-
     </script>
   </body>
 </html>
