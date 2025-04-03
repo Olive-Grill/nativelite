@@ -12,6 +12,12 @@
     "new": false
   },
   {
+    "name": "ChatGPT",
+    "image": "chat.png",
+    "url": "https://chat.laisky.com/",
+    "new": true
+  },
+  {
     "name": "Minecraft",
     "image": "mc.png",
     "url": "https://eagle-plum.vercel.app/",
