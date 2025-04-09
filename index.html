@@ -1,399 +1,54 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Home</title>
-    <link rel="stylesheet" href="config/main.css" />
-    <script src="config/main.js" type="module"></script>
-</head>
-<body>
-    <div class="center">
-        <h1 id="title"></h1>
-        <p id="subtitle"></p>
-    </div>
+in order to reduce traffic, this website has been temporarily turned off. please wait until tomorrow for an update.
 
-    <!-- Tools Button -->
-    <div class="center">
-        <button id="toolsButton" class="button tools-button" onclick="toggleTools()">🛠️ Tools</button>
-    </div>
 
-    <!-- Hidden Buttons Container -->
-<div id="toolsContainer" class="button-container hidden">
-    <a href="https://forms.gle/C9cjArpuga5EQDk88" target="_blank">
-        <button class="button feedback-button">📝 Give Feedback</button>
-    </a>
-    <button class="button chatroom-button" onclick="window.open('https://us29.chatzy.com/46298746305400', '_blank')">
-        💬 Open Chatroom
-    </button>
-    <a href="https://sites.google.com/portnet.org/263875438796534879658734687956/home" target="_blank">
-        <button class="button legacy-button">🕰️ Legacy Version</button>
-    </a>
-    <button class="button dark-mode-button" onclick="toggleDarkMode()">🌙 Toggle Dark Mode</button>
-    <button class="button mission-toggle" onclick="toggleMission()">📜 Our Mission</button>
-    <!-- New View ToS Button -->
-    <button class="button view-tos-button" onclick="viewToS()">📄 View Terms of Service</button>
-</div>
-    
-    <!-- Mission Statement Drop-Down -->
-    <div id="missionStatement" class="mission-content">
-        <p>
-            We strive to create a space where users can easily find and enjoy games while fostering a welcoming community.<br /><br />
-            Student privacy is an important issue in education. Privacy is a fundamental human right that establishes limits to limit access to personal information.<br /><br />
-            It is essential to understand the importance of protecting student data to prevent it from falling into the wrong hands.<br /><br />
-            There are federal and state laws that regulate the privacy of students' personally identifiable information (PII), and there are legal and ethical limitations on the collection and use of this data.<br />
-            It is wrong to deprive students of their privacy by monitoring and changing everything they do. This is considered illegal and violates students' privacy rights.<br /><br />
-            Privacy is a fundamental value that must be respected in a democratic society. Both the State and private organizations must limit their power to commit illegal or arbitrary intrusions into people's private lives.
-        </p>
-    </div>
 
-    <!-- Search Bar -->
-    <div class="center">
-        <input type="text" id="searchInput" placeholder="Search games" />
-    </div>
-    <div id="gamesContainer"></div>
 
-    <div class="footer">
-        <a style="font-weight: 700">a site by</a>
-        <a style="font-weight: 700" class="link" href="https://dsc.gg/parcoil">parcoil network</a>
-    </div>
 
-  <!-- Terms of Service Popup -->
-<div id="tosPopup" class="tos-popup" style="display: flex;">
-    <div class="tos-popup-content">
-        <h2 id="tosTitle">Terms of Service</h2>
-        <p id="tosMessage">
-            By using this website, you agree to abide by the terms and conditions set forth in the Terms of Service. Please read them carefully.
-        </p>
-        <div class="tos-buttons">
-            <button id="acceptTOS">Accept</button>
-            <button id="viewTOS" onclick="viewToS()">View Full Terms</button>
-            <button id="closeTOS" style="display: none;" onclick="closeTOS()">Close</button>
-        </div>
-        <iframe id="termsIframe" style="display: none;"></iframe>
-    </div>
-</div>
 
-<!-- Welcome Back Message (hidden initially) -->
-<div id="welcomeMessage" style="display: none;">
-    <h2>Welcome back!</h2>
-    <p>You have already accepted the latest Terms of Service.</p>
-    <button id="closeWelcome" onclick="closeWelcome()">Close</button>
-</div>
 
-    <style>
-        /* ToS Popup Styles */
-        .tos-popup {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.5);
-            backdrop-filter: blur(10px); /* Blurring effect */
-            z-index: 9999; /* Ensure it's above other content */
-            justify-content: center;
-            align-items: center;
-        }
-        
-        .tos-popup-content {
-            background-color: white;
-            color: black;
-            padding: 20px;
-            border-radius: 10px;
-            width: 80%;
-            max-width: 600px;
-            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
-            overflow: auto;
-            max-height: 80%;
-        }
-        
-        .tos-buttons {
-            display: flex;
-            justify-content: space-between;
-            margin-top: 20px;
-        }
-        
-        .tos-popup h2 {
-            margin-bottom: 15px;
-        }
-        
-        .tos-popup p {
-            line-height: 1.6;
-        }
-        
-        /* Button styles */
-        #acceptTOS, #viewTOS {
-            background-color: #4b87f7;
-            color: white;
-            font-size: 18px;
-            padding: 10px 20px;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-        
-        #viewTOS {
-            background-color: #ddd;
-            color: #444;
-        }
-        
-        #acceptTOS:hover, #viewTOS:hover {
-            transform: scale(1.05);
-        }
-        
-        /* Styles for iframe (for displaying terms.html) */
-        #termsIframe {
-            width: 100%;
-            height: 400px; /* Adjust height as needed */
-            border: none;
-            margin-top: 20px; /* Some space above the iframe */
-        }
 
-        /* General Button Styles */
-        .button {
-            background-color: #4b87f7;
-            color: white;
-            font-size: 18px;
-            padding: 15px 30px;
-            border-radius: 5px;
-            cursor: pointer;
-            text-decoration: none;
-            transition: transform 0.3s ease-out, background-color 0.3s ease, border 0.3s ease;
-            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
-            border: 3px solid black;
-            min-height: 60px;  /* Ensures all buttons are at least this tall */
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
 
-        /* Hover Effects */
-        .feedback-button:hover {
-            background-color: #3871d0;
-            border: 3px solid yellow;
-            transform: scale(1.1) rotate(-5deg); /* Only this rotates -5 degrees */
-        }
 
-        .chatroom-button:hover {
-            background-color: #3871d0;
-            border: 3px solid green;
-            transform: scale(1.1);
-        }
 
-        .legacy-button:hover {
-            background-color: #3871d0;
-            border: 3px solid red;
-            transform: scale(1.1); /* No rotation */
-        }
 
-        .dark-mode-button:hover {
-            background-color: #3871d0;
-            border: 3px solid orange;
-            transform: scale(1.1);
-        }
 
-        .mission-toggle:hover {
-            background-color: #444;
-            transform: scale(1.1) rotate(5deg); /* Only this rotates 5 degrees */
-        }
 
-        /* Button Container */
-        .button-container {
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-            margin-bottom: 20px;
-            flex-wrap: wrap;
-        }
 
-        /* Hide Tools Buttons Initially */
-        .hidden {
-            display: none;
-        }
 
-        /* Mission Statement Content */
-        .mission-content {
-            display: none;
-            background-color: #000;
-            color: white;
-            padding: 15px;
-            margin: 10px auto;
-            max-width: 600px;
-            border-radius: 5px;
-            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
-            overflow: hidden;
-            max-height: 0;
-            transition: max-height 0.5s ease-out, padding 0.3s ease-out;
-        }
 
-        .mission-content p {
-            margin: 0;
-        }
 
-        /* Search Bar Styles */
-        #searchInput {
-            width: 60%;
-            max-width: 500px;
-            padding: 15px;
-            font-size: 18px;
-            border: 2px solid #4b87f7;
-            border-radius: 5px;
-            outline: none;
-            transition: transform 0.3s ease-out, border-color 0.3s ease;
-            margin-top: 20px;
-            animation: pulse 1.5s infinite ease-in-out; /* Pulsating animation */
-        }
 
-        /* Keyframes for Pulsating Effect */
-        @keyframes pulse {
-            0% {
-                transform: scale(1);
-            }
-            50% {
-                transform: scale(1.1); /* Get a bit bigger */
-            }
-            100% {
-                transform: scale(1); /* Return to normal size */
-            }
-        }
 
-        /* Tools Button */
-        .tools-button {
-            animation: bounce 0.8s infinite ease-in-out;
-        }
 
-        /* Wiggle effect (slower with 3-second intervals) */
-        @keyframes wiggle {
-            0% {
-                transform: rotate(0deg);
-            }
-            25% {
-                transform: rotate(3deg); /* Rotate slightly */
-            }
-            50% {
-                transform: rotate(-3deg); /* Rotate slightly in the opposite direction */
-            }
-            75% {
-                transform: rotate(2deg); /* Another slight rotation */
-            }
-            100% {
-                transform: rotate(0deg);
-            }
-        }
 
-        /* Search Bar Hover Effect */
-        #searchInput:hover, #searchInput:focus {
-            transform: scale(1.05);
-            border-color: #3871d0;
-        }
 
-        /* Centered Layout */
-        .center {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin-bottom: 20px;
-        }
 
-        /* Dark Mode Styles */
-        body.dark-mode {
-            background-color: #121212;
-            color: white;
-        }
 
-        .dark-mode .button {
-            background-color: #333;
-            border-color: #555;
-            color: white;
-        }
 
-        .dark-mode .mission-content {
-            background-color: #222;
-        }
 
-        .dark-mode #searchInput {
-            border-color: #555;
-        }
-    </style>
 
-<script>
-// Check if the user has already accepted the ToS
-window.onload = function() {
-    // If the user has not accepted the ToS, show the ToS popup
-    if (!localStorage.getItem('tosAccepted')) {
-        document.getElementById('tosPopup').style.display = 'flex';
-        document.getElementById('tosTitle').textContent = 'Terms of Service';
-        document.getElementById('tosMessage').textContent = 'By using this website, you agree to abide by the terms and conditions set forth in the Terms of Service. Please read them carefully.';
-        // Show the "Accept" button and "View Full Terms" button
-        document.getElementById('acceptTOS').style.display = 'inline-block';
-        document.getElementById('viewTOS').style.display = 'inline-block';
-        // Show close button
-        document.getElementById('closeTOS').style.display = 'inline-block';
-    } else {
-        // If the user has already accepted the ToS, show "Welcome Back!"
-        document.getElementById('tosPopup').style.display = 'flex';
-        document.getElementById('tosTitle').textContent = 'Welcome Back!';
-        document.getElementById('tosMessage').textContent = 'You have already accepted the latest Terms of Service.';
-        // Hide the "Accept" and "View Full Terms" buttons
-        document.getElementById('acceptTOS').style.display = 'none';
-        document.getElementById('viewTOS').style.display = 'none';
-        // Show close button
-        document.getElementById('closeTOS').style.display = 'inline-block';
-    }
-};
 
-// Function to accept the Terms of Service
-document.getElementById('acceptTOS').onclick = function() {
-    // Store the acceptance in localStorage
-    localStorage.setItem('tosAccepted', 'true');
-    
-    // Hide the Terms of Service popup
-    document.getElementById('tosPopup').style.display = 'none';
-};
 
-// Function to view the Terms of Service (in iframe)
-document.getElementById('viewTOS').onclick = function() {
-    const termsIframe = document.getElementById('termsIframe');
 
-    // Set the iframe source only if it's not already set
-    if (!termsIframe.src) {
-        termsIframe.src = 'https://pastebin.com/embed_js/aw7RN1qF';
-    }
 
-    // Make sure the iframe is visible
-    termsIframe.style.display = 'block';
-};
 
-// Function to close the Terms of Service popup
-document.getElementById('closeTOS').onclick = function() {
-    document.getElementById('tosPopup').style.display = 'none';
-};
 
-// Function to toggle the visibility of the tools section
-function toggleTools() {
-    const toolsContainer = document.getElementById('toolsContainer');
-    toolsContainer.classList.toggle('hidden');
-}
 
-// Function to toggle Dark Mode
-function toggleDarkMode() {
-    document.body.classList.toggle('dark-mode');
-}
 
-// Function to toggle the mission statement section visibility
-function toggleMission() {
-    const missionContent = document.getElementById('missionStatement');
-    missionContent.style.display = missionContent.style.display === 'none' ? 'block' : 'none';
-}
 
-// Function to view the Terms of Service (in iframe)
-function viewToS() {
-    // Set the iframe source to the Pastebin embed URL
-    document.getElementById('termsIframe').src = 'https://pastebin.com/embed_js/aw7RN1qF';
-    // Show the popup with the iframe
-    document.getElementById('tosPopup').style.display = 'flex';
-}
-</script>
-</body>
-</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<n>
+chicken jockey
+</n>
