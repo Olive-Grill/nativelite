@@ -4,3 +4,28 @@ in order to reduce traffic, this website has been temporarily turned off.
 please wait until tomorrow for an update.
 <br><br><br><br><br><br><br><br><br>
 chicken jockey
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Simple Clicker Game</title>
+</head>
+<body>
+  <h1>Clicker Game</h1>
+  <button id="clickerButton">Click Me!</button>
+  <p id="score">Score: 0</p>
+
+  <script>
+    let score = 0;
+    const scoreElement = document.getElementById("score");
+    const clickerButton = document.getElementById("clickerButton");
+
+    clickerButton.addEventListener("click", () => {
+      score++;
+      scoreElement.textContent = "Score: " + score;
+    });
+  </script>
+</body>
+</html>
