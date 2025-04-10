@@ -12,12 +12,6 @@
     "new": true
   },
   {
-    "name": "1v1lol (broken i think)",
-    "image": "logo.png",
-    "url": "1v1lol",
-    "new": false
-  },
-  {
     "name": "ChatGPT",
     "image": "chat.png",
     "url": "https://chat.laisky.com/",
@@ -27,6 +21,12 @@
     "name": "Minecraft",
     "image": "mc.png",
     "url": "https://mit-is-better-than-harvardaaa.netlify.app/",
+    "new": true
+  },
+  {
+    "name": "BROKEN",
+    "image": "download (56).png",
+    "url": "https://deltamaht.netlify.app/",
     "new": true
   },
   {
@@ -219,6 +219,12 @@
     "name": "Basket Random",
     "image": "splash.jpeg",
     "url": "basket-random",
+    "new": false
+  },
+  {
+    "name": "1v1lol (broken i think)",
+    "image": "logo.png",
+    "url": "1v1lol",
     "new": false
   },
   {
