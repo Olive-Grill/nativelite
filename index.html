@@ -9,7 +9,7 @@ please wait until tomorrow for an update.
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Global sdakkgfsakd Incrementer</title>
+    <title>Global number Incrementer</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -24,15 +24,15 @@ please wait until tomorrow for an update.
     </style>
 </head>
 <body>
-    <h1>Global sdakkgfsakd: <span id="sdakkgfsakd">0</span></h1>
-    <button id="increment-button">Increase sdakkgfsakd</button>
+    <h1>Global number: <span id="number">0</span></h1>
+    <button id="increment-button">Increase number</button>
 
     <script>
-        let sdakkgfsakd = 0;
+        let number = 0;
 
         document.getElementById('increment-button').addEventListener('click', () => {
-            sdakkgfsakd++;
-            document.getElementById('sdakkgfsakd').textContent = sdakkgfsakd;
+            number++;
+            document.getElementById('number').textContent = number;
         });
     </script>
 </body>
