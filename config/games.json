@@ -12,25 +12,25 @@
     "new": true
   },
   {
-    "name": "ChatGPT",
+    "name": "Chat",
     "image": "chat.png",
     "url": "https://chat.laisky.com/",
     "new": true
   },
   {
-    "name": "Minecraft",
+    "name": "MC",
     "image": "mc.png",
     "url": "https://mit-is-better-than-harvardaaa.netlify.app/",
     "new": true
   },
   {
-    "name": "BROKEN",
+    "name": "YT",
     "image": "download (56).png",
     "url": "https://deltamaht.netlify.app/",
     "new": true
   },
   {
-    "name": "1v1space",
+    "name": "1v1",
     "image": "splash.png",
     "url": "1v1space",
     "new": false
@@ -708,13 +708,13 @@
     "new": false
   },
   {
-    "name": "Game Inside",
+    "name": "Gme Inside",
     "image": "img/display.png",
     "url": "game-inside",
     "new": false
   },
   {
-    "name": "Generic Fishing Game",
+    "name": "Generic Fishing Gme",
     "image": "splash.png",
     "url": "generic-fishing-game",
     "new": false
@@ -882,7 +882,7 @@
     "new": false
   },
   {
-    "name": "Kitchen Gun Game",
+    "name": "Kitchen Gn Gme",
     "image": "splash.png",
     "url": "kitchen-gun-game",
     "new": false
@@ -1128,7 +1128,7 @@
     "new": false
   },
   {
-    "name": "Pixel Gun Survival",
+    "name": "Pixel Gn Survival",
     "image": "512x512.png",
     "url": "pixel-gun-survival",
     "new": false
@@ -1278,7 +1278,7 @@
     "new": false
   },
   {
-    "name": "Sand Game",
+    "name": "Sand Gme",
     "image": "sand-game.PNG",
     "url": "sand-game",
     "new": false
@@ -1554,7 +1554,7 @@
     "new": false
   },
   {
-    "name": "Tactical Weapon Pack 2",
+    "name": "Tactical Weap#n Pack 2",
     "image": "splash.jpg",
     "url": "tactical-weapon-pack-2",
     "new": false
@@ -1608,7 +1608,7 @@
     "new": false
   },
   {
-    "name": "There Is No Game",
+    "name": "There Is No Gme",
     "image": "logo.png",
     "url": "there-is-no-game",
     "new": false
@@ -1752,13 +1752,13 @@
     "new": false
   },
   {
-    "name": "World's Hardest Game",
+    "name": "World's Hardest Gme",
     "image": "images/splash.jpg",
     "url": "worlds-hardest-game",
     "new": false
   },
   {
-    "name": "World's Hardest Game 2",
+    "name": "World's Hardest Gme 2",
     "image": "the-worlds-hardest-game-2.jpg",
     "url": "worlds-hardest-game-2",
     "new": false
